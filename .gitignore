@@ -4,4 +4,4 @@ assets/external/
 *.py[cod]
 .web
 .states
-*.DS_Store
+**/.DS_Store*

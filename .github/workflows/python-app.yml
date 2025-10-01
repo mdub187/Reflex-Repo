@@ -1,42 +1,35 @@
-name: Reflex Preview
+name: Deploy Reflex Frontend to GitHub Pages
 
 on:
-  workflow_dispatch:   # lets you trigger it manually
   push:
     branches:
       - main
 
-jobs:
-  preview:
-    runs-on: ubuntu-latest
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
-      - name: Install dependencies
-        run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install --upgrade pip
-          pip install reflex
+      - name: Install Reflex
+        run: pip install reflex
 
-      - name: Install ngrok
-        run: npm install -g ngrok
+      - name: Build Reflex frontend
+        run: reflex export --frontend-only
 
-      - name: Run Reflex app
-        run: |
-          source .venv/bin/activate
-          reflex run --backend-port 8000 --frontend-port 3000 &
-          sleep 10   # give Reflex time to start
-
-      - name: Expose with ngrok
-        run: |
-          ngrok http 3000 --log=stdout > ngrok.log &
-          sleep 5
-          cat ngrok.log | grep -o "https://[0-9a-z]*\.ngrok\.io" | head -n1
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend/.web/_static

@@ -1,0 +1,18 @@
+*,
+html {
+justify-self: none;
+justify-content: stretch;
+}
+
+/*div.rt-Container.rt-r-size-3.css-8hu8q1 {*/
+/*display: contents;*/
+/*flex_direction: column;*/
+/*align_items: center;*/
+/*justify_content: center;*/
+/*height: "100%";*/
+/*background_color: "#f5f5f5";*/
+/*}*/
+
+{
+    display: 100%;
+}

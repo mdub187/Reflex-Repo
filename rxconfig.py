@@ -1,4 +1,4 @@
-import reflex as rx
+from imports import rx
 
 
 class Config(rx.Config):
@@ -13,5 +13,5 @@ class Config(rx.Config):
     ]
 
 
-print(Config(app_name="lmrex"))
+# print(Config(app_name="lmrex"))
 config = Config(app_name="lmrex")

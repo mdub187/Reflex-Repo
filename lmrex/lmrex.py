@@ -1,6 +1,6 @@
 import reflex as rx
 from rxconfig import config
-
+from .components import heading, input, menu, navbar
 # config = config.styles
 
 # styles = [
@@ -19,24 +19,24 @@ from rxconfig import config
 # print(styles)
 
 
-class State(rx.State):
-    """The app state."""
+# class State(rx.State):
+#     """The app state."""
 
-    label: str = "Be"
-    label_arr: list[str] = ["Be", "Alright"]
+#     label: str = "Be"
+#     label_arr: list[str] = ["Be", "Alright"]
 
-    def change_label(self):
-        if self.label == self.label_arr[0]:
-            self.label = self.label_arr[1]
-        else:
-            self.label = self.label_arr[0]
-            # add a for or while loop here iterating through an entire sentence as described in the label_arr
-            # for i in range(len(self.label_arr)):
-            #     self.label_arr[i] = self.label_arr[i].upper()
-            # self.label_arr = [label.upper() for label in self.label_arr]
+#     def change_label(self):
+#         if self.label == self.label_arr[0]:
+#             self.label = self.label_arr[1]
+#         else:
+#             self.label = self.label_arr[0]
+#             # add a for or while loop here iterating through an entire sentence as described in the label_arr
+#             # for i in range(len(self.label_arr)):
+#             #     self.label_arr[i] = self.label_arr[i].upper()
+#             # self.label_arr = [label.upper() for label in self.label_arr]
 
-    def handle_input_change(self, value: str):
-        self.label = value
+#     def handle_input_change(self, value: str):
+#         self.label = value
 
 
 def base_page() -> rx.Component:
@@ -104,16 +104,17 @@ def navbar() -> rx.Component:
                     rx.heading("Dumbass Shit", size="6", weight="bold"),
                     align_items="center",
                 ),
-                rx.menu.root(
-                    rx.menu.trigger(rx.icon("menu", size=30)),
-                    rx.menu.content(
-                        rx.menu.item("Home"),
-                        rx.menu.item("About"),
-                        rx.menu.item("Pricing"),
-                        rx.menu.item("Contact"),
-                    ),
-                    # justify="content",
-                ),
+                rx.menu,
+                # rx.menu.root(
+                #     rx.menu.trigger(rx.icon("menu", size=30)),
+                #     rx.menu.content(
+                #         rx.menu.item("Home"),
+                #         rx.menu.item("About"),
+                #         rx.menu.item("Pricing"),
+                #         rx.menu.item("Contact"),
+                #     ),
+                # justify="content",
+                # ),
                 # justify="between",
                 # align_items="center",
                 # width="100%",
@@ -137,26 +138,30 @@ def index() -> rx.Component:
     return rx.box(
         rx.flex(),
         navbar(),
+        rx.heading(),
         rx.vstack(
-            rx.heading(State.label, size="9"),
+            # rx.heading(State.label, size="9"),
             rx.text(
                 "This gon' b alright ...",
                 rx.code({"./"}),
                 size="5",
             ),
-            rx.input(
-                placeholder="type some shit",
-                on_change=State.handle_input_change,
-            ),
-            rx.button("Lizzard", on_click=State.change_label),
-            spacing="5",
-            justify_self="none",
-            min_height="85vh",
+            rx.input(input),
+            #     placeholder="type some shit",
+            #     on_change=State.handle_input_change,
+            # ),
+            rx.button(),
+            # "Lizzard", on_click=State.change_label),
+            #     spacing="5",
+            #     justify_self="none",
+            #     min_height="85vh",
+            # ),
+            rx.color_mode.button(),
+            # position="bottom-center", width="100%"),
+            # justify_self="normal",
+            # padding_top="1em",
+            # display="contents",
         ),
-        rx.color_mode.button(position="bottom-center", width="100%"),
-        justify_self="normal",
-        padding_top="1em",
-        # display="contents",
     )
 
 

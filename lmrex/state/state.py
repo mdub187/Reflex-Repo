@@ -1,4 +1,5 @@
 import reflex as rx
+from ..pages.__init__ import routes
 
 
 class State(rx.State):
@@ -19,3 +20,11 @@ class State(rx.State):
 
     def handle_input_change(self, value: str):
         self.label = value
+
+    def change_page(self):
+        if self.button(routes.home) == "Home":
+            rx.redirect("/home")
+        elif self.button(routes.about) == "About":
+            rx.redirect("/about")
+        elif self.button(routes.contact) == "Contact":
+            rx.redirect("/contact")

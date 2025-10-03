@@ -1,9 +1,12 @@
-from .imports import rx
+import reflex as rx
+from lmrex.components.navbar import navbar
+from lmrex.components.color_mode import color_mode
+from lmrex.state.state import State
+from lmrex.components.input import input as input
 
 
 def index() -> rx.Component:
     return rx.box(
-        rx.flex(),
         navbar(),
         rx.vstack(
             rx.heading(State.label, size="9"),
@@ -12,17 +15,17 @@ def index() -> rx.Component:
                 rx.code({"./"}),
                 size="5",
             ),
-            rx.input(
-                placeholder="type some shit",
-                on_change=State.handle_input_change,
-            ),
+            input("self"),
             rx.button("Lizzard", on_click=State.change_label),
             spacing="5",
             justify_self="none",
             min_height="85vh",
         ),
-        rx.color_mode.button(position="bottom-center", width="100%"),
-        justify_self="normal",
-        padding_top="1em",
-        # display="contents",
+        rx.color_mode.button(),
+        # rx.color_mode.button(position="bottom-center", width="100%"),
+        # padding_top="1em",
     )
+    return index()
+
+
+index()

@@ -1,3 +1,10 @@
+import reflex as rx
+
+
+def navbar_link(text: str, url: str) -> rx.Component:
+    return rx.link(
+        rx.text(text, size="4", weight="medium", display="contents"), href=url
+    )
 
 
 def navbar() -> rx.Component:
@@ -7,24 +14,19 @@ def navbar() -> rx.Component:
             rx.hstack(
                 rx.hstack(
                     rx.image(
-                        src="../music-notes-minus-thin.svg",
+                        src="/music-notes-minus-thin.svg",  # Corrected path
                         width="2.25em",
                         height="auto",
                         border_radius="25%",
                     ),
                     rx.heading("Web App Example", size="7", weight="bold"),
-                    # align_items="center",
-                    # justify="start",
                     width="100%",
                 ),
                 rx.hstack(
                     navbar_link("Home", "/#"),
-                    navbar_link(
-                        "About", "/#"
-                    ),  # adding a link ... replace the "/#" with a https://+{link}
-                    navbar_link("Pricing", "/#"),
+                    navbar_link("About", "/#"),
+                    navbar_link("Gallery", "/#"),
                     navbar_link("Contact", "/#"),
-                    # justify="end",
                     spacing="5",
                 ),
             ),
@@ -33,36 +35,26 @@ def navbar() -> rx.Component:
             rx.hstack(
                 rx.hstack(
                     rx.image(
-                        src="'../music-notes-minus-thin.svg'",
-                        width="2em",
+                        src="/music-notes-minus-thin.svg",  # Corrected path
+                        width="1.5em",
                         height="auto",
                         border_radius="25%",
                     ),
-                    rx.heading("Dumbass Shit", size="6", weight="bold"),
+                    rx.heading("Dumbass Shit", size="7", weight="bold"),
                     align_items="center",
                 ),
-                rx.menu,
-                # rx.menu.root(
-                #     rx.menu.trigger(rx.icon("menu", size=30)),
-                #     rx.menu.content(
-                #         rx.menu.item("Home"),
-                #         rx.menu.item("About"),
-                #         rx.menu.item("Pricing"),
-                #         rx.menu.item("Contact"),
-                #     ),
-                # justify="content",
-                # ),
-                # justify="between",
-                # align_items="center",
-                # width="100%",
+                rx.menu.root(
+                    rx.menu.trigger(rx.icon("menu", size=30)),
+                    rx.menu.content(
+                        rx.menu.item("Home"),
+                        rx.menu.item("About"),
+                        rx.menu.item("Gallery"),
+                        rx.menu.item("Contact"),
+                    ),
+                ),
             ),
-            # max_width="890px",
         ),
         bg=rx.color("accent", 3),
-        # padding="1em",
-        justify_self="normal",
-        # position="dynamic",
-        top="0px",
+        top="2px",
         z_index="5",
-        # width="100%",
     )

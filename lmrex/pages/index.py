@@ -5,7 +5,7 @@ from lmrex.state.state import State
 from lmrex.components.input import input as input
 
 
-def index() -> rx.Component:
+def index(self) -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
@@ -15,7 +15,7 @@ def index() -> rx.Component:
                 rx.code({"./"}),
                 size="5",
             ),
-            input("self"),
+            input(self),
             rx.button("Lizzard", on_click=State.change_label),
             spacing="5",
             justify_self="none",
@@ -25,7 +25,4 @@ def index() -> rx.Component:
         # rx.color_mode.button(position="bottom-center", width="100%"),
         # padding_top="1em",
     )
-    return index()
-
-
-index()
+    return index(self)

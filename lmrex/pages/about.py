@@ -1,6 +1,6 @@
 import reflex as rx
 from lmrex.template import State
-from .components.navbar import navbar
+from ..components.navbar import navbar
 from .components.color_mode import color_mode
 
 # from lmrex.state.state import State

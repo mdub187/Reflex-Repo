@@ -2,4 +2,4 @@ import reflex as rx
 
 
 class State(rx.State):
-    rx.heading(size="9")
+    rx.heading(size="4")

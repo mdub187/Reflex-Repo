@@ -2,7 +2,7 @@ from enum import CONTINUOUS
 
 
 def routes(self):
-    HOME_ROUTE = "/"
+    HOME_ROUTE = "/index"
     ABOUT_ROUTE = "/about"
     GALLERY_ROUTE = "/gallery"
     CONTACT_ROUTE = "/contact"

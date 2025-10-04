@@ -2,14 +2,20 @@ import reflex as rx
 from lmrex.components.navbar import navbar
 from lmrex.components.color_mode import color_mode
 from lmrex.state.state import State
-# from lmrex.components.input import input as input
+
+contact = "pages/contact"
 
 
-def products() -> rx.Component:
+def contact() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
             rx.heading(State.label, size="9"),
-            rx.text("Gallery", rx.code({""}), url_redirect=("/gallery"), size="5"),
+            rx.text(
+                rx.code({"contact"}),
+                url_redirect=(f"{contact}"),
+                size="5",
+            ),
         ),
     )
+    return contact

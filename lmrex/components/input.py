@@ -7,3 +7,4 @@ def input(self) -> rx.Component:
         placeholder="type some shit",
         on_change=State.handle_input_change,
     )
+    return input

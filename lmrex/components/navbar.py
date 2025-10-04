@@ -1,10 +1,11 @@
 import reflex as rx
+# from ..ui import index
+# from ..ui import about
+# from ..ui import gallery
 
 
-def navbar_link(text: str, url: str) -> rx.Component:
-    return rx.link(
-        rx.text(text, size="4", weight="medium", display="contents"), href=url
-    )
+def navbar_link(text, url) -> rx.Component:
+    return rx.link(rx.text(text, size="4", weight="medium", display="contents"))
 
 
 def navbar() -> rx.Component:
@@ -19,14 +20,14 @@ def navbar() -> rx.Component:
                         height="auto",
                         border_radius="25%",
                     ),
-                    rx.heading("Web App Example", size="7", weight="bold"),
+                    rx.heading("We Gon", size="7", weight="bold"),
                     width="100%",
                 ),
                 rx.hstack(
-                    navbar_link("Home", "/#"),
-                    navbar_link("About", "/#"),
-                    navbar_link("Gallery", "/#"),
-                    navbar_link("Contact", "/#"),
+                    rx.link("home", href="/"),
+                    rx.link("about", href="/About"),
+                    rx.link("gallery", href="/Gallery"),
+                    rx.link("contact", href="/Contact"),
                     spacing="5",
                 ),
             ),
@@ -40,7 +41,7 @@ def navbar() -> rx.Component:
                         height="auto",
                         border_radius="25%",
                     ),
-                    rx.heading("Dumbass Shit", size="7", weight="bold"),
+                    rx.heading("B alright", size="7", weight="bold"),
                     align_items="center",
                 ),
                 rx.menu.root(
@@ -58,3 +59,10 @@ def navbar() -> rx.Component:
         top="2px",
         z_index="5",
     )
+
+    return rx.container.navbar
+
+
+# print(navbar)
+if __name__ == "__main__":
+    print(navbar)

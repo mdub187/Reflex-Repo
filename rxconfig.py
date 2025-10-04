@@ -13,5 +13,4 @@ class Config(rx.Config):
     ]
 
 
-print(Config(app_name="lmrex"))
 config = Config(app_name="lmrex")

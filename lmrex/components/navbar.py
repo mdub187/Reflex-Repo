@@ -1,3 +1,5 @@
+# ./lmrex/components/navbar.py
+
 import reflex as rx
 # from ..ui import index
 # from ..ui import about
@@ -28,6 +30,7 @@ def navbar() -> rx.Component:
                     rx.link("about", href="/About"),
                     rx.link("gallery", href="/Gallery"),
                     rx.link("contact", href="/Contact"),
+                    rx.link("login", href="/Login"),
                     spacing="5",
                 ),
             ),

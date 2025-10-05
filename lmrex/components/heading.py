@@ -1,5 +1,7 @@
+# lmrex/components/heading.py
+
 import reflex as rx
 
-
-class State(rx.State):
-    rx.heading(size="4")
+def header() -> rx.Component:
+    return rx.heading(size="9")
+    return header

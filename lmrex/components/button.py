@@ -1,3 +1,7 @@
+# ./lmrex/components/button.py
+
+import reflex as rx
+
 rx.button(
     "Button",
     on_click=State.change_label,

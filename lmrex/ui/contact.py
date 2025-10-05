@@ -1,5 +1,8 @@
+# lmrex/ui/contact.py
+
 import reflex as rx
 from lmrex.components.navbar import navbar
+from lmrex.components.heading import header
 from lmrex.components.color_mode import color_mode
 from lmrex.state.state import State
 
@@ -17,5 +20,6 @@ def contact() -> rx.Component:
                 size="5",
             ),
         ),
+        color_mode(),
     )
     return contact

@@ -1,8 +1,11 @@
+# Entry point rxconfig.py
+
 import reflex as rx
 
 
 class Config(rx.Config):
-    app_name = "lmrex"
+    # app_name = ("lmrex",)
+    app_module_import = "./lmrex/lmrex.py"
     styles = [
         "styles.css",
         "./styles/styles.css",

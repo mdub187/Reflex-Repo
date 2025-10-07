@@ -1,14 +1,9 @@
 # ./lmrex/components/navbar.py
-
 import reflex as rx
-# from ..ui import index
-# from ..ui import about
-# from ..ui import gallery
-
+from .user_login import user_login
 
 def navbar_link(text, url) -> rx.Component:
-    return rx.link(rx.text(text, size="4", weight="medium", display="contents"))
-
+    return rx.link(rx.text(text, size="4", weight="medium", display="contents"), href=url)
 
 def navbar() -> rx.Component:
     return rx.container(
@@ -17,7 +12,7 @@ def navbar() -> rx.Component:
             rx.hstack(
                 rx.hstack(
                     rx.image(
-                        src="/music-notes-minus-thin.svg",  # Corrected path
+                        src="/music-notes-minus-thin.svg",
                         width="2.25em",
                         height="auto",
                         border_radius="25%",
@@ -30,7 +25,7 @@ def navbar() -> rx.Component:
                     rx.link("about", href="/About"),
                     rx.link("gallery", href="/Gallery"),
                     rx.link("contact", href="/Contact"),
-                    rx.link("login", href="/Login"),
+                    user_login(),  # ← here’s your modal component!
                     spacing="5",
                 ),
             ),
@@ -39,7 +34,7 @@ def navbar() -> rx.Component:
             rx.hstack(
                 rx.hstack(
                     rx.image(
-                        src="/music-notes-minus-thin.svg",  # Corrected path
+                        src="/music-notes-minus-thin.svg",
                         width="1.5em",
                         height="auto",
                         border_radius="25%",
@@ -54,6 +49,7 @@ def navbar() -> rx.Component:
                         rx.menu.item("About"),
                         rx.menu.item("Gallery"),
                         rx.menu.item("Contact"),
+                        rx.menu.item("Login"),  # could hook modal here too
                     ),
                 ),
             ),
@@ -62,10 +58,3 @@ def navbar() -> rx.Component:
         top="2px",
         z_index="5",
     )
-
-    return rx.container.navbar
-
-
-# print(navbar)
-if __name__ == "__main__":
-    print(navbar)

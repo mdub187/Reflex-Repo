@@ -12,6 +12,7 @@ def menu() -> rx.Component:
                 rx.menu.item("About"),
                 rx.menu.item("Gallery"),
                 rx.menu.item("Contact"),
+                rx.menu.item("Login")
             ),
         ),
     )

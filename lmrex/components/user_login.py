@@ -10,5 +10,8 @@ def user_login() -> rx.Component:
             rx.input(placeholder="Username"),
             rx.input(placeholder="Password", type="password"),
             rx.dialog.close(rx.button("Submit")),
+            rx.spacer(column=1),
+            rx.dialog.trigger(rx.button("Create Account"))
+
         ),
     )

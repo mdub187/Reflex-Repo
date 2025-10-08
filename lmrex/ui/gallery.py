@@ -4,10 +4,9 @@ import reflex as rx
 from lmrex.components.navbar import navbar
 from lmrex.components.color_mode import color_mode
 from lmrex.state.state import State
-from lmrex.components.video import video_component as video
+from lmrex.components.media_carousel import media_carousel
 
-gallery = "pages/gallery"
-
+gallery_url = "pages/gallery"
 
 def gallery() -> rx.Component:
     return rx.box(
@@ -15,12 +14,13 @@ def gallery() -> rx.Component:
         rx.vstack(
             rx.heading(State.label, size="9"),
             rx.text(
-                rx.code({"gallery"}),
-                url_redirect=(f"{gallery}"),
+                "Gallery Page",
+                url_redirect=gallery_url,
                 size="5",
             ),
-            rx.container(video()),
+            rx.container(
+            media_carousel()
+            ),
         ),
         color_mode(),
     )
-    return gallery

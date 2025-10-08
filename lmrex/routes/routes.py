@@ -1,22 +1,46 @@
 # lmrex/routes/routes.py
 
-import reflex as rx
-# from ..components.user_login import UserLogin, State
-# def routes(self):
-#     HOME_ROUTE = "/index"
-#     ABOUT_ROUTE = "/about"
-#     GALLERY_ROUTE = "/gallery"
-#     CONTACT_ROUTE = "/contact"
-#     return routes(self)
-# app = routes
+# import reflex as rx
+# # from ..components.user_login import UserLogin, State
+# # def routes(self):
+# #     HOME_ROUTE = "/index"
+# #     ABOUT_ROUTE = "/about"
+# #     GALLERY_ROUTE = "/gallery"
+# #     CONTACT_ROUTE = "/contact"
+# #     return routes(self)
+# # app = routes
 
+
+# app = rx.App()
+
+
+# def routes():
+#     index = [app.add_page(route="/")];
+#     about = [app.add_page(route="/about")],
+#     gallery = [app.add_page(route="/gallery")],
+#     contact = [app.add_page(route="/contact")],
+#     # login = [app.UserLogin(State)]
+"""this was mine"""
+
+
+"""this is garfs"""
+import reflex as rx
+
+# Import your UI pages
+from lmrex.ui.index import index
+from lmrex.ui.about import about
+from lmrex.ui.gallery import gallery
+from lmrex.ui.contact import contact
+from lmrex.ui.login import user_login
 
 app = rx.App()
 
+def add_routes():
+    # Register your pages with their components
+    app.add_page(index, route="/")
+    app.add_page(about, route="/about")
+    app.add_page(gallery, route="/gallery")
+    app.add_page(contact, route="/contact")
+    app.add_page(user_login, route="/login")
 
-def routes():
-    index = [app.add_page(route="/")];
-    about = [app.add_page(route="/about")],
-    gallery = [app.add_page(route="/gallery")],
-    contact = [app.add_page(route="/contact")],
-    # login = [app.UserLogin(State)]
+    return app

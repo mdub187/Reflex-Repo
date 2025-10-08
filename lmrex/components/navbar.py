@@ -25,8 +25,7 @@ def navbar() -> rx.Component:
                     rx.link("about", href="/About"),
                     rx.link("gallery", href="/Gallery"),
                     rx.link("contact", href="/Contact"),
-                    user_login(),  # ← here’s your modal component!
-                    spacing="5",
+                    rx.link(user_login(), create_account=True, spacing="5"),
                 ),
             ),
         ),

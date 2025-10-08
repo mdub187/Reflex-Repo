@@ -1,8 +1,5 @@
-# lmrex/state/state.py
-
 import reflex as rx
-# from .state import AuthState
-from ..models.user_model import User1, NewUser
+from ..models.user_model import User1, NewUser, Gallery
 
 class State(rx.State):
     """The app state."""
@@ -25,12 +22,53 @@ class State(rx.State):
         """Toggle the dialog on and off."""
         self.show_dialog = not self.show_dialog
 
-    # media = [
-    #         {"type": "image", "src": "/cat1.jpg"},
-    #         {"type": "video", "src": "/cat_video.mp4"},
-    #         {"type": "image", "src": "/cat2.jpg"},
-    #         {"type": "video", "src": "/cat_video2.mp4"},
-    #     ]
+    # Media carousel state with external URLs
+    media: list[dict[str, str]] = [
+        {
+            "type": "image", 
+            "src": "https://picsum.photos/600/400?random=1", 
+            "title": "Random Photo 1"
+        },
+        {
+            "type": "video", 
+            "src": "https://www.youtube.com/embed/dQw4w9WgXcQ", 
+            "title": "Rick Roll (YouTube)"
+        },
+        {
+            "type": "image", 
+            "src": "https://picsum.photos/600/400?random=2", 
+            "title": "Random Photo 2"
+        },
+        {
+            "type": "video", 
+            "src": "https://www.youtube.com/embed/jNQXAC9IVRw", 
+            "title": "Me at the zoo (First YouTube video)"
+        },
+        {
+            "type": "image", 
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop", 
+            "title": "Unsplash Mountain"
+        }
+    ]
+    current_index: int = 0
+
+    def previous_item(self):
+        """Navigate to the previous item in the carousel."""
+        if len(self.media) > 0:
+            self.current_index = (self.current_index - 1) % len(self.media)
+
+    def next_item(self):
+        """Navigate to the next item in the carousel."""
+        if len(self.media) > 0:
+            self.current_index = (self.current_index + 1) % len(self.media)
+
+    @rx.var
+    def current_media_item(self) -> dict[str, str]:
+        """Get the current media item to display."""
+        if len(self.media) > 0:
+            return self.media[self.current_index]
+        return {"type": "image", "src": ""}
+
     show_modal: bool = False
 
     @rx.event
@@ -38,27 +76,9 @@ class State(rx.State):
         print("togly")
         print(f"Modal visibility toggled. Current state: {self.show_modal}")
         self.show_modal = not self.show_modal
-        # class User1(rx.Model, table=True, extend_existing=True):
-        class User2(rx.Model, extend_existing=True):
-                current_user: dict[str, str] = {}
-
-                def add_user(self, user_data: dict[str, str]):
-                    """Add a new user to the database."""
-                    self.current_user = user_data
-
-                    # with rx.session() as session:
-                    #     existing_user = session.exec(
-                    #         User2(User2.email == self.current_user["email"])
-                    #     ).first()
-
-
-        #     f"User {self.current_user['name']} has been added.",
-        # position="bottom-right",
-        # # rx.cond(toggle_modal),
-        #         self.add_user(User1(**self.current_user))
 
 class FormState(rx.State):
-        @rx.event
-        def handle_submit(self, state):
-            """Handle the form submit."""
-            self.handle_submit
+    @rx.event
+    def handle_submit(self, form_data):
+        """Handle the form submit."""
+        print(f"Form submitted with data: {form_data}")

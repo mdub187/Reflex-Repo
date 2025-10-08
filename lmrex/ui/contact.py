@@ -6,8 +6,7 @@ from lmrex.components.heading import header
 from lmrex.components.color_mode import color_mode
 from lmrex.state.state import State
 
-contact = "pages/contact"
-
+contact_url = "pages/contact"
 
 def contact() -> rx.Component:
     return rx.box(
@@ -15,11 +14,15 @@ def contact() -> rx.Component:
         rx.vstack(
             rx.heading(State.label, size="9"),
             rx.text(
-                rx.code({"contact"}),
-                url_redirect=(f"{contact}"),
+                "Contact Page",
                 size="5",
+            ),
+            rx.vstack(
+                rx.text("Get in touch with us:"),
+                rx.text("Email: contact@example.com"),
+                rx.text("Phone: (555) 123-4567"),
+                spacing="2",
             ),
         ),
         color_mode(),
     )
-    return contact

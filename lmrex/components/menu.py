@@ -12,7 +12,11 @@ def menu() -> rx.Component:
                 rx.menu.item("About"),
                 rx.menu.item("Gallery"),
                 rx.menu.item("Contact"),
-                rx.menu.item("Login")
+                rx.menu.item("Login"),
+                rx.stack(
+                    rx.spacer(column=12),
+                ),
+                rx.menu.item("Create Account"),
             ),
         ),
     )

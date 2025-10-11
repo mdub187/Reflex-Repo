@@ -13,6 +13,7 @@ def menu() -> rx.Component:
                 rx.menu.item("Gallery"),
                 rx.menu.item("Contact"),
                 rx.menu.item("Login"),
+                rx.color_mode.btn(),
                 rx.stack(
                     rx.spacer(column=12),
                 ),

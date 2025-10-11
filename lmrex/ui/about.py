@@ -3,6 +3,7 @@
 import reflex as rx
 from lmrex.components.navbar import navbar
 from lmrex.components.color_mode import color_mode
+from lmrex.components.footer import footer
 from lmrex.state.state import State
 from lmrex import template
 
@@ -15,7 +16,14 @@ def about() -> rx.Component:
         rx.vstack(
             rx.heading(State.label, size="9"),
             rx.text(rx.code({"about"}), url_redirect=(f"{about}"), size="5"),
+            spacing="5",
+            justify="center",
+            align="center",
+            min_height="80vh",
+            text_align="center",
         ),
-        color_mode(),
+        rx.container(
+            footer(),
+            # color_mode(),
+        ),
     )
-    return about

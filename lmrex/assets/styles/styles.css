@@ -1,0 +1,28 @@
+*,
+html {
+    justify-self: none;
+    justify-content: stretch;
+}
+
+.lucide,
+.lucide-sun,
+.lucide-moon {
+    position: fixed;
+    align-items: center;
+    grid-area: 1 span;
+    grid-area: 2;
+    grid-area: -1 / 2 / 3 / 2;
+}
+/*div.rt-Container.rt-r-size-3.css-8hu8q1 {*/
+/*display: contents;*/
+/*flex_direction: column;*/
+/*align_items: center;*/
+/*justify_content: center;*/
+/*height: "100%";*/
+/*background_color: "#f5f5f5";*/
+/*}*/
+#css-1et3mde,
+#css-1bsrzu9,
+bakground {
+    src: url("../TDM.mov");
+}

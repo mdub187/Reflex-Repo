@@ -8,9 +8,9 @@ def color_mode() -> rx.Component:
         # rx.footer(),
         rx.color_mode.button(
             class_name="color-mode-button",
-            position="bottom-center",
+            # position="",
             width="100%",
-            justify_self="center",
+            justify_self="bottom-right",
             padding_top="1em",
         ),
     )

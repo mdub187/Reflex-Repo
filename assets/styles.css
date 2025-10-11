@@ -1,0 +1,52 @@
+/* Minimal CSS fixes for viewport height and content centering */
+
+* {
+    max-height: 80vh;
+    box-sizing: border-box;
+
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#root {
+    min-height: 80vh;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Ensure all page containers use 80% of viewport height */
+.rx-box {
+    min-height: 80vh;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Center content in vstack containers */
+.rx-vstack {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Responsive viewport units for better mobile support */
+@supports (height: 100dvh) {
+    html, body, #root {
+        height: 100dvh;
+    }
+
+    .rx-box {
+        min-height: 80dvh;
+        max-height: 80dvh;
+    }
+}
+
+/* Prevent horizontal scroll on mobile */
+body {
+    overflow-x: hidden;
+}

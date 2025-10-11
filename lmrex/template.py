@@ -38,11 +38,17 @@ def template(child: rx.Component, args, **kwargs) -> rx.Component:
         user_login(),  # Include the user_login component
         debug_modal(),  # Include the debug_modal component for testing
         navbar(),
-        # color_mode(),
-        rx.heading(State.label, size="9"),
+        color_mode(),
+        rx.heading(State.label, size="9", style={
+            "background_color": "#667eea",
+            "color": "white",
+            "border_radius": "8px",
+            "padding": "0.75rem 2rem",
+            "margin_top": "1rem",
+        }),
         # min_height="50vh",
         footer(),
-        color_mode(),
+        # color_mode(),
         print("Debug: Template rendering completed"),  # Debug log
     )
     return template

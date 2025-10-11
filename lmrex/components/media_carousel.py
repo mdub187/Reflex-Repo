@@ -1,10 +1,10 @@
 import reflex as rx
 from ..state.state import State
 
-def media_carousel():
+def media_carousel(current_media_item):
     return rx.vstack(
         # Title
-        rx.heading("My Media Carousel", size="9", text_align="center"),
+        rx.heading("", size="9", text_align="center"),
 
         # Main media container with consistent sizing
         rx.box(
@@ -12,11 +12,12 @@ def media_carousel():
                 State.current_media_item["type"] == "video",
                 # Video container with fixed dimensions
                 rx.el.iframe(
-                    src=State.current_media_item["src"],
+                    src=State.current_media_item["url"],
                     width="100%",
                     height="100%",
                     frameborder="0",
-                    display="block",
+                    display="felx",
+                    flex_direction="column",
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
                     allowfullscreen=True,
                     style={
@@ -25,7 +26,7 @@ def media_carousel():
                 ),
                 # Image container with fixed dimensions and object-fit
                 rx.image(
-                    src=State.current_media_item["src"],
+                    src=State.current_media_item["url"],
                     width="100%",
                     height="100%",
                     object_fit="cover",
@@ -53,13 +54,14 @@ def media_carousel():
 
         # Media title (if available)
         rx.cond(
-            State.current_media_item.get("title", "") != "",
+            current_media_item.get("title", "") != "",
             rx.text(
-                State.current_media_item.get("title", ""),
+                current_media_item.get("title", ""),
                 size="4",
                 weight="medium",
                 text_align="center",
                 style={
+                    "align": "center",
                     "margin_top": "15px",
                     "color": "#374151",
                     "max_width": "600px"
@@ -73,9 +75,9 @@ def media_carousel():
             rx.button(
                 "← Previous",
                 on_click=State.previous_item,
-                disabled=State.media.length() == 0,
                 variant="outline",
                 size="3",
+                disabled=State.media_count == 0,
                 style={
                     "min_width": "100px",
                 }
@@ -85,7 +87,7 @@ def media_carousel():
                 rx.text(
                     State.current_index + 1,
                     " / ",
-                    State.media.length(),
+                    State.media_count,
                     size="3",
                     weight="medium",
                     text_align="center",
@@ -98,9 +100,9 @@ def media_carousel():
             rx.button(
                 "Next →",
                 on_click=State.next_item,
-                disabled=State.media.length() == 0,
                 variant="outline",
                 size="3",
+                disabled=State.media_count == 0,
                 style={
                     "min_width": "100px",
                 }
@@ -112,6 +114,68 @@ def media_carousel():
         ),
 
         # Container styles for the entire carousel
+        # Additional controls
+        rx.hstack(
+            rx.button(
+                "Add Image",
+                on_click=State.add_media_item(
+                    "Sample Image",
+                    "https://picsum.photos/800/600",
+                    "image"
+                ),
+                size="2",
+                variant="outline",
+                color_scheme="green",
+            ),
+            rx.button(
+                "Remove Current",
+                on_click=State.remove_current_item,
+                size="2",
+                variant="outline",
+                color_scheme="red",
+                disabled=State.media_count == 0,
+            ),
+            rx.button(
+                "Duplicate Current",
+                on_click=State.duplicate_current_item,
+                size="2",
+                variant="outline",
+                color_scheme="blue",
+                disabled=State.media_count == 0,
+            ),
+            rx.button(
+                "Reset to Defaults",
+                on_click=State.reset_to_defaults,
+                size="2",
+                variant="outline",
+                color_scheme="gray",
+            ),
+            spacing="3",
+            justify="center",
+            wrap="wrap",
+        ),
+
+        # Media statistics
+        rx.hstack(
+            rx.badge(
+                f"Images: {State.image_count}",
+                color_scheme="blue",
+                size="2",
+            ),
+            rx.badge(
+                f"Videos: {State.video_count}",
+                color_scheme="purple",
+                size="2",
+            ),
+            rx.badge(
+                f"Total: {State.media_count}",
+                color_scheme="gray",
+                size="2",
+            ),
+            spacing="3",
+            justify="center",
+        ),
+
         spacing="6",
         align="center",
         width="100%",

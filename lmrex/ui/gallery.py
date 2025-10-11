@@ -3,6 +3,7 @@
 import reflex as rx
 from lmrex.components.navbar import navbar
 from lmrex.components.color_mode import color_mode
+from lmrex.components.footer import footer
 from lmrex.state.state import State
 from lmrex.components.media_carousel import media_carousel
 
@@ -14,13 +15,21 @@ def gallery() -> rx.Component:
         rx.vstack(
             rx.heading(State.label, size="9"),
             rx.text(
-                "Gallery Page",
+                rx.code({"api so high"}),
                 url_redirect=gallery_url,
                 size="5",
             ),
             rx.container(
-            media_carousel()
+            media_carousel(current_media_item=State.current_media_item)
             ),
+            spacing="5",
+            justify="center",
+            align="center",
+            min_height="80vh",
+            text_align="center",
         ),
-        color_mode(),
+        rx.container(
+            footer(),
+            # color_mode(),
+        ),
     )

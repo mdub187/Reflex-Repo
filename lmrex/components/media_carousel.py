@@ -115,66 +115,66 @@ def media_carousel(current_media_item):
 
         # Container styles for the entire carousel
         # Additional controls
-        rx.hstack(
-            rx.button(
-                "Add Image",
-                on_click=State.add_media_item(
-                    "Sample Image",
-                    "https://picsum.photos/800/600",
-                    "image"
-                ),
-                size="2",
-                variant="outline",
-                color_scheme="green",
-            ),
-            rx.button(
-                "Remove Current",
-                on_click=State.remove_current_item,
-                size="2",
-                variant="outline",
-                color_scheme="red",
-                disabled=State.media_count == 0,
-            ),
-            rx.button(
-                "Duplicate Current",
-                on_click=State.duplicate_current_item,
-                size="2",
-                variant="outline",
-                color_scheme="blue",
-                disabled=State.media_count == 0,
-            ),
-            rx.button(
-                "Reset to Defaults",
-                on_click=State.reset_to_defaults,
-                size="2",
-                variant="outline",
-                color_scheme="gray",
-            ),
-            spacing="3",
-            justify="center",
-            wrap="wrap",
-        ),
+        # rx.hstack(
+        #     rx.button(
+        #         "Add Image",
+        #         on_click=State.add_media_item(
+        #             "Sample Image",
+        #             "https://picsum.photos/800/600",
+        #             "image"
+        #         ),
+        #         size="2",
+        #         variant="outline",
+        #         color_scheme="green",
+        #     ),
+        #     rx.button(
+        #         "Remove Current",
+        #         on_click=State.remove_current_item,
+        #         size="2",
+        #         variant="outline",
+        #         color_scheme="red",
+        #         disabled=State.media_count == 0,
+        #     ),
+        #     rx.button(
+        #         "Duplicate Current",
+        #         on_click=State.duplicate_current_item,
+        #         size="2",
+        #         variant="outline",
+        #         color_scheme="blue",
+        #         disabled=State.media_count == 0,
+        #     ),
+        #     rx.button(
+        #         "Reset to Defaults",
+        #         on_click=State.reset_to_defaults,
+        #         size="2",
+        #         variant="outline",
+        #         color_scheme="gray",
+        #     ),
+        #     spacing="3",
+        #     justify="center",
+        #     wrap="wrap",
+        # ),
 
-        # Media statistics
-        rx.hstack(
-            rx.badge(
-                f"Images: {State.image_count}",
-                color_scheme="blue",
-                size="2",
-            ),
-            rx.badge(
-                f"Videos: {State.video_count}",
-                color_scheme="purple",
-                size="2",
-            ),
-            rx.badge(
-                f"Total: {State.media_count}",
-                color_scheme="gray",
-                size="2",
-            ),
-            spacing="3",
-            justify="center",
-        ),
+        # # Media statistics
+        # rx.hstack(
+        #     rx.badge(
+        #         f"Images: {State.image_count}",
+        #         color_scheme="blue",
+        #         size="2",
+        #     ),
+        #     rx.badge(
+        #         f"Videos: {State.video_count}",
+        #         color_scheme="purple",
+        #         size="2",
+        #     ),
+        #     rx.badge(
+        #         f"Total: {State.media_count}",
+        #         color_scheme="gray",
+        #         size="2",
+        #     ),
+        #     spacing="3",
+        #     justify="center",
+        # ),
 
         spacing="6",
         align="center",

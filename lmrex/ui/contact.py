@@ -19,8 +19,8 @@ def contact() -> rx.Component:
                 size="5",
             ),
             rx.vstack(
-                rx.text("Get in touch with us:"),
-                rx.text("Email: contact@example.com"),
+                rx.text("Get in touch with me:"),
+                rx.text("Email: ", rx.link("mdub187@dub.com", href="mailto:mdub187@dub.com")),
                 rx.text("Phone: (555) 123-4567"),
                 spacing="2",
             ),

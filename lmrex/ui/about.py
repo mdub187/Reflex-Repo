@@ -2,6 +2,7 @@
 
 import reflex as rx
 from lmrex.components.navbar import navbar
+from lmrex.components.heading import header
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
 from lmrex.state.state import State
@@ -14,7 +15,7 @@ def about() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-            rx.heading(State.label, size="9"),
+            header(),
             rx.text(rx.code({"about"}), url_redirect=(f"{about}"), size="5"),
             spacing="5",
             justify="center",

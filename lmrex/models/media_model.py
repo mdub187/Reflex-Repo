@@ -12,7 +12,7 @@ class MediaService:
     DEFAULT_MEDIA_ITEMS: List[Dict[str, str]] = [
         {
             "title": "Photo1",
-            "url": "https://www.behance.net/gallery/209581411/Mood",
+            "url": "https://www.behance.net/gallery/209581411/Mood/modules/1229770495",
             "type": "image"
         },
         {

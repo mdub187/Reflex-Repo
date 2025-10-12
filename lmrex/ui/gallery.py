@@ -13,9 +13,15 @@ def gallery() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-            rx.heading(State.label, size="9"),
+            rx.heading(State.label, size="9",
+                style={
+                    "background": "linear-gradient(45deg, #667eea, #764ba2)",
+                    "background_clip": "text",
+                    "color": "transparent",
+                    "margin_bottom": "1rem",
+                }),
             rx.text(
-                rx.code({"api so high"}),
+                rx.code({"creative"}),
                 url_redirect=gallery_url,
                 size="5",
             ),

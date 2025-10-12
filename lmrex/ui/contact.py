@@ -13,9 +13,8 @@ def contact() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-            rx.heading(State.label, size="9"),
-            rx.text(
-                "Contact Page",
+            header(),
+            rx.text(rx.code({"Resources"}),
                 size="5",
             ),
             rx.vstack(

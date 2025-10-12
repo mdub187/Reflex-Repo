@@ -6,11 +6,21 @@ class State(rx.State):
     """The app state."""
 
     label: str = ""
-    label_arr: list[str] = ["Be", "Alright"]
+    label_arr: list[str] = ["We", "Gonna", "Be", "Alright"]
+
+    # for label in label_arr:
+    #     print(label)
 
     def change_label(self):
         if self.label == self.label_arr[0]:
-            self.label = self.label_arr[1]
+            # self.label = self.label_arr[1 + 0]
+            self.label = self.label_arr[1 + 0]
+        elif self.label == self.label_arr[1]:
+            self.label = self.label_arr[2 + 0]
+        elif self.label == self.label_arr[2]:
+            self.label = self.label_arr[3 + 0]
+        elif self.label == self.label_arr[3]:
+            self.label = self.label_arr[0]
         else:
             self.label = self.label_arr[0]
 

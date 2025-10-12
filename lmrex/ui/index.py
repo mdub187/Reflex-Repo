@@ -19,7 +19,7 @@ def index() -> rx.Component:
         rx.vstack(
             # Welcome section with nice styling
             rx.heading(
-                State.label, 
+                State.label,
                 size="9",
                 style={
                     "background": "linear-gradient(45deg, #667eea, #764ba2)",
@@ -36,14 +36,14 @@ def index() -> rx.Component:
                     "color": "#6b7280",
                 }
             ),
-            
+
             # Interactive elements in a nice container
             rx.box(
                 rx.vstack(
                     input(rx.input),
                     rx.button(
-                        "Lizzard", 
-                        on_click=State.change_label,
+                        "Lizzard",
+                        on_click=State.text,
                         size="3",
                         style={
                             "background_color": "#667eea",

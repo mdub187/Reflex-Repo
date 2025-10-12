@@ -1,3 +1,5 @@
+# lmrex/components/menu.py
+
 import reflex as rx
 
 
@@ -10,6 +12,12 @@ def menu() -> rx.Component:
                 rx.menu.item("About"),
                 rx.menu.item("Gallery"),
                 rx.menu.item("Contact"),
+                rx.menu.item("Login"),
+                rx.color_mode.btn(),
+                rx.stack(
+                    rx.spacer(column=12),
+                ),
+                rx.menu.item("Create Account"),
             ),
         ),
     )

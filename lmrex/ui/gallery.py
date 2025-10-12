@@ -1,37 +1,41 @@
+# lmrex/ui/gallery.py
+
 import reflex as rx
 from lmrex.components.navbar import navbar
 from lmrex.components.color_mode import color_mode
+from lmrex.components.footer import footer
 from lmrex.state.state import State
+from lmrex.components.media_carousel import media_carousel
 
-gallery = "pages/gallery"
-
+gallery_url = "pages/gallery"
 
 def gallery() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-            rx.heading(State.label, size="9"),
+            rx.heading(State.label, size="9",
+                style={
+                    "background": "linear-gradient(45deg, #667eea, #764ba2)",
+                    "background_clip": "text",
+                    "color": "transparent",
+                    "margin_bottom": "1rem",
+                }),
             rx.text(
-                rx.code({"gallery"}),
-                url_redirect=(f"{gallery}"),
+                rx.code({"creative"}),
+                url_redirect=gallery_url,
                 size="5",
             ),
-            rx.video(
-                url="./assets/Main.mov",
-                # auto_play=True,
-                # loop=True,
-                # muted=True,
-                style={
-                    "src": ("./assets/Main.mov"),
-                    "vph": "100%",
-                    "min_height": "100%",
-                    "min_width": "100%",
-                    "object_fit": "cover",
-                    "right": 0,
-                    "bottom": 0,
-                    "z_index": 1,
-                },
+            rx.container(
+            media_carousel(current_media_item=State.current_media_item)
             ),
+            spacing="5",
+            justify="center",
+            align="center",
+            min_height="80vh",
+            text_align="center",
+        ),
+        rx.container(
+            footer(),
+            # color_mode(),
         ),
     )
-    return gallery

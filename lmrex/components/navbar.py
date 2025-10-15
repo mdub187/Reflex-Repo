@@ -45,9 +45,9 @@ def navbar() -> rx.Component:
                     rx.menu.trigger(rx.icon("menu", size=30)),
                     rx.menu.content(
                         rx.menu.item("Home")rx.link("home", href="/"),
-                        rx.menu.item("About"),
-                        rx.menu.item("Gallery"),
-                        rx.menu.item("Contact"),
+                        rx.menu.item("About")rx.link("about", href="/About"),
+                        rx.menu.item("Gallery")rx.link("gallery", href="Gallery"),
+                        rx.menu.item("Contact")rx.link("conatct", href="/Contact"),
                         rx.menu.item("Login"),  # could hook modal here too
                     ),
                 ),

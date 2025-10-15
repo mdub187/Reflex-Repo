@@ -44,7 +44,7 @@ def navbar() -> rx.Component:
                 rx.menu.root(
                     rx.menu.trigger(rx.icon("menu", size=30)),
                     rx.menu.content(
-                        rx.menu.item("Home"),
+                        rx.menu.item("Home")rx.link("home", href="/"),
                         rx.menu.item("About"),
                         rx.menu.item("Gallery"),
                         rx.menu.item("Contact"),

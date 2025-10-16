@@ -43,7 +43,7 @@ def index() -> rx.Component:
                     input(rx.input),
                     rx.button(
                         "Lizzard",
-                        on_click=State.text,
+                        on_click=State.change_label,
                         size="3",
                         style={
                             "background_color": "#667eea",

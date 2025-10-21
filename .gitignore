@@ -16,4 +16,3 @@ assets/external/*
 *.mov
 **alembic/*
 **.github/*
-**.env

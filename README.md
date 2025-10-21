@@ -6,6 +6,7 @@
  Template web-application project utilizing the Reflex framework, built in Python.
 
 # Install
+<<<<<<< HEAD
  1. Create a virtual environment:
    """ python3 -m venv .venv """
  2. Activate the environment:
@@ -53,6 +54,17 @@
 # License
  undefined
 
+=======
+  undefined
+# Usage
+  Simple web app
+# Contribution
+  any
+# Testing
+  n/a
+# Liscense
+  undefined
+>>>>>>> origin/revert-2-new
 # Github Username
  mdub187
 

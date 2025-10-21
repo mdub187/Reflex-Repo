@@ -1,6 +1,7 @@
 # lmrex/ui/gallery.py
 
 import reflex as rx
+from lmrex.components.heading import header
 from lmrex.components.navbar import navbar
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
@@ -9,25 +10,27 @@ from lmrex.components.media_carousel import media_carousel
 
 gallery_url = "pages/gallery"
 
+
 def gallery() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-            rx.heading(State.label, size="9",
+            rx.heading(
+                State.label,
+                size="9",
                 style={
                     "background": "linear-gradient(45deg, #667eea, #764ba2)",
                     "background_clip": "text",
                     "color": "transparent",
                     "margin_bottom": "1rem",
-                }),
+                },
+            ),
             rx.text(
-                rx.code({"creative"}),
+                rx.code("creative"),
                 url_redirect=gallery_url,
                 size="5",
             ),
-            rx.container(
-            media_carousel(current_media_item=State.current_media_item)
-            ),
+            rx.container(media_carousel()),
             spacing="5",
             justify="center",
             align="center",
@@ -35,7 +38,7 @@ def gallery() -> rx.Component:
             text_align="center",
         ),
         rx.container(
-            footer(),
+            # footer(),
             # color_mode(),
         ),
     )

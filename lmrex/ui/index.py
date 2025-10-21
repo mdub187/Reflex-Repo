@@ -13,6 +13,7 @@ from lmrex.components.heading import header
 
 index = "/index"
 
+
 def index() -> rx.Component:
     return rx.box(
         navbar(),
@@ -26,17 +27,16 @@ def index() -> rx.Component:
                     "background_clip": "text",
                     "color": "transparent",
                     "margin_bottom": "1rem",
-                }
+                },
             ),
             rx.text(
-                rx.code({"alright"}),
+                rx.code("alright"),
                 size="5",
                 style={
                     "margin": "1rem 0 2rem 0",
                     "color": "#6b7280",
-                }
+                },
             ),
-
             # Interactive elements in a nice container
             rx.box(
                 rx.vstack(
@@ -51,7 +51,7 @@ def index() -> rx.Component:
                             "border_radius": "8px",
                             "padding": "0.75rem 2rem",
                             "margin_top": "1rem",
-                        }
+                        },
                     ),
                     spacing="4",
                     align="center",
@@ -62,15 +62,14 @@ def index() -> rx.Component:
                     "padding": "2rem",
                     "box_shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
                     "max_width": "400px",
-                }
+                },
             ),
-
             spacing="6",
             justify="center",
             align="center",
             min_height="80vh",
             text_align="center",
-            ),
+        ),
         rx.container(
             footer(),
             # color_mode(),

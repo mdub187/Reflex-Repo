@@ -16,3 +16,5 @@ assets/external/*
 *.mov
 **alembic/*
 **.github/*
+/logic/youtube_api.py
+.env

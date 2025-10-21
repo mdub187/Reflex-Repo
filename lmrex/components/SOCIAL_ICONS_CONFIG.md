@@ -11,7 +11,7 @@ Edit the `SOCIAL_CONFIG` dictionary in `social_icons.py`:
 ```python
 SOCIAL_CONFIG = {
     "github": "https://github.com/yourusername",
-    "linkedin": "https://linkedin.com/in/yourusername", 
+    "linkedin": "https://linkedin.com/in/yourusername",
     "youtube": "https://youtube.com/@yourusername",
     "instagram": "https://instagram.com/yourusername",
     "facebook": "https://facebook.com/yourusername",
@@ -42,7 +42,9 @@ The following social media platforms are supported with icons:
 ## Usage Examples
 
 ### Footer Icons (Default)
+
 ```python
+
 from lmrex.components.social_icons import social_icons_footer
 
 # Uses configured URLs with common platforms (github, linkedin, youtube)
@@ -50,7 +52,9 @@ social_icons_footer()
 ```
 
 ### Custom Platform Selection
+
 ```python
+
 from lmrex.components.social_icons import social_icons
 
 # Only show specific platforms
@@ -62,7 +66,9 @@ social_icons(
 ```
 
 ### Custom URLs
+
 ```python
+
 from lmrex.components.social_icons import social_icons
 
 my_urls = {
@@ -71,19 +77,24 @@ my_urls = {
 }
 
 social_icons(urls=my_urls, include_platforms=["github", "linkedin"])
+
 ```
 
 ### Large Icons for Hero Section
+
 ```python
+
 from lmrex.components.social_icons import social_icons_hero
 
 # Large icons with more spacing
 social_icons_hero()
+
 ```
 
 ## Customization Options
 
 ### Size Options
+
 - `"16px"` - Small icons
 - `"20px"` - Default footer size
 - `"24px"` - Medium icons
@@ -91,23 +102,28 @@ social_icons_hero()
 - `"48px"` - Extra large icons
 
 ### Spacing Options
+
 - `"2"` - Tight spacing
 - `"3"` - Default spacing
 - `"4"` - Medium spacing
 - `"6"` - Large spacing
 
 ### Platform Filtering
+
 ```python
+
 # Include only specific platforms
 social_icons(include_platforms=["github", "linkedin", "youtube"])
 
 # Exclude specific platforms
 social_icons(exclude_platforms=["whatsapp", "reddit"])
+
 ```
 
 ## Complete Example
 
 ```python
+
 def my_custom_social_footer() -> rx.Component:
     """Custom footer with social icons."""
     my_social_urls = {
@@ -116,7 +132,7 @@ def my_custom_social_footer() -> rx.Component:
         "youtube": "https://youtube.com/@mychannel",
         "instagram": "https://instagram.com/myhandle"
     }
-    
+
     return rx.container(
         rx.hstack(
             rx.text("Follow us:", size="3", weight="bold"),
@@ -132,6 +148,7 @@ def my_custom_social_footer() -> rx.Component:
         ),
         padding="4"
     )
+
 ```
 
 ## Adding New Icons
@@ -142,6 +159,7 @@ To add new social media icons:
 2. Update the `ICON_MAP` dictionary in `social_icons.py`:
 
 ```python
+
 ICON_MAP = {
     # ... existing icons ...
     "tiktok": "social_icons/tiktok.png",
@@ -152,6 +170,7 @@ ICON_MAP = {
 3. Add the URLs to your `SOCIAL_CONFIG`:
 
 ```python
+
 SOCIAL_CONFIG = {
     # ... existing URLs ...
     "tiktok": "https://tiktok.com/@yourusername",
@@ -162,21 +181,26 @@ SOCIAL_CONFIG = {
 ## Troubleshooting
 
 ### Icons Not Showing
+
 1. Verify icon files exist in `assets/social_icons/` directory
 2. Check that file paths in `ICON_MAP` are correct
 3. Restart your Reflex development server after adding new icons
 
 ### Wrong Links
+
 1. Update the URLs in `SOCIAL_CONFIG` or pass custom `urls` parameter
 2. Make sure URLs include `https://` protocol
 
 ### Styling Issues
+
 1. Adjust `size` and `spacing` parameters
 2. Use CSS classes for advanced styling
 3. Wrap in containers for custom layouts
 
 ## File Structure
+
 ```
+
 assets/
 └── social_icons/
     ├── github.png

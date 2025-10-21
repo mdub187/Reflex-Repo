@@ -2,7 +2,7 @@
 
 import reflex as rx
 from lmrex.components.navbar import navbar
-from lmrex.components.heading import header
+from lmrex.components.heading import heading.header
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
 from lmrex.state.state import State
@@ -14,6 +14,7 @@ def contact() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
+<<<<<<< Updated upstream
             rx.heading(
                 (State.label),
                 header(),
@@ -39,6 +40,20 @@ def contact() -> rx.Component:
             rx.container(
                 # footer(),
                 # color_mode(),
+=======
+            rx.heading(rx.text(State.label)),
+            rx.text(
+                rx.code({"Resources"}),
+                size="5",
+            ),
+            rx.vstack(
+                rx.text("Get in touch with me:"),
+                rx.text(
+                    "Email: ", rx.link("mdub187@dub.com", href="mailto:mdub187@dub.com")
+                ),
+                rx.text("Phone: (555) 123-4567"),
+                spacing="2",
+>>>>>>> Stashed changes
             ),
         ),
     )

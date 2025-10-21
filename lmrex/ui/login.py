@@ -16,7 +16,6 @@ def user_login() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-<<<<<<< HEAD
             rx.heading("Login / Demo", size="6"),
             rx.text(
                 "This page simulates a login flow for local development. "
@@ -45,7 +44,6 @@ def user_login() -> rx.Component:
                 "You can then visit the protected secret page."
             ),
             spacing="6",
-=======
             rx.alert_dialog.trigger(
                 rx.box(
                     rx.hstack(
@@ -60,14 +58,11 @@ def user_login() -> rx.Component:
                         "Cancel",
                         variant="soft",
                         color_scheme="gray",
-                        ),
-                    ),
+                    )
                 # is_open=True,  # Force modal to always render for debugging
                 ), # Toggle modal visibility on close action
-            ),
             spacing="5",
             justify="center",
->>>>>>> origin/revert-2-new
             align="center",
             justify="center",
             min_height="60vh",
@@ -75,8 +70,8 @@ def user_login() -> rx.Component:
         footer(),
         color_mode(),
         style={"padding": "18px"},
+    ),
     )
-<<<<<<< HEAD
 
 
 # Alias for compatibility with modules that expect a `login` function
@@ -135,5 +130,3 @@ def secret() -> rx.Component:
 
 
 __all__ = ["user_login", "login", "secret"]
-=======
->>>>>>> origin/revert-2-new

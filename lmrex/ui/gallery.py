@@ -16,7 +16,11 @@ def gallery() -> rx.Component:
         navbar(),
         rx.vstack(
             rx.heading(
+<<<<<<< Updated upstream
                 State.label,
+=======
+                rx.text(State.label),
+>>>>>>> Stashed changes
                 size="9",
                 style={
                     "background": "linear-gradient(45deg, #667eea, #764ba2)",
@@ -27,10 +31,16 @@ def gallery() -> rx.Component:
             ),
             rx.text(
                 rx.code("creative"),
+<<<<<<< Updated upstream
                 url_redirect=gallery_url,
                 size="5",
             ),
             rx.container(media_carousel()),
+=======
+                size="5",
+            ),
+            rx.container(media_carousel(State.current_media_item)),
+>>>>>>> Stashed changes
             spacing="5",
             justify="center",
             align="center",

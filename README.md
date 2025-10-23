@@ -5,7 +5,12 @@
 # Description
  Template web-application project utilizing the Reflex framework, built in Python.
 
+# Title
+  Reflex-Repo
+# Desription
+  Template web-application project utitilizing reflex framework, built in python.
 # Install
+<<<<<<< HEAD
 <<<<<<< HEAD
  1. Create a virtual environment:
    """ python3 -m venv .venv """
@@ -41,6 +46,16 @@
      strictly for local development convenience. In production you must set
      `CLERK_SECRET_KEY` and disable demo tokens.
 
+=======
+  1. Create virtual environment:
+    """ python3 -m venv .venv """
+  2. Activate Said Environment:
+    """ source .venv/bin/activate """
+  3. Install dependencies:
+    """ pip install -r requirements.txt """
+  4. run reflex:
+    """ reflex run """
+>>>>>>> parent of 4a4eed8 (cleaning up refactor, added filed to .gitignore, added authentication logic, the logic is sitll a work in progress and isnt yet working. encountered some roadblocks i did have some help for co pilot. i want to clean up and make sure it didnt overcomplicate things.)
 # Usage
  Extensive portfolio / e-commerce web app using only Python and Reflex libraries.
 
@@ -49,6 +64,7 @@
  Contributions and suggestions are welcome.
 
 # Testing
+<<<<<<< HEAD
  TBD
 
 # License
@@ -65,6 +81,11 @@
 # Liscense
   undefined
 >>>>>>> origin/revert-2-new
+=======
+  TBD
+# Liscense
+  undefined
+>>>>>>> parent of 4a4eed8 (cleaning up refactor, added filed to .gitignore, added authentication logic, the logic is sitll a work in progress and isnt yet working. encountered some roadblocks i did have some help for co pilot. i want to clean up and make sure it didnt overcomplicate things.)
 # Github Username
  mdub187
 

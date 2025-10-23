@@ -16,7 +16,6 @@ MarkupSafe==3.0.3
 mdurl==0.1.2
 packaging==25.0
 platformdirs==4.4.0
-pendulum
 pydantic==2.11.10
 pydantic_core==2.33.2
 Pygments==2.19.2
@@ -25,7 +24,6 @@ python-multipart==0.0.20
 python-socketio==5.14.1
 redis==6.4.0
 reflex==0.8.14.post1
-reflex-local-auth
 reflex-hosting-cli==0.1.56
 rich==14.1.0
 simple-websocket==1.1.0

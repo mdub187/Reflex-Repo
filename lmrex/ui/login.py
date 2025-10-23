@@ -1,21 +1,14 @@
 import reflex as rx
-from ..state.state import AuthState
-from ..components.navbar import navbar
+from ..state.state import State
 from ..components.footer import footer
 from ..components.color_mode import color_mode
 
 
 def user_login() -> rx.Component:
-    """
-    Combined login/demo page used for local development.
-
-    - "Simulate login" stores a demo token and calls `AuthState.handle_login_success`.
-    - "Simulate admin token" stores an admin demo token.
-    - "Logout" clears the stored token.
-    """
+    print("Debug: user_login component is being rendered")
     return rx.box(
-        navbar(),
         rx.vstack(
+<<<<<<< HEAD
             rx.heading("Login / Demo", size="6"),
             rx.text(
                 "This page simulates a login flow for local development. "
@@ -105,28 +98,39 @@ def secret() -> rx.Component:
                         rx.vstack(
                             rx.text("Account info:"),
                             rx.text(AuthState.authenticated_user.email),
+=======
+            rx.alert_dialog.root(
+                rx.alert_dialog.content(
+                rx.alert_dialog.trigger(
+                    rx.box(
+                        rx.hstack(
+                            rx.heading("Debug Modal"),
+                            size="3",
+                            # rx.box("This is a simple modal for debugging."),
+                            justify="center"
                         ),
-                        rx.fragment(),
+                        rx.button("Close", on_click=State.toggle_modal),
+                        rx.alert_dialog.cancel(
+                            rx.button(
+                                "Cancel",
+                                variant="soft",
+                            color_scheme="gray",
+>>>>>>> parent of 4a4eed8 (cleaning up refactor, added filed to .gitignore, added authentication logic, the logic is sitll a work in progress and isnt yet working. encountered some roadblocks i did have some help for co pilot. i want to clean up and make sure it didnt overcomplicate things.)
+                        ),
                     ),
-                    spacing="4",
-                    align="center",
-                ),
-                rx.vstack(
-                    rx.heading("Protected", size="6"),
-                    rx.text("You must be logged in to view this page."),
-                    rx.link("Go to login demo", href="/login"),
-                    spacing="3",
-                    align="center",
-                ),
+                # is_open=True,  # Force modal to always render for debugging
+                ), # Toggle modal visibility on close action
             ),
-            min_height="60vh",
-            align="center",
+            ),
+            spacing="5",
             justify="center",
-            spacing="6",
+            align="center",
+            min_height="80vh",
+            text_align="center",
         ),
-        # footer(),
-        style={"padding": "18px"},
+        rx.container(
+            footer(),
+            color_mode(),
+        ),
     )
-
-
-__all__ = ["user_login", "login", "secret"]
+)

@@ -25,6 +25,6 @@ def about() -> rx.Component:
         ),
         rx.container(
             footer(),
-            # color_mode(),
+            color_mode(),
         ),
     )

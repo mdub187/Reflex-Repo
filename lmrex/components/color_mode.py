@@ -14,4 +14,4 @@ def color_mode() -> rx.Component:
             padding_top="1em",
         ),
     )
-    return color_mode
+    # return color_mode

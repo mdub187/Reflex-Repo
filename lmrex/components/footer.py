@@ -10,28 +10,22 @@ def footer() -> rx.Component:
             rx.hstack(
                 # Copyright text
                 rx.text("© 2025 Marc Weeks", size="2", color="gray.600"),
-
                 # Social icons
                 social_icons_footer(
                     # ="center"
                 ),
-
+                rx.box(),
                 # Color mode toggle
-                rx.color_mode.button(),
-
                 justify="center",
                 align="center",
-                width="100%"
+                width="100%",
             ),
-            max_width="1200px"
+            max_width="1200px",
         ),
         width="100%",
         padding="4",
         border_top="1px solid",
         border_color="gray.200",
         background="gray.50",
-        _dark={
-            "border_color": "gray.700",
-            "background": "gray.900"
-        }
+        _dark={"border_color": "gray.700", "background": "gray.900"},
     )

@@ -16,7 +16,4 @@ assets/external/*
 *.mov
 **alembic/*
 **.github/*
-<<<<<<< HEAD
 .env
-=======
->>>>>>> parent of 4a4eed8 (cleaning up refactor, added filed to .gitignore, added authentication logic, the logic is sitll a work in progress and isnt yet working. encountered some roadblocks i did have some help for co pilot. i want to clean up and make sure it didnt overcomplicate things.)

@@ -2,8 +2,12 @@
 import reflex as rx
 from .user_login import user_login
 
+
 def navbar_link(text, url) -> rx.Component:
-    return rx.link(rx.text(text, size="4", weight="medium", display="contents"), href=url)
+    return rx.link(
+        rx.text(text, size="4", weight="medium", display="contents"), href=url
+    )
+
 
 def navbar() -> rx.Component:
     return rx.container(
@@ -53,7 +57,7 @@ def navbar() -> rx.Component:
                 ),
             ),
         ),
-        bg=rx.color("accent", 3),
+        # xxbg=rx.color("accent", 3),
         top="2px",
         z_index="5",
     )

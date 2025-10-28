@@ -1,5 +1,5 @@
 import reflex as rx
-from ..state.state import State
+from ..state.auth_state import AuthState
 from ..components.footer import footer
 from ..components.color_mode import color_mode
 
@@ -8,7 +8,6 @@ def user_login() -> rx.Component:
     print("Debug: user_login component is being rendered")
     return rx.box(
         rx.vstack(
-<<<<<<< HEAD
             rx.heading("Login / Demo", size="6"),
             rx.text(
                 "This page simulates a login flow for local development. "
@@ -37,50 +36,28 @@ def user_login() -> rx.Component:
                 "You can then visit the protected secret page."
             ),
             spacing="6",
-            rx.alert_dialog.trigger(
-                rx.box(
-                    rx.hstack(
-                    rx.heading("Debug Modal"),
-                    size="3",
-                    # rx.box("This is a simple modal for debugging."),
-                        justify="center"
-                    ),
-                    rx.button("Close", on_click=State.toggle_modal),
-            rx.alert_dialog.cancel(
-                    rx.button(
-                        "Cancel",
-                        variant="soft",
-                        color_scheme="gray",
-                    )
-                # is_open=True,  # Force modal to always render for debugging
-                ), # Toggle modal visibility on close action
-            spacing="5",
             justify="center",
             align="center",
-            justify="center",
             min_height="60vh",
         ),
         footer(),
-        color_mode(),
+        # color_mode(),
         style={"padding": "18px"},
-    ),
     )
 
 
-# Alias for compatibility with modules that expect a `login` function
 def login() -> rx.Component:
+    """Alias for compatibility with modules that expect a `login` function"""
     return user_login()
 
 
 def secret() -> rx.Component:
     """
     Protected UI that displays secret content only when the user is authenticated.
-
     This is client-side gating for demo purposes. For real applications,
     validate tokens on the server before returning sensitive data.
     """
     return rx.box(
-        navbar(),
         rx.vstack(
             rx.cond(
                 AuthState.authenticated_user,
@@ -98,29 +75,16 @@ def secret() -> rx.Component:
                         rx.vstack(
                             rx.text("Account info:"),
                             rx.text(AuthState.authenticated_user.email),
-=======
-            rx.alert_dialog.root(
-                rx.alert_dialog.content(
-                rx.alert_dialog.trigger(
-                    rx.box(
-                        rx.hstack(
-                            rx.heading("Debug Modal"),
-                            size="3",
-                            # rx.box("This is a simple modal for debugging."),
-                            justify="center"
-                        ),
-                        rx.button("Close", on_click=State.toggle_modal),
-                        rx.alert_dialog.cancel(
-                            rx.button(
-                                "Cancel",
-                                variant="soft",
-                            color_scheme="gray",
->>>>>>> parent of 4a4eed8 (cleaning up refactor, added filed to .gitignore, added authentication logic, the logic is sitll a work in progress and isnt yet working. encountered some roadblocks i did have some help for co pilot. i want to clean up and make sure it didnt overcomplicate things.)
+                            spacing="2",
                         ),
                     ),
-                # is_open=True,  # Force modal to always render for debugging
-                ), # Toggle modal visibility on close action
-            ),
+                    spacing="4",
+                ),
+                rx.vstack(
+                    rx.heading("Access Denied", size="6"),
+                    rx.text("Please log in to view this content."),
+                    spacing="4",
+                ),
             ),
             spacing="5",
             justify="center",
@@ -128,9 +92,6 @@ def secret() -> rx.Component:
             min_height="80vh",
             text_align="center",
         ),
-        rx.container(
-            footer(),
-            color_mode(),
-        ),
+        footer(),
+        # color_mode(),
     )
-)

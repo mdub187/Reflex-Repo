@@ -1,6 +1,6 @@
 """Media service for managing media data and operations."""
 
-from typing import List, Dict, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 
 class MediaService:
@@ -24,7 +24,7 @@ class MediaService:
         },
     ]
 
-    VALID_MEDIA_TYPES = ["image", "video"]
+    VALID_MEDIA_TYPES = ["image", "video", "audio", "text"]
 
     # ─────────────────────────────
     # Retrieval Methods

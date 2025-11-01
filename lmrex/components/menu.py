@@ -6,18 +6,13 @@ import reflex as rx
 def menu() -> rx.Component:
     return rx.container(
         rx.menu.root(
-            rx.menu.trigger(rx.icon("menu", size=30)),
+            rx.menu.trigger(rx.icon("Media", size=30)),
             rx.menu.content(
-                rx.menu.item("Home"),
-                rx.menu.item("About"),
-                rx.menu.item("Gallery"),
-                rx.menu.item("Contact"),
-                rx.menu.item("Login"),
-                # rx.color_mode.btn(),
-                rx.stack(
-                    rx.spacer(column=12),
-                ),
-                rx.menu.item("Create Account"),
+                rx.menu.item("Photo"),
+                rx.menu.item("Video"),
+                rx.menu.item("Graphic"),
+                rx.menu.item("Audio"),
+                rx.menu.item("Ideas"),
             ),
         ),
     )

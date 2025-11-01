@@ -1,17 +1,18 @@
 # lmrex/ui/index.py
 
 import reflex as rx
-from lmrex.components.navbar import navbar
+
 from lmrex.components.color_mode import color_mode
-from lmrex.state.state import State
-from lmrex.components.input import input
 from lmrex.components.footer import footer
 from lmrex.components.heading import header
+from lmrex.components.input import input
+from lmrex.components.navbar import navbar
+from lmrex.state.state import State
 
 # from lmrex.components.media_carousel import media_carousel
 # from lmrex.template import template
 
-index = "/index"
+# index = "/index"
 
 
 def index() -> rx.Component:

@@ -1,8 +1,9 @@
 import reflex as rx
-from lmrex.components.navbar import navbar
-from lmrex.components.heading import header
+
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
+from lmrex.components.heading import header
+from lmrex.components.navbar import navbar
 from lmrex.state.state import State
 
 contact_url = "pages/contact"
@@ -21,7 +22,7 @@ def contact() -> rx.Component:
                 rx.text("Get in touch with me:"),
                 rx.text(
                     "Email: ",
-                    rx.link("mdub187@dub.com", href="mailto:mdub187@dub.com"),
+                    rx.link("This is my email", href="mailto:maweeks85@comcast.net"),
                 ),
                 rx.text("Phone: (555) 123-4567"),
                 spacing="2",

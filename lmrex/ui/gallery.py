@@ -1,11 +1,13 @@
 # lmrex/ui/gallery.py
 
 import reflex as rx
-from lmrex.components.navbar import navbar
+
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
-from lmrex.state.state import State
 from lmrex.components.media_carousel import media_carousel
+from lmrex.components.menu import menu
+from lmrex.components.navbar import navbar
+from lmrex.state.state import State
 
 gallery_url = "pages/gallery"
 
@@ -29,7 +31,14 @@ def gallery() -> rx.Component:
                 url_redirect=gallery_url,
                 size="5",
             ),
-            rx.container(),
+            rx.container(
+                rx.menu.root(
+                    rx.menu.trigger(
+                        rx.button("Media"),
+                    ),
+                    rx.menu.content(menu()),
+                ),
+            ),
             media_carousel(current_media_item=State.current_media_item),
             # rx.container(media_carousel(State.current_media_item)),
             # rx.code({"creative"}),

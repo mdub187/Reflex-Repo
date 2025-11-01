@@ -58,6 +58,7 @@ class AuthState(rx.State):
         # Store a serializable dict representing the user
         self.authenticated_user = self._user_from_token(token)
         print(f"[AuthState] Authenticated user set: {self.authenticated_user}")
+        rx.redirect("/account")
 
     @rx.event
     def clear_auth_token(self) -> None:

@@ -4,6 +4,8 @@ import typing as t
 
 import reflex as rx
 
+from ..middleware.auth_logic import ProtectedState
+
 
 class AuthState(rx.State):
     """
@@ -59,6 +61,7 @@ class AuthState(rx.State):
         self.authenticated_user = self._user_from_token(token)
         print(f"[AuthState] Authenticated user set: {self.authenticated_user}")
         rx.redirect("/account")
+        ProtectedState()
 
     @rx.event
     def clear_auth_token(self) -> None:

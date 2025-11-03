@@ -8,9 +8,6 @@ from ..models.media_model import MediaService
 class State(rx.State):
     """Global app state controller."""
 
-    # ─────────────────────────────
-    # Basic Label Management
-    # ─────────────────────────────
     label: str = ""
     label_arr: list[str] = ["We", "Gonna", "Be", "Alright"]
 
@@ -27,9 +24,6 @@ class State(rx.State):
         """Update label based on user input."""
         self.label = value.strip()
 
-    # ─────────────────────────────
-    # Dialog + Modal Control
-    # ─────────────────────────────
     show_dialog: bool = False
     show_modal: bool = False
 
@@ -43,9 +37,6 @@ class State(rx.State):
         print(f"Modal toggled. Current state: {self.show_modal}")
         self.show_modal = not self.show_modal
 
-    # ─────────────────────────────
-    # Media Carousel State
-    # ─────────────────────────────
     media: list[dict[str, str]] = MediaService.get_default_media_items()
     current_index: int = 0
 
@@ -117,40 +108,6 @@ class State(rx.State):
         """Clear all media items."""
         self.media = []
         self.current_index = 0
-
-    # ─────────────────────────────
-    # Media Filters
-    # ─────────────────────────────
-    # @rx.var
-    # def image_count(self) -> int:
-    #     """Count the number of image items."""
-    #     return len([m for m in self.media if m.get("type") == "image"])
-
-    # @rx.var
-    # def video_count(self) -> int:
-    #     """Count the number of video items."""
-    #     return len([m for m in self.media if m.get("type") == "video"])
-
-    # @rx.var
-    # def has_images(self) -> bool:
-    #     """Check if there are any image items."""
-    #     return self.image_count > 0
-
-    # @rx.var
-    # def has_videos(self) -> bool:
-    #     """Check if there are any video items."""
-    #     return self.video_count > 0
-
-    # @rx.var
-    # def get_images_only(self) -> list[dict[str, str]]:
-    #     """Return only image items."""
-    #     return [m for m in self.media if m.get("type") == "image"]
-
-    # @rx.var
-    # def get_videos_only(self) -> list[dict[str, str]]:
-    #     """Return only video items."""
-    #     return [m for m in self.media if m.get("type") == "video"]
-
 
 class FormState(rx.State):
     """State for handling form submission."""

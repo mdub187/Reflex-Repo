@@ -1,6 +1,11 @@
 # models/user_model.py
 
+from datetime import datetime
+from typing import Optional
+
 import reflex as rx
+from sqlmodel import Field, SQLModel
+
 
 class User1(rx.Model, table=True, extend_existing=True):
     """The user model."""
@@ -9,12 +14,32 @@ class User1(rx.Model, table=True, extend_existing=True):
     email: str = ""
     password: str = ""
 
+
 class NewUser(rx.Model, extend_existing=True):
     name: str = ""
     email: str = ""
-    passsword: str = ""
+    password: str = ""
+
 
 class Gallery(rx.Model, extend_existing=True):
     title: str = ""
     media: str = ""
     creator: str = ""
+
+
+class LocalUser(SQLModel, table=True, extend_existing=True):
+    """Model for local users."""
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    username: str
+    password_hash: str
+    enabled: bool = True
+
+
+class LocalAuthSession(SQLModel, table=True, extend_existing=True):
+    """Model for local authentication sessions."""
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key="localuser.id")
+    session_id: str
+    expiration: datetime

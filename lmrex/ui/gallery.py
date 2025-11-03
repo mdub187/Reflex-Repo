@@ -27,7 +27,7 @@ def gallery() -> rx.Component:
                 },
             ),
             rx.text(
-                # rx.code("creative"),
+               rx.code("creative"),
                 url_redirect=gallery_url,
                 size="5",
             ),

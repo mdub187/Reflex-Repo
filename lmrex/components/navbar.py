@@ -1,5 +1,6 @@
 # ./lmrex/components/navbar.py
 import reflex as rx
+
 from .user_login import user_login
 
 
@@ -16,6 +17,7 @@ def navbar() -> rx.Component:
             rx.hstack(
                 rx.hstack(
                     rx.image(
+                        href="/",
                         src="/music-notes-minus-thin.svg",
                         width="2.25em",
                         height="auto",

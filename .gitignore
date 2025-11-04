@@ -1,3 +1,5 @@
+# user
+
 .states
 .web
 __pycache__/
@@ -17,3 +19,43 @@ assets/external/*
 **alembic/*
 **.github/*
 **/.env
+
+# ruff populated .gitignore
+.venv/
+venv/
+env/
+__pypackages__/
+
+# Python bytecode and cache files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
+# Ruff cache directory
+.ruff_cache/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# IDE-specific files (common examples)
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+
+# Environment files and secrets
+.env
+.flaskenv
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+
+# OS generated files
+.DS_Store
+.Trash
+Thumbs.db

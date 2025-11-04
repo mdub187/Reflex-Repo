@@ -49,19 +49,10 @@ class AuthState(rx.State):
         return {"email": "demo@example.local", "name": "Demo User", "roles": ["user"]}
 
     @rx.event
-    def handle_login_success(self, token: str) -> None:
-        """
-        Handle a successful login by storing the token and setting the authenticated user.
-
-        This is invoked by UI demo buttons to simulate successful logins.
-        """
-        print(f"[AuthState] Received login token: {token!r}")
+    def handle_login_success(self, token: str):
         self.auth_token = token
-        # Store a serializable dict representing the user
         self.authenticated_user = self._user_from_token(token)
-        print(f"[AuthState] Authenticated user set: {self.authenticated_user}")
-        rx.redirect("/account")
-        ProtectedState()
+        return self.handle_login_success
 
     @rx.event
     def clear_auth_token(self) -> None:
@@ -89,3 +80,7 @@ class AuthState(rx.State):
             if self.authenticated_user
             else []
         )
+
+
+class State(rx.State):
+    logged_in: bool = False

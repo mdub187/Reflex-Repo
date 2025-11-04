@@ -15,7 +15,7 @@ class ProtectedState(reflex_local_auth.LocalAuthState):
         return reflex_local_auth.LocalAuthState.do_logout
 
 
-@rx.page(on_load=ProtectedState.on_load)
+# @rx.page(on_load=ProtectedState.on_load)
 @reflex_local_auth.require_login
 def protected_page():
     @rx.page()

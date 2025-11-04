@@ -1,7 +1,5 @@
 # ./routes/routes.py
 
-"""this is garfs"""
-
 import reflex as rx
 
 from lmrex.ui.about import about
@@ -26,10 +24,10 @@ def add_routes():
     app.add_page(gallery, route="/gallery")
     app.add_page(contact, route="/contact")
     app.add_page(user_login, route="/login")
-    # app.add_page(protected_page, route="/protected")
-    app.add_page(account, route="/protected/account")
+    app.add_page(user_login, route="/login/protected")
+    app.add_page(account, route="/login/protected/account")
     # app.add_page(pictures, route="/gallery/pictures")
     # app.add_page(videos, route="/gallery/videos")
     # app.add_page(music, route="/gallery/music")
+    app._compile()
     return app
-    app.compile()

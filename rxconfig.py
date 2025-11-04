@@ -3,9 +3,10 @@ import reflex as rx
 
 config = rx.Config(
     app_name="lmrex",
-    styles=[
-        "styles.css",
-        "./styles/styles.css",
+    stylesheets=[
+        "assets/styles.css",
+        "assets/styles/styles.css",
+        ".web/styles/tailwind.css",
     ],
     plugins=[
         rx.plugins.TailwindV4Plugin(),

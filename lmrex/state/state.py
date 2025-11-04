@@ -1,8 +1,9 @@
 # ./state/state.py
 
 import reflex as rx
-from ..models.user_model import User1, NewUser
-from ..models.media_model import MediaService
+
+# from ..models.user_model import User1, NewUser
+from lmrex.models.media_model import MediaService
 
 
 class State(rx.State):
@@ -108,6 +109,7 @@ class State(rx.State):
         """Clear all media items."""
         self.media = []
         self.current_index = 0
+
 
 class FormState(rx.State):
     """State for handling form submission."""

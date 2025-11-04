@@ -1,12 +1,13 @@
 # lmrex/ui/about.py
 
 import reflex as rx
-from lmrex.components.navbar import navbar
-from lmrex.components.heading import header
+
+from lmrex import template
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
+from lmrex.components.heading import header
+from lmrex.components.navbar import navbar
 from lmrex.state.state import State
-from lmrex import template
 
 about = "pages/about"
 

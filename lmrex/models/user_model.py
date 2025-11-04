@@ -6,19 +6,18 @@ from typing import Optional
 import reflex as rx
 from sqlmodel import Field, SQLModel
 
+# class User1(rx.Model, table=True, extend_existing=True):
+#     """The user model."""
 
-class User1(rx.Model, table=True, extend_existing=True):
-    """The user model."""
-
-    name: str = ""
-    email: str = ""
-    password: str = ""
+#     name: str = ""
+#     email: str = ""
+#     password: str = ""
 
 
-class NewUser(rx.Model, extend_existing=True):
-    name: str = ""
-    email: str = ""
-    password: str = ""
+# class NewUser(rx.Model, extend_existing=True):
+#     name: str = ""
+#     email: str = ""
+#     password: str = ""
 
 
 class Gallery(rx.Model, extend_existing=True):

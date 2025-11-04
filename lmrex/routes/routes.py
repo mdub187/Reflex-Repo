@@ -8,13 +8,13 @@ from lmrex.ui.about import about
 from lmrex.ui.account import account
 from lmrex.ui.contact import contact
 from lmrex.ui.gallery import gallery
+from lmrex.ui.index import index
+from lmrex.ui.login import user_login
 
 # from lmrex.ui.gallery_music import music
 # from lmrex.ui.gallery_pictures import pictures
 # from lmrex.ui.gallery_video import videos
 # Import your UI pages
-from lmrex.ui.index import index
-from lmrex.ui.login import user_login
 
 app = rx.App()
 
@@ -32,3 +32,4 @@ def add_routes():
     # app.add_page(videos, route="/gallery/videos")
     # app.add_page(music, route="/gallery/music")
     return app
+    app.compile()

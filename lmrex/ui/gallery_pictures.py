@@ -1,4 +1,6 @@
-import reflelx as rx
+# lmrex/ui/gallery_pictures.py
+
+from ..imports import rx
 
 
 @rx.var
@@ -6,11 +8,11 @@ def has_images(self) -> bool:
     """Check if there are any image items."""
     return self.image_count > 0
 
+
 @rx.var
 def image_count(self) -> int:
     """Count the number of image items."""
     return len([m for m in self.media if m.get("type") == "image"])
-
 
 
 @rx.var

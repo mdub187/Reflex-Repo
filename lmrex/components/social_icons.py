@@ -1,5 +1,8 @@
-import reflex as rx
+# lmrex/components/social_icons.py
+
 from typing import Dict, List, Optional
+
+import reflex as rx
 
 # Icon mapping - paths relative to assets directory
 ICON_MAP = {
@@ -19,13 +22,14 @@ ICON_MAP = {
     "music-notes": "music-notes-minus-thin.svg",
 }
 
+
 def social_icons(
     icons: Optional[Dict[str, str]] = None,
     urls: Optional[Dict[str, str]] = None,
     size: str = "24px",
     spacing: str = "4",
     include_platforms: Optional[List[str]] = None,
-    exclude_platforms: Optional[List[str]] = None
+    exclude_platforms: Optional[List[str]] = None,
 ) -> rx.Component:
     """
     Create a horizontal stack of social media icons.
@@ -93,32 +97,32 @@ def social_icons(
                         _hover={
                             "opacity": 0.7,
                             "transform": "scale(1.1)",
-                            "transition": "all 0.2s ease"
-                        }
+                            "transition": "all 0.2s ease",
+                        },
                     ),
                     href=social_url,
                     is_external=True,
-                    _hover={"text_decoration": "none"}
+                    _hover={"text_decoration": "none"},
                 )
             )
 
-    return rx.hstack(
-        *icon_components,
-        spacing=spacing,
-        align="center"
-    )
+    return rx.hstack(*icon_components, spacing=spacing, align="center")
+
 
 def social_icons_simple() -> rx.Component:
     """Simple version with default settings."""
     return social_icons()
 
+
 def social_icons_large() -> rx.Component:
     """Large version of social icons."""
     return social_icons(size="32px", spacing="6")
 
+
 def social_icons_minimal(platforms: List[str]) -> rx.Component:
     """Minimal version with only specified platforms."""
     return social_icons(include_platforms=platforms)
+
 
 # Export the ICON_MAP for use in other components
 social_icons_data = ICON_MAP
@@ -132,8 +136,9 @@ SOCIAL_CONFIG = {
     "facebook": "https://facebook.com/yourusername",
     "reddit": "https://reddit.com/u/yourusername",
     "behance": "https://www.behance.net/marcweeks",
-    "soundcloud": "https://soundcloud.com/marc-weeks"
+    "soundcloud": "https://soundcloud.com/marc-weeks",
 }
+
 
 def social_icons_configured() -> rx.Component:
     """Social icons using the configured URLs above."""
@@ -141,8 +146,9 @@ def social_icons_configured() -> rx.Component:
         urls=SOCIAL_CONFIG,
         include_platforms=list(SOCIAL_CONFIG.keys()),
         size="20px",
-        spacing="3"
+        spacing="3",
     )
+
 
 def social_icons_footer() -> rx.Component:
     """Footer-sized social icons with common platforms."""
@@ -150,8 +156,9 @@ def social_icons_footer() -> rx.Component:
         urls=SOCIAL_CONFIG,
         include_platforms=["github", "linkedin", "youtube", "soundcloud", "behance"],
         size="18px",
-        spacing="3"
+        spacing="3",
     )
+
 
 def social_icons_hero() -> rx.Component:
     """Large social icons for hero sections."""
@@ -159,5 +166,5 @@ def social_icons_hero() -> rx.Component:
         urls=SOCIAL_CONFIG,
         include_platforms=["github", "linkedin", "youtube", "behance", "soundlcoud"],
         size="32px",
-        spacing="6"
+        spacing="6",
     )

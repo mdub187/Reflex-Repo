@@ -1,3 +1,5 @@
+# .lmrex/models/media_model.py
+#
 """Media service for managing media data and operations."""
 
 from typing import Dict, List, Optional, Tuple
@@ -21,6 +23,11 @@ class MediaService:
             "title": "Swirls",
             "url": "https://player.vimeo.com/video/1127068081?",
             "type": "video",
+        },
+        {
+            "title": "Test_Audio",
+            "url": "https://on.soundcloud.com/LSgMc7ip5ZocgIF431",
+            "type": "audio",
         },
     ]
 
@@ -69,12 +76,13 @@ class MediaService:
         return {"title": title.strip(), "url": url.strip(), "type": media_type.lower()}
 
     @staticmethod
-    def add_media_item(
+    def add_media(
         media_list: List[Dict[str, str]], title: str, url: str, media_type: str
     ) -> List[Dict[str, str]]:
         """Add a new media item to the list."""
         new_item = MediaService.create_media_item(title, url, media_type)
         return media_list + [new_item]
+        media_list.append(new_item)
 
     @staticmethod
     def remove_media_item(
@@ -101,3 +109,8 @@ class MediaService:
         new_list = media_list.copy()
         new_list[index] = updated_item
         return new_list
+
+
+if __name__ == "__main__":
+    print(__name__)
+    # print(MediaService.create_media_item("Test Title", "https://example.com", "image"))

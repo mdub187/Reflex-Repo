@@ -40,6 +40,9 @@ class State(rx.State):
 
     media: list[dict[str, str]] = MediaService.get_default_media_items()
     current_index: int = 0
+    media_type: str = ""
+    media_title: str = ""
+    media_url: str = ""
 
     @rx.var
     def media_count(self) -> int:
@@ -62,13 +65,14 @@ class State(rx.State):
         item = MediaService.get_media_item_by_index(self.media, self.current_index)
         return item or MediaService.get_empty_media_item()
 
-    def add_media_item(self, title: str, url: str, media_type: str):
-        """Add new media item to the list."""
-        try:
-            new_item = MediaService.create_media_item(title, url, media_type)
-            self.media = self.media + [new_item]
-        except ValueError as e:
-            print(f"Error adding media item: {e}")
+    @rx.event
+    def add_media_item(self):
+        """Add a new media item to the state with default values."""
+        new_item = MediaService.create_media_item(
+            "New Title", "https://example.com/new_media", "image"
+        )
+        self.media = self.media + [new_item]
+        print("Media added:", new_item)
 
     def remove_media_item(self, index: int):
         """Remove media item at the specified index."""
@@ -90,16 +94,6 @@ class State(rx.State):
         if self.media:
             self.remove_media_item(self.current_index)
 
-    def duplicate_current_item(self):
-        """Duplicate the currently displayed media item."""
-        if self.media:
-            item = self.current_media_item
-            self.add_media_item(
-                title=f"{item['title']} (Copy)",
-                url=item["url"],
-                media_type=item["type"],
-            )
-
     def reset_to_defaults(self):
         """Reset media list to default items."""
         self.media = MediaService.get_default_media_items()
@@ -115,6 +109,18 @@ class FormState(rx.State):
     """State for handling form submission."""
 
     @rx.event
-    def handle_submit(self, form_data: dict):
+    def handle_submit(self):
         """Handle form submissions."""
-        print(f"Form submitted with data: {form_data}")
+        new_item = MediaService.create_media_item(
+            self.media_title, self.media_url, self.media_type
+        )
+        self.media = self.media + [new_item]
+        print("Media added:", new_item)
+        # Reset form inputs
+        self.media_type = ""
+        self.media_title = ""
+        self.media_url = ""
+
+
+if __name__ == "__main__":
+    print(State())

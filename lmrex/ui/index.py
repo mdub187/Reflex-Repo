@@ -1,7 +1,5 @@
 # lmrex/ui/index.py
 
-import reflex as rx
-
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
 from lmrex.components.heading import header
@@ -9,14 +7,15 @@ from lmrex.components.input import input
 from lmrex.components.navbar import navbar
 from lmrex.state.state import State
 
-# from lmrex.components.media_carousel import media_carousel
-# from lmrex.template import template
+# from lmrex.ui.responsive_utils import apply_responsive_styles
+from ..imports import rx
 
-# index = "/index"
+# index = "/"
 
 
 def index() -> rx.Component:
     return rx.box(
+        # apply_responsive_styles(),
         navbar(),
         rx.vstack(
             # Welcome section with nice styling
@@ -28,14 +27,13 @@ def index() -> rx.Component:
                     "color": "#6b7280",
                 },
             ),
-            rx.heading(
-                State.label,
-                size="9",
+            header(),
+            rx.text(
+                rx.code({"Yourself"}),
+                size="5",
                 style={
-                    "background": "linear-gradient(45deg, #667eea, #764ba2)",
-                    "background_clip": "text",
-                    "color": "transparent",
-                    "margin_bottom": "1rem",
+                    "margin": "1rem 0 2rem 0",
+                    "color": "#6b7280",
                 },
             ),
             # Interactive elements in a nice container

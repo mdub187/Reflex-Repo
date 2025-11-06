@@ -6,21 +6,22 @@ from typing import Optional
 import reflex as rx
 from sqlmodel import Field, SQLModel
 
-# class User1(rx.Model, table=True, extend_existing=True):
-#     """The user model."""
 
-#     name: str = ""
-#     email: str = ""
-#     password: str = ""
+class Admin(rx.Model, table=True, extend_existing=True):
+    """The user model."""
 
-
-# class NewUser(rx.Model, extend_existing=True):
-#     name: str = ""
-#     email: str = ""
-#     password: str = ""
+    name: str = "mdub"
+    email: str = "test@test.com"
+    password: str = "admin"
 
 
-class Gallery(rx.Model, extend_existing=True):
+class NewUser(rx.Model, extend_existing=True):
+    name: str = ""
+    email: str = ""
+    password: str = ""
+
+
+class UserGallery(rx.Model, extend_existing=True):
     title: str = ""
     media: str = ""
     creator: str = ""

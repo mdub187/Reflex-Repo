@@ -1,3 +1,5 @@
+# lmrex/components/check_tables.py
+
 import os
 import sys
 from pathlib import Path

@@ -1,13 +1,15 @@
 # lmrex/ui/gallery.py
 
-import reflex as rx
-
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
 from lmrex.components.media_carousel import media_carousel
+from lmrex.components.media_modal import media_modal
 from lmrex.components.menu import menu
 from lmrex.components.navbar import navbar
+from lmrex.models.media_model import MediaService
 from lmrex.state.state import State
+
+from ..imports import rx
 
 gallery_url = "pages/gallery"
 
@@ -27,35 +29,33 @@ def gallery() -> rx.Component:
                 },
             ),
             rx.text(
-               rx.code("creative"),
+                rx.code("creative"),
                 url_redirect=gallery_url,
                 size="5",
             ),
             rx.container(
                 rx.menu.root(
                     rx.menu.trigger(
-                        rx.button("Media"),
+                        rx.button(
+                            id="Add_Media",
+                            label="Add Media",
+                            on_click=State.toggle_modal,
+                        )
                     ),
                     rx.menu.content(menu()),
                 ),
             ),
             media_carousel(current_media_item=State.current_media_item),
-            # rx.container(media_carousel(State.current_media_item)),
-            # rx.code({"creative"}),
+            rx.button("Add Media", on_click=State.toggle_modal),
             url_redirect=gallery_url,
             size="5",
             key="gallery",
             justify="center",
             align="center",
         ),
-        # rx.container(
-        #     # media_carousel(current_media_item=State.current_media_item),
-        #     spacing="5",
-        #     min_height="80vh",
-        #     text_align="center",
-        # ),
         rx.container(
             footer(),
             color_mode(),
         ),
+        # media_modal(),
     )

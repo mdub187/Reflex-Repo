@@ -1,45 +1,20 @@
-# Reflex_pylot/lmrex/state/auth_state.py
+# lmrex/components/auth_state.py
 
 import typing as t
 
 import reflex as rx
 
-from ..middleware.auth_logic import ProtectedState
-
 
 class AuthState(rx.State):
-    """
-    Demo authentication state using serializable built-in types.
-
-    Notes:
-    - `authenticated_user` is stored as a plain dict (or None) to satisfy Reflex's
-      requirement that state vars be serializable. Avoid storing custom classes
-      or dataclass instances directly on State.
-    - This is intentionally simple and client-only for local development/demo pages.
-    - For production, replace with proper authentication flows (server-validated tokens,
-      secure storage, refresh tokens, etc.).
-    """
-
-    # Stored auth token (demo only)
-    auth_token: t.Optional[str] = None
-
-    # The currently authenticated user (or None). Use a serializable dict.
+    _auth_token: t.Optional[str] = None
     authenticated_user: t.Optional[dict] = None
 
     @rx.var
     def is_authenticated(self) -> bool:
-        """Convenience var for checking authentication in UI code."""
         return self.authenticated_user is not None
 
     @staticmethod
     def _user_from_token(token: str) -> dict:
-        """
-        Create a demo serializable user dict from a token string.
-
-        Rules (demo):
-        - If token contains 'admin' -> admin user
-        - Otherwise -> demo user
-        """
         if "admin" in (token or "").lower():
             return {
                 "email": "admin@example.local",
@@ -49,38 +24,64 @@ class AuthState(rx.State):
         return {"email": "demo@example.local", "name": "Demo User", "roles": ["user"]}
 
     @rx.event
-    def handle_login_success(self, token: str):
+    def handle_login_success(self, token: str, redirect: bool = True):
         self.auth_token = token
         self.authenticated_user = self._user_from_token(token)
-        return self.handle_login_success
+        print(f"[AuthState] Login success for {self.authenticated_user['name']}")
+        if redirect:
+            return rx.redirect("login/protected/")
 
     @rx.event
-    def clear_auth_token(self) -> None:
-        """Clear stored token and authenticated user (logout)."""
+    def clear_auth_token(self):
         print("[AuthState] Clearing auth token and authenticated user")
         self.auth_token = None
         self.authenticated_user = None
 
+
+@rx.event
+def set_user_email(self, email: str):
+    if self.authenticated_user:
+        print(f"[AuthState] Updating authenticated user email to: {email}")
+        self.authenticated_user["email"] = email
+    else:
+        print("[AuthState] No authenticated user to update")
+
+    # @rx.event
+    # def fetch_protected_data(self):
+    #     if not self._auth_token:
+    #         print("No token found — cannot fetch data")
+    #         return
+    #     headers = {"Authorization": f"Bearer {self._auth_token}"}
+    #     resp = requests.get("https://api.yourservice.com/data", headers=headers)
+
+    if resp.ok:
+        print("Fetched data:", resp.json())
+    elif resp.status_code == 401:
+        print("Auth failed")
+    else:
+        print("Bad request")
+
+
+@rx.var
+def get_roles(self) -> t.List[str]:
+    return (
+        list(self.authenticated_user.get("roles", []))
+        if self.authenticated_user
+        else []
+    )
+
     @rx.event
-    def set_user_email(self, email: str) -> None:
-        """Utility to update the authenticated user's email (if present)."""
-        if self.authenticated_user is not None:
-            print(f"[AuthState] Updating authenticated user email to: {email}")
-            # Mutate the dict in-place (still serializable)
-            self.authenticated_user["email"] = email
-        else:
-            print("[AuthState] No authenticated user to update")
+    def handle_login_success(self, token: str):
+        self._auth_token = token
+        self.authenticated_user = self._user_from_token(token)
+        return rx.redirect("/protected")
 
-    # Additional convenience helpers (demo)
-    @rx.var
-    def get_roles(self) -> t.List[str]:
-        """Return roles for the current user (empty list if not authenticated)."""
-        return (
-            list(self.authenticated_user.get("roles", []))
-            if self.authenticated_user
-            else []
-        )
+    @rx.event
+    def fetch_user_data(self):
+        if not self._auth_token:
+            print("Not authenticated")
+            return
 
-
-class State(rx.State):
-    logged_in: bool = False
+        headers = {"Authorization": f"Bearer {self._auth_token}"}
+        r = requests.get("https://api.yourservice.com/me", headers=headers)
+        print(r.json())

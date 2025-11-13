@@ -3,7 +3,7 @@ name: Deploy Reflex Frontend to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - new
 
 permissions:
   contents: write

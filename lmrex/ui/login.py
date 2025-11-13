@@ -1,16 +1,18 @@
 # lmrex/ui/login.py
 
 from ..components.footer import footer
+
+# from ..components.navbar import navbar
 from ..imports import rx
 from ..state.auth_state import AuthState
 
 
-def user_login() -> rx.Component:
+def user_login():
     """Login page with simulated login buttons and proper redirects."""
 
     # Helper functions
     def login_and_redirect(token: str):
-        AuthState.handle_login_success(token)
+        AuthState.handle_login_success()
         return rx.redirect("/protected/secret")  # Redirect after successful login
 
     def logout_and_redirect():
@@ -27,7 +29,7 @@ def user_login() -> rx.Component:
             rx.hstack(
                 rx.button(
                     "Simulate login",
-                    on_click=lambda: AuthState.handle_login_success("demo-token"),
+                    on_click=lambda: AuthState.handle_login_success(),
                 ),
                 rx.button(
                     "Simulate admin token",

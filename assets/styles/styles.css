@@ -1,18 +1,12 @@
-*,
-html {
-	justify-self: none;
-	justify-content: stretch;
-}
-
-.lucide,
+/*.lucide,
 .lucide-sun,
-.lucide-moon {
-	position: fixed;
-	align-items: center;
-	grid-area: 1 span;
-	grid-area: 2;
-	grid-area: -1 / 2 / 3 / 2;
-}
+.lucide-moon {*/
+position: fixed;
+align-items: center;
+grid-area: 1 span;
+grid-area: 2;
+grid-area: -1 / 2 / 3 / 2;
+/*}*/
 /*div.rt-Container.rt-r-size-3.css-8hu8q1 {*/
 /*display: contents;*/
 /*flex_direction: column;*/
@@ -25,15 +19,4 @@ html {
 #css-1bsrzu9,
 bakground {
 	src: url("../TDM.mov");
-}
-
-@media only screen and (max-width: 600px) {
-	/* Styles for smaller screens */
-	body {
-		font-size: 14px;
-	}
-	.container {
-		width: 100%;
-		padding: 10px;
-	}
 }

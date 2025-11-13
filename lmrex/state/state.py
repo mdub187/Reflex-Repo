@@ -3,7 +3,7 @@
 import reflex as rx
 
 # from ..models.user_model import User1, NewUser
-from lmrex.models.media_model import MediaService
+from ..models.media_model import MediaService
 
 
 class State(rx.State):
@@ -35,8 +35,9 @@ class State(rx.State):
     @rx.event
     def toggle_modal(self):
         """Toggle the modal visibility."""
-        print(f"Modal toggled. Current state: {self.show_modal}")
+        print(f"[Breadcrumb] Toggling modal. Current state: {self.show_modal}")
         self.show_modal = not self.show_modal
+        print(f"[Breadcrumb] Modal toggled. New state: {self.show_modal}")
 
     media: list[dict[str, str]] = MediaService.get_default_media_items()
     current_index: int = 0
@@ -45,6 +46,10 @@ class State(rx.State):
     media_url: str = ""
 
     @rx.var
+    def audio_only(self) -> list[dict[str, str]]:
+        """Reactive list of only audio items."""
+        return [m for m in self.media if m.get("type") == "audio"]
+
     def media_count(self) -> int:
         """Get the total number of media items."""
         return len(self.media)
@@ -66,13 +71,34 @@ class State(rx.State):
         return item or MediaService.get_empty_media_item()
 
     @rx.event
-    def add_media_item(self):
-        """Add a new media item to the state with default values."""
+    def set_media_title(self, title: str):
+        """Set the media title."""
+        self.media_title = title
+
+    @rx.event
+    def set_media_url(self, url: str):
+        """Set the media URL."""
+        self.media_url = url
+
+    @rx.event
+    def set_media_type(self, media_type: str):
+        """Set the media type."""
+        self.media_type = media_type
+
+    @rx.event
+    def handle_submit(self):
+        """Handle form submissions."""
         new_item = MediaService.create_media_item(
-            "New Title", "https://example.com/new_media", "image"
+            self.media_title, self.media_url, self.media_type
         )
         self.media = self.media + [new_item]
-        print("Media added:", new_item)
+        print("[Breadcrumb] Media added:", new_item)
+        # Reset form inputs
+        self.media_type = ""
+        self.media_title = ""
+        self.media_url = ""
+        # Close the modal
+        self.show_modal = False
 
     def remove_media_item(self, index: int):
         """Remove media item at the specified index."""
@@ -115,7 +141,7 @@ class FormState(rx.State):
             self.media_title, self.media_url, self.media_type
         )
         self.media = self.media + [new_item]
-        print("Media added:", new_item)
+        print("[Breadcrumb] Media added:", new_item)
         # Reset form inputs
         self.media_type = ""
         self.media_title = ""

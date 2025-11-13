@@ -3,6 +3,11 @@
 from ..imports import rx
 
 
+def gallery_videos() -> rx.Component:
+    """Create a gallery of videos."""
+    return gallery_videos()
+
+
 @rx.var
 def video_count(self) -> int:
     """Count the number of video items."""

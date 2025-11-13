@@ -1,4 +1,4 @@
-# lmrex/components/auth_state.py
+# lmrex/state/auth_state.py
 
 import typing as t
 
@@ -8,6 +8,10 @@ import reflex as rx
 class AuthState(rx.State):
     _auth_token: t.Optional[str] = None
     authenticated_user: t.Optional[dict] = None
+    is_add_media_modal_open: bool = False
+    media_url: str = ""
+    username: str = ""
+    password: str = ""
 
     @rx.var
     def is_authenticated(self) -> bool:
@@ -24,64 +28,54 @@ class AuthState(rx.State):
         return {"email": "demo@example.local", "name": "Demo User", "roles": ["user"]}
 
     @rx.event
-    def handle_login_success(self, token: str, redirect: bool = True):
-        self.auth_token = token
+    def handle_login_success(self):
+        # Extract the token from the event or use a default token
+        token = "default_token"  # Replace with actual logic to get the token
+        self._auth_token = token
         self.authenticated_user = self._user_from_token(token)
         print(f"[AuthState] Login success for {self.authenticated_user['name']}")
-        if redirect:
-            return rx.redirect("login/protected/")
+        return rx.redirect("/login/protected/")
 
     @rx.event
     def clear_auth_token(self):
         print("[AuthState] Clearing auth token and authenticated user")
-        self.auth_token = None
+        self._auth_token = None
         self.authenticated_user = None
 
-
-@rx.event
-def set_user_email(self, email: str):
-    if self.authenticated_user:
-        print(f"[AuthState] Updating authenticated user email to: {email}")
-        self.authenticated_user["email"] = email
-    else:
-        print("[AuthState] No authenticated user to update")
+    @rx.event
+    def set_user_email(self, email: str):
+        if self.authenticated_user:
+            print(f"[AuthState] Updating authenticated user email to: {email}")
+            self.authenticated_user["email"] = email
+        else:
+            print("[AuthState] No authenticated user to update")
 
     # @rx.event
-    # def fetch_protected_data(self):
-    #     if not self._auth_token:
-    #         print("No token found — cannot fetch data")
-    #         return
-    #     headers = {"Authorization": f"Bearer {self._auth_token}"}
-    #     resp = requests.get("https://api.yourservice.com/data", headers=headers)
+    # def toggle_add_media_modal(self):
+    # self.is_add_media_modal_open = not self.is_add_media_modal_open
 
-    if resp.ok:
-        print("Fetched data:", resp.json())
-    elif resp.status_code == 401:
-        print("Auth failed")
-    else:
-        print("Bad request")
+    # @rx.event
+    # def set_media_url(self, media_url: str):
+    #     self.media_url = media_url
 
-
-@rx.var
-def get_roles(self) -> t.List[str]:
-    return (
-        list(self.authenticated_user.get("roles", []))
-        if self.authenticated_user
-        else []
-    )
+    # @rx.event
+    # def handle_upload(self):
+    #     # Handle the media upload logic here
+    #     print(f"Media uploaded with URL: {self.media_url}")
+    #     self.is_add_media_modal_open = False
+    #     self.media_url = ""
 
     @rx.event
-    def handle_login_success(self, token: str):
-        self._auth_token = token
-        self.authenticated_user = self._user_from_token(token)
-        return rx.redirect("/protected")
+    def set_username(self, username: str):
+        self.username = username
 
     @rx.event
-    def fetch_user_data(self):
-        if not self._auth_token:
-            print("Not authenticated")
-            return
+    def set_password(self, password: str):
+        self.password = password
 
-        headers = {"Authorization": f"Bearer {self._auth_token}"}
-        r = requests.get("https://api.yourservice.com/me", headers=headers)
-        print(r.json())
+    @rx.event
+    def handle_login(self):
+        # Handle the login logic here
+        print(f"Username: {self.username}, Password: {self.password}")
+        self.username = ""
+        self.password = ""

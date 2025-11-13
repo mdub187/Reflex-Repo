@@ -1,22 +1,25 @@
 # lmrex/ui/gallery_music.py
 
-
 from ..imports import rx
+from ..state.state import State
 
 
-@rx.var
-def has_audio(self) -> bool:
-    """Check if there are any image items."""
-    return self.image_count > 0
-
-
-@rx.var
-def audio_count(self) -> int:
-    """Count the number of image items."""
-    return len([m for m in self.media if m.get("type") == "image"])
-
-
-@rx.var
-def get_audio_only(self) -> list[dict[str, str]]:
-    """Return only image items."""
-    return [m for m in self.media if m.get("type") == "image"]
+def gallery_music():
+    """Render a gallery of audio media items."""
+    return rx.container(
+        rx.foreach(
+            State.audio_only,  # ✅ use the reactive var directly
+            lambda m: rx.card(
+                rx.vstack(
+                    rx.text(m.get("title", "Untitled"), size="4"),
+                    rx.audio(src=m["url"], controls=True, width="100%"),
+                ),
+                width="100%",
+                padding="1em",
+                border_radius="1em",
+                box_shadow="md",
+            ),
+        ),
+        width="100%",
+        padding="1em",
+    )

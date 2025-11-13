@@ -1,7 +1,8 @@
 # ./lmrex/components/navbar.py
 import reflex as rx
 
-from .user_login import user_login
+# from .media_modal import media_modal
+from lmrex.ui.login import login
 
 
 def navbar_link(text, url) -> rx.Component:
@@ -29,20 +30,14 @@ def navbar() -> rx.Component:
                     ),
                     rx.heading("We Gon", size="7", weight="bold"),
                     width="100%",
-                    align_items="center",  # Ensure alignment
                 ),
                 rx.hstack(
-                    navbar_link("home", "/"),
-                    navbar_link("about", "/About"),
-                    navbar_link("gallery", "/Gallery"),
-                    navbar_link("contact", "/Contact"),
-                    rx.link(user_login(), create_account=True),
-                    spacing="5",
-                    align_items="center",  # Ensure alignment
+                    rx.link("home", href="/"),
+                    rx.link("about", href="/About"),
+                    rx.link("gallery", href="/Gallery"),
+                    rx.link("contact", href="/Contact"),
+                    rx.button("login"),
                 ),
-                width="100%",
-                justify="between",
-                align_items="center",  # Ensure alignment
             ),
         ),
         rx.mobile_and_tablet(
@@ -60,20 +55,18 @@ def navbar() -> rx.Component:
                 rx.menu.root(
                     rx.menu.trigger(rx.icon("menu", size=30)),
                     rx.menu.content(
-                        navbar_link("Home", "/"),
-                        navbar_link("About", "/About"),
-                        navbar_link("Gallery", "/Gallery"),
-                        navbar_link("Contact", "/Contact"),
-                        rx.menu.item(rx.link(user_login(), create_account=True)),
+                        # navbar_link("Home", "/"),
+                        # navbar_link("About", "/About"),
+                        # navbar_link("Gallery", "/Gallery"),
+                        # navbar_link("Contact", "/Contact"),
+                        # rx.menu.item(rx.link(login(), create_account=True)),
+                        # # rx.menu.item(media_modal()),
+                        # # rx.menu.item(user_login()),
                     ),
                 ),
-                width="100%",
-                justify="between",
-                align_items="center",  # Ensure alignment
             ),
         ),
+        # xxbg=rx.color("accent", 3),
         top="2px",
         z_index="5",
-        width="100%",
-        padding="10px",
     )

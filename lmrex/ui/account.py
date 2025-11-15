@@ -2,10 +2,13 @@
 
 import reflex as rx
 
+from ..routes import routes
 
-def account():
+
+def account_ui():
     return rx.box(
+        # account_ui(),
         rx.text("Account Page"),
         rx.button("Logout", on_click=rx.redirect("/")),
     )
-    return account
+    return routes.account

@@ -1,7 +1,7 @@
 # ./lmrex/components/navbar.py
 import reflex as rx
 
-from .user_login import user_login
+from .user_login import AuthState, user_login
 
 
 def navbar_link(text, url) -> rx.Component:

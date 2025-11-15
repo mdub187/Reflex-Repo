@@ -11,7 +11,9 @@ def user_login() -> rx.Component:
     # Helper functions
     def login_and_redirect(token: str):
         AuthState.handle_login_success(token)
-        return rx.redirect("/protected/secret")  # Redirect after successful login
+        # Redirect after successful login
+        rx.redirect("/protected/account")
+        return login_and_redirect
 
     def logout_and_redirect():
         # AuthState._auth_token()
@@ -54,6 +56,6 @@ def user_login() -> rx.Component:
     )
 
 
-def login() -> rx.Component:
+def login(login_and_redirect) -> rx.Component:
     """Alias for compatibility with modules that expect a `login` function"""
     return user_login()

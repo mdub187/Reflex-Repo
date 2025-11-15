@@ -3,25 +3,28 @@
 import reflex as rx
 import reflex_local_auth
 
+from lmrex.ui import account
+
 
 class ProtectedState(reflex_local_auth.LocalAuthState):
-    data: str
+    """State for protected pages using reflex-local-auth"""
+
+    data: str = ""
 
     def on_load(self):
+        """Check authentication on page load"""
         if not self.is_authenticated:
             return reflex_local_auth.LoginState.redir
         self.data = f"This is truly private data for {self.authenticated_user.username}"
 
     def do_logout(self):
+        """Handle logout"""
         self.data = ""
         return reflex_local_auth.LocalAuthState.do_logout
 
 
 # @rx.page(on_load=ProtectedState.on_load)
 @reflex_local_auth.require_login
-def protected_page():
-    @rx.page()
-    @reflex_local_auth.require_login
-    def protected_page():
-        return rx.heading("Welcome, authenticated user!")
-        return rx.heading(ProtectedState.data)
+def protected_page(self):
+    """Protected page that requires authentication"""
+    return rx.container()

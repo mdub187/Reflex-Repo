@@ -60,3 +60,6 @@ build/
 .DS_Store
 .Trash
 Thumbs.db
+
+# Stakpak local files
+.stakpak

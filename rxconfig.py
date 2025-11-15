@@ -8,6 +8,7 @@ config = rx.Config(
         "assets/styles/styles.css",
         ".web/styles/tailwind.css",
     ],
+    rx run --port 8080,
     plugins=[
         rx.plugins.TailwindV4Plugin(),
     ],

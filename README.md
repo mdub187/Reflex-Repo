@@ -1,10 +1,8 @@
  
 # Title
  Reflex-Repo
-
 # Description
  Template web-application project utilizing the Reflex framework, built in Python.
-
 # Install
  1. Create a virtual environment:
    """ python3 -m venv .venv """
@@ -14,48 +12,19 @@
    """ pip install -r requirements.txt """
  4. Run Reflex:
    """ reflex run """
-
-# Environment (Auth & Development)
- This project integrates with Clerk for authentication in production via the
- `CLERK_SECRET_KEY` environment variable. For local development the UI includes
- demo login buttons that use simulated tokens (for example `demo-token` and
- `demo-admin-token`).
-
- - Production:
-   - Set `CLERK_SECRET_KEY` to your Clerk secret so server-side token verification works.
-     Example:
-       export CLERK_SECRET_KEY="sk_live_..."
-
- - Local development (optional):
-   - To enable the development fallback that accepts demo tokens when
-     `CLERK_SECRET_KEY` is not set, set:
-       export ALLOW_DEMO_TOKENS=true
-   - When `ALLOW_DEMO_TOKENS` is enabled and `CLERK_SECRET_KEY` is not present,
-     demo tokens starting with `demo` (e.g., `demo-token`, `demo-admin-token`)
-     will return a lightweight demo user so you can exercise protected UI flows
-     without a Clerk account.
-
- Security note:
-   - Do NOT enable `ALLOW_DEMO_TOKENS` in production or CI. The demo fallback is
-     strictly for local development convenience. In production you must set
-     `CLERK_SECRET_KEY` and disable demo tokens.
-
 # Usage
  Extensive portfolio / e-commerce web app using only Python and Reflex libraries.
-
 # Contribution
  Working on getting the regex for the auth login, and the redirect.
  Contributions and suggestions are welcome.
-
 # Testing
  TBD
-
 # License
  undefined
-
+# Usage
+  Simple web app
 # Github Username
  mdub187
-
 # Email
  maweeks.91@gmail.com
 #

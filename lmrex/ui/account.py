@@ -1,15 +1,14 @@
+# lmrex/ui/account.py
+
 import reflex as rx
-from lmrex.state.state import AuthState
-from lmrex.models.user_model import User
-from ..template import template
+
+from ..routes import routes
 
 
-def account() -> rx.Component:
-    return rx.vstack(
-        template(child=rx.text("Account"), args={}, key="account"),
-        rx.cond(
-            AuthState.authenticated_user,
-            rx.text("Hello, ", AuthState.auth_token),
-            rx.link("Log in", href="/login"),
-        ),
+def account_ui():
+    return rx.box(
+        # account_ui(),
+        rx.text("Account Page"),
+        rx.button("Logout", on_click=rx.redirect("/")),
     )
+    return routes.account

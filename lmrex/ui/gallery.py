@@ -1,12 +1,15 @@
 # lmrex/ui/gallery.py
 
-import reflex as rx
-from lmrex.components.heading import header
-from lmrex.components.navbar import navbar
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
-from lmrex.state.state import State
 from lmrex.components.media_carousel import media_carousel
+from lmrex.components.media_modal import media_modal
+from lmrex.components.menu import menu
+from lmrex.components.navbar import navbar
+from lmrex.models.media_model import MediaService
+from lmrex.state.state import State
+
+from ..imports import rx
 
 gallery_url = "pages/gallery"
 
@@ -30,15 +33,29 @@ def gallery() -> rx.Component:
                 url_redirect=gallery_url,
                 size="5",
             ),
-            rx.container(media_carousel()),
-            spacing="5",
+            rx.container(
+                rx.menu.root(
+                    rx.menu.trigger(
+                        rx.button(
+                            id="Add_Media",
+                            label="Add Media",
+                            on_click=State.toggle_modal,
+                        )
+                    ),
+                    rx.menu.content(menu()),
+                ),
+            ),
+            media_carousel(current_media_item=State.current_media_item),
+            rx.button("Add Media", on_click=State.toggle_modal),
+            url_redirect=gallery_url,
+            size="5",
+            key="gallery",
             justify="center",
             align="center",
-            min_height="80vh",
-            text_align="center",
         ),
         rx.container(
-            # footer(),
-            # color_mode(),
+            footer(),
+            color_mode(),
         ),
+        # media_modal(),
     )

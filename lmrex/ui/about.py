@@ -1,12 +1,13 @@
 # lmrex/ui/about.py
 
 import reflex as rx
-from lmrex.components.navbar import navbar
-from lmrex.components.heading import header
+
+from lmrex import template
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
+from lmrex.components.heading import header
+from lmrex.components.navbar import navbar
 from lmrex.state.state import State
-from lmrex import template
 
 about = "pages/about"
 
@@ -16,7 +17,7 @@ def about() -> rx.Component:
         navbar(),
         rx.vstack(
             header(),
-            rx.text(rx.code("about"), url_redirect=(f"{about}"), size="5"),
+            rx.text(rx.code({"about"}), url_redirect=(f"{about}"), size="5"),
             spacing="5",
             justify="center",
             align="center",
@@ -24,7 +25,7 @@ def about() -> rx.Component:
             text_align="center",
         ),
         rx.container(
-            # footer(),
-            # color_mode(),
+            footer(),
+            color_mode(),
         ),
     )

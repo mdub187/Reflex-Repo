@@ -1,6 +1,7 @@
 # lmrex/components/heading.py
 
 import reflex as rx
+
 from lmrex.state.state import State
 
 
@@ -14,6 +15,6 @@ def header() -> rx.Component:
                 "background_clip": "text",
                 "color": "transparent",
                 "margin_bottom": "1rem",
-            }
+            },
         ),
     )

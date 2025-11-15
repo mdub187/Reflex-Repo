@@ -1,6 +1,8 @@
-# footer.py
+# lmrex/components/__init__.py
 
 import reflex as rx
+
+from .color_mode import color_mode
 from .social_icons import social_icons_footer
 
 
@@ -15,8 +17,8 @@ def footer() -> rx.Component:
                 social_icons_footer(
                     # ="center"
                 ),
+                rx.box(),
                 # Color mode toggle
-                rx.color_mode.button(),
                 justify="center",
                 align="center",
                 width="100%",

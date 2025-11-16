@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "default_policy": "Prompt",
+  "tools": {
+    "search_docs": "Auto",
+    "subagent_task": "Prompt",
+    "generate_password": "Auto",
+    "create": "Prompt",
+    "generate_code": "Prompt",
+    "cancel_task": "Prompt",
+    "local_code_search": "Auto",
+    "get_task_details": "Auto",
+    "wait_for_tasks": "Auto",
+    "search_memory": "Auto",
+    "view": "Auto",
+    "read_rulebook": "Auto",
+    "run_command": "Prompt",
+    "run_command_task": "Prompt",
+    "str_replace": "Prompt",
+    "get_all_tasks": "Auto"
+  },
+  "command_patterns": {
+    "safe_readonly": [],
+    "sensitive_destructive": [],
+    "interactive_required": []
+  }
+}

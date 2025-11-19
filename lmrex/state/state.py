@@ -299,7 +299,7 @@ class AuthState(rx.State):
         self.auth_token = token
         self.login_error_message = ""
         # Redirect to a protected page after login.
-        return rx.redirect("/account")
+        return rx.redirect("/protected/account")
 
     @rx.var
     def authenticated_user(self) -> UserInfo | None:

@@ -1,6 +1,4 @@
-# lmrex/ui/gallery_video.py
-
-from ..imports import rx
+import reflex as rx
 
 
 @rx.var
@@ -13,7 +11,6 @@ def video_count(self) -> int:
 def has_videos(self) -> bool:
     """Check if there are any video items."""
     return self.video_count > 0
-
 
 @rx.var
 def get_videos_only(self) -> list[dict[str, str]]:

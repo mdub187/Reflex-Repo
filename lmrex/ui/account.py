@@ -1,5 +1,3 @@
-# lmrex/ui/account.py
-
 import reflex as rx
 
 from ..routes import routes

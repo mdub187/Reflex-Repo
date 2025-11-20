@@ -1,5 +1,3 @@
-# lmrex/components/debug_app.py
-#
 import reflex as rx
 from reflex import App, Component, alert_dialog, button, text, vstack
 
@@ -9,8 +7,10 @@ def debug_modal() -> Component:
     return vstack(
         alert_dialog(
             alert_dialog.title("Debug Modal"),
-            alert_dialog.content(
-                rx.section(rx.text("This is a standalone debug modal for testing.")),
+                alert_dialog.content(
+                rx.section(
+                    rx.text("This is a standalone debug modal for testing.")
+                ),
                 alert_dialog.footer(
                     button("Close", on_click=lambda: print("Close button clicked"))
                 ),

@@ -1,5 +1,3 @@
-# lmrex/middleware/auth_logic.py
-
 import reflex as rx
 import reflex_local_auth
 

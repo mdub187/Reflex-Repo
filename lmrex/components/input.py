@@ -1,8 +1,4 @@
-# lmrex/components/input.py
-
-
 import reflex as rx
-
 from ..state.state import State
 
 

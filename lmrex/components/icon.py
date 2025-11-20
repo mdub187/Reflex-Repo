@@ -1,5 +1,3 @@
-# lmrex/components/icon.py
-
 import reflex as rx
 
 

@@ -1,11 +1,10 @@
-# lmrex/ui/contact.py
+import reflex as rx
 
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
 from lmrex.components.heading import header
 from lmrex.components.navbar import navbar
-
-from ..imports import rx
+from lmrex.state.state import State
 
 contact_url = "pages/contact"
 

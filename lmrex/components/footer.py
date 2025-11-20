@@ -1,9 +1,6 @@
-# lmrex/components/__init__.py
-
 import reflex as rx
-
-from .color_mode import color_mode
 from .social_icons import social_icons_footer
+from .color_mode import color_mode
 
 
 def footer() -> rx.Component:

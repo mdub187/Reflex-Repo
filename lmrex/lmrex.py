@@ -2,17 +2,26 @@
 
 # import sys
 
-from lmrex.routes.routes import add_routes, app
-from lmrex.ui.responsive_utils import apply_responsive_styles
+from lmrex.routes.routes import add_routes
 
-responsive_styles = apply_responsive_styles()
+# responsive_styles = apply_responsive_styles()
+
+# path = "/Users/mdub/Documents/Dev End/User Python/Reflex_pylot/lmrex"
+# print(path)
+# sys.path.append(path)
 
 
-app()
-add_routes(app)
+# sys.path.append(".")
+# sys.path.append("lmrex")
+
+
+# print(sys.path)
+app = add_routes()
+
+# app()
+# add_routes(app)
 
 
 if __name__ == "__main__":
-    apply_responsive_styles()
-    print(add_routes)
-    print("Hello, World!")
+    app.run()
+    # print("Hello, World!")

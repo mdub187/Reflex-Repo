@@ -19,6 +19,7 @@ def index() -> rx.Component:
         navbar(),
         rx.vstack(
             # Welcome section with nice styling
+        header(),
             rx.text(
                 rx.code({"Hello"}),
                 size="5",

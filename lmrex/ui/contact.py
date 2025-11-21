@@ -4,6 +4,7 @@ from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
 from lmrex.components.heading import header
 from lmrex.components.navbar import navbar
+from lmrex.components.menu import menu
 
 from ..imports import rx
 
@@ -15,6 +16,7 @@ def contact() -> rx.Component:
         navbar(),
         rx.vstack(
             header(),
+            menu(),
             rx.text(
                 rx.code("Resources"),
                 size="5",

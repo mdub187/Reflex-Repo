@@ -24,7 +24,9 @@ class ProtectedState(reflex_local_auth.LocalAuthState):
 
 
 # @rx.page(on_load=ProtectedState.on_load)
-@reflex_local_auth.require_login
-def protected_page(self):
-    """Protected page that requires authentication"""
-    return rx.container()
+# @reflex_local_auth.require_login
+# def protected_page(self):
+#     """Protected page that requires authentication"""
+#     return rx.container(
+#         # account_page.account(),
+#     )

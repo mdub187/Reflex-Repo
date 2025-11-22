@@ -1,7 +1,8 @@
 *,
 html {
-	justify-self: none;
-	justify-content: stretch;
+	/*justify-self: none;*/
+	/*justify-content: stretch;*/
+	min-width: 100%
 }
 
 .lucide,
@@ -34,6 +35,6 @@ bakground {
 	}
 	.container {
 		width: 100%;
-		padding: 10px;
+		padding: 0;
 	}
 }

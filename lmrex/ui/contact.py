@@ -7,7 +7,7 @@ from lmrex.components.navbar import navbar
 
 from ..imports import rx
 
-contact_url = "pages/contact"
+# contact_url = "pages/contact"
 
 
 def contact() -> rx.Component:

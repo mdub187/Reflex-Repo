@@ -1,19 +1,57 @@
-# lmrex/ui/login.py
+# # lmrex/ui/login.py
 
-from ..components.footer import footer
-from ..imports import rx
-from ..state.auth_state import AuthState
+# # from ..components.footer import footer
+# from ..imports import rx
+# # from ..state.auth_state import AuthState
+# # from ..state.auth_state import login_and_redirect
+# # from ..state.auth_state import logout_and_redirect
 
 
-def user_login() -> rx.Component:
+<<<<<<< Updated upstream
+
+
+# def login_page() -> rx.Component:
+#    return rx.box(
+#         rx.vstack(
+#             rx.heading("Login / Demo", size="6"),
+#             rx.text(
+#                 "This page simulates a login flow for local development. "
+#                 "Click a button below to store a demo token and set the authenticated user state."
+#             ),
+#             rx.hstack(
+#                 rx.button(
+#                     "Simulate login",
+#                 ),
+#                 rx.button(
+#                     "Simulate admin token",
+#                     style={"background_color": "#2563eb", "color": "white"},
+#                 ),
+#                 rx.button(
+#                     "Logout",
+#                     # on_click=logout_and_redirect,
+#                     style={"background_color": "#ef4444", "color": "white"},
+#                 ),
+#                 spacing="4",
+#             ),
+#             rx.text(
+#                 "After a successful login you'll be redirected to the protected secret page."
+#             ),
+#             spacing="6",
+#             justify="center",
+#             align="center",
+#             min_height="60vh",
+#         ),
+#         style={"padding": "18px"},
+#     )
+# print(login_page())
+=======
+def login() -> rx.Component:
     """Login page with simulated login buttons and proper redirects."""
 
     # Helper functions
     def login_and_redirect(token: str):
         AuthState.handle_login_success(token)
-        # Redirect after successful login
-        rx.redirect("/protected/account")
-        return login_and_redirect
+        return rx.redirect("/protected/secret")  # Redirect after successful login
 
     def logout_and_redirect():
         # AuthState._auth_token()
@@ -54,8 +92,9 @@ def user_login() -> rx.Component:
         footer(),
         style={"padding": "18px"},
     )
+    return login()
 
 
-def login(login_and_redirect) -> rx.Component:
-    """Alias for compatibility with modules that expect a `login` function"""
-    return user_login()
+# def login() -> rx.Component:
+#     """Alias for compatibility with modules that expect a `login` function"""
+>>>>>>> Stashed changes

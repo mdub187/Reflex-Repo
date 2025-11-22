@@ -1,14 +1,13 @@
-# lmrex/ui/account.py
+# # lmrex/ui/account.py
 
-import reflex as rx
-
-from ..routes import routes
+# import reflex as rx
 
 
-def account_ui():
-    return rx.box(
-        # account_ui(),
-        rx.text("Account Page"),
-        rx.button("Logout", on_click=rx.redirect("/")),
-    )
-    return routes.account
+# def account_page():
+#     return rx.box(
+#         # account_ui(),
+#         # rx.text("Account Page"),
+#         # rx.button("Logout", on_click=rx.redirect("/")),
+#     )
+#     # return account()
+#     # print(account())

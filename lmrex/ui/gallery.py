@@ -11,7 +11,7 @@ from lmrex.state.state import State
 
 from ..imports import rx
 
-gallery_url = "pages/gallery"
+# gallery_url = "pages/gallery"
 
 
 def gallery() -> rx.Component:

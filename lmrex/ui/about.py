@@ -9,7 +9,7 @@ from lmrex.components.heading import header
 from lmrex.components.navbar import navbar
 from lmrex.state.state import State
 
-about = "pages/about"
+# about = "pages/about"
 
 
 def about() -> rx.Component:

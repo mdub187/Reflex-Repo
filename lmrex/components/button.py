@@ -2,7 +2,8 @@
 
 import reflex as rx
 
-rx.button(
+def button() -> rx.Component:
+	rx.button(
     "Button",
     on_click=State.change_label,
     spacing="5",

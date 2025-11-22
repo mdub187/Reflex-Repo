@@ -6,7 +6,7 @@ import reflex as rx
 def menu() -> rx.Component:
     return rx.container(
         rx.menu.root(
-            rx.menu.trigger(rx.icon("Media", size=30)),
+            rx.menu.trigger(rx.icon("folder-open", size=30)),
             rx.menu.content(
                 rx.menu.item("Photo", href="./photo"),
                 rx.menu.item("Video", href="/video"),

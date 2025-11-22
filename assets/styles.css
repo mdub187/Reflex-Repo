@@ -10,12 +10,12 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    width: 100%;
+    min-width: 100%;
 }
 
 #root {
     min-height: 80vh;
-    width: 100vw;
+    min-width: 100%;
     overflow-x: hidden;
 }
 
@@ -23,6 +23,7 @@ html, body {
 .rx-box {
     min-height: 80vh;
     max-height: 80vh;
+    min-width: 100%;
     display: flex;
     flex-direction: column;
 }

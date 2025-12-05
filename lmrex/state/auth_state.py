@@ -72,9 +72,10 @@ class AuthState(rx.State):
         self.authenticated_user = self._user_from_token(token)
         print(f"[AuthState] Login success for {self.authenticated_user['name']}")
         # Redirect to protected page after successful login
-        # return rx.redirect(token)
+        return rx.redirect(token)
+        return username, password
         # rx.redirect(token)
-        rx.redirect("/protected/account/" + self.authenticated_user["email"])
+        # rx.redirect("/protected/account/" + self.authenticated_user["email"])
 
     @rx.event
     def clear_auth_token(self) -> None:
@@ -82,7 +83,7 @@ class AuthState(rx.State):
         print("[AuthState] Clearing auth token and authenticated user")
         self._auth_token = None
         self.authenticated_user = None
-        auth_logic()
+        # auth_logic()
 
     @rx.event
     def do_logout(self):

@@ -1,7 +1,7 @@
 # ./lmrex/components/navbar.py
 import reflex as rx
 
-from .user_login import AuthState, user_login
+from .user_login import AuthState, login
 
 
 def navbar_link(text, url) -> rx.Component:
@@ -31,7 +31,7 @@ def navbar() -> rx.Component:
                     rx.link("about", href="/About"),
                     rx.link("gallery", href="/Gallery"),
                     rx.link("contact", href="/Contact"),
-                    rx.link(user_login(), create_account=True, spacing="5"),
+                    rx.link("login", onClick=login(), spacing="5"),
                 ),
             ),
         ),
@@ -54,12 +54,13 @@ def navbar() -> rx.Component:
                         rx.menu.item("About"),
                         rx.menu.item("Gallery"),
                         rx.menu.item("Contact"),
-                        rx.menu.item("Login"),  # could hook modal here too
+                        # rx.menu.item(
+                        # rx.button("Login", on_click=login),  # could hook modal here too
                     ),
                 ),
             ),
         ),
-        # xxbg=rx.color("accent", 3),
+        bg=rx.color("accent", 5),
         top="2px",
         z_index="5",
     )

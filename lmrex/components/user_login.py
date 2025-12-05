@@ -1,55 +1,53 @@
-# ./lmrex/components/user_login.py
 import reflex as rx
 
-
+from ..components.footer import footer
 from ..state.auth_state import AuthState
 
+def login() -> rx.State:
+    """Login page with simulated login buttons and proper redirects."""
 
-class LoginState(rx.State):
-    """State for login form"""
-    username: str = ""
-    password: str = ""
+    # Helper functions
+    def login_and_redirect(token: str):
+        # AuthState.handle_login_success
+        # Redirect after successful login
+        return rx.State("/protected/account")
 
-    def set_username(self, value: str):
-        """Set username value"""
-        self.username = value
+    def logout_and_redirect():
+        AuthState.clear_auth_token
+        return rx.State("/")  # Redirect to home after logout
 
-    def set_password(self, value: str):
-        """Set password value"""
-        self.password = value
+    # return rx.box(
+    #     rx.vstack(
+    #         rx.heading("Login / Demo", size="6"),
+    #         rx.text(
+    #             "This page simulates a login flow for local development. "
+    #             "Click a button below to store a demo token and set the authenticated user state."
+    #         ),
+    #         rx.hstack(
+    #             rx.button(
+    #                 # "Simulate admin token",
+    #                 # on_click=lambda: login_and_redirect("demo-admin-token"),
+    #                 # style={"background_color": "#2563eb", "color": "white"},
+    #             ),
+    #             rx.button(
+    #                 "Logout",
+    #                 on_click=logout_and_redirect,
+    #                 style={"background_color": "#ef4444", "color": "white"},
+    #             ),
+    #             spacing="4",
+    #         ),
+    #         rx.text(
+    #             "After a successful login you'll be redirected to the protected secret page."
+    #         ),
+    #         spacing="6",
+    #         justify="center",
+    #         align="center",
+    #         min_height="60vh",
+    #     ),
+    #     footer(),
+    #     style={"padding": "18px"},
+    # )
 
-
-def user_login() -> rx.Component:
-    """Login dialog component"""
-    return rx.dialog.root(
-        rx.dialog.trigger(rx.button("Login")),
-        rx.dialog.title(
-        rx.dialog.content(
-            rx.heading("Sign-in or Register", size="6"),
-            rx.text("Enter your credentials below."),
-            rx.form(
-                rx.input(
-                    placeholder="Username",
-                    on_change=LoginState.set_username,
-                    value=LoginState.username,
-                ),
-            ),
-                rx.input(
-                    placeholder="Password",
-                    type="password",
-                    on_change=LoginState.set_password,
-                    value=LoginState.password,
-                ),
-            ),
-            rx.dialog.close(
-                rx.button(
-                    "Submit",
-                    on_click=AuthState.handle_login_success(
-                        LoginState.username, LoginState.password
-                    )
-                )
-            ),
-        ),
-            rx.spacer(column=1),
-            rx.dialog.trigger(rx.button("Create Account")),
-    )
+# def login() -> rx.Component:
+#     """Alias for compatibility with modules that expect a `login` function"""
+#     return rx.State()

@@ -3,13 +3,13 @@
 import reflex as rx
 
 from lmrex.ui.about import about
-from lmrex.ui.account import account
+from lmrex.ui.account import account_ui
 from lmrex.ui.contact import contact
 from lmrex.ui.gallery import gallery
 from lmrex.ui.index import index
 from lmrex.ui.login import login
-from lmrex.ui.login import user_login
-
+# from lmrex.ui.login import login
+# import reflex_local_auth
 # from lmrex.ui.gallery_music import music
 # from lmrex.ui.gallery_pictures import pictures
 # from lmrex.ui.gallery_video import videos
@@ -25,11 +25,11 @@ def add_routes():
     app.add_page(gallery, route="/gallery")
     app.add_page(contact, route="/contact")
     # app.add_page(account, route="/login")
+    app.add_page(login, route="/login/")
+    app.add_page(account_ui, route="/login/protected/account")
+    app.add_page(login, "protected/account/login")
     # app.add_page(user_login, route="/login/protected")
-    app.add_page(account, route="/login/protected/account")
-    app.add_page(user_login, route="/login")
-    app.add_page(user_login, route="/login/protected")
-    app.add_page(account, route="/login/protected/account")
+    # app.add_page(account, route="/login/protected/account")
     # app.add_page(pictures, route="/gallery/pictures")
     # app.add_page(videos, route="/gallery/videos")
     # app.add_page(music, route="/gallery/music")

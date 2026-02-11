@@ -1,12 +1,12 @@
-/*.lucide,
+.lucide,
 .lucide-sun,
-.lucide-moon {*/
+.lucide-moon {
 position: fixed;
 align-items: center;
 grid-area: 1 span;
 grid-area: 2;
 grid-area: -1 / 2 / 3 / 2;
-/*}*/
+}
 /*div.rt-Container.rt-r-size-3.css-8hu8q1 {*/
 /*display: contents;*/
 /*flex_direction: column;*/

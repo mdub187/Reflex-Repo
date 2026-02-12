@@ -21,6 +21,7 @@ alembic.ini
 **.github/*
 **/.env
 **/.stakpak/*
+**/.stakpak/**
 
 # ruff populated .gitignore
 .venv/

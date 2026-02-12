@@ -113,4 +113,3 @@ class MediaService:
 
 if __name__ == "__main__":
     print(__name__)
-    # print(MediaService.create_media_item("Test Title", "https://example.com", "image"))

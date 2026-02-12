@@ -1,6 +1,5 @@
 # ./lmrex/assets/icon_dir.py
 
-
 ICON_MAP = {
     "behance": "social_icons/behance.png",
     "dropbox": "social_icons/dropbox.png",

@@ -1,9 +1,6 @@
 # lmrex/state/auth_state.py
-
-import typing as t
-
 import reflex as rx
-
+import typing as t
 from lmrex.middleware import auth_logic
 from lmrex.routes import routes
 from lmrex.ui.account import account_page
@@ -44,33 +41,24 @@ class AuthState(rx.State):
     def handle_login_success(self, username: str, password: str):
         """Handle successful login with username and password"""
         def login_and_redirect(token: str):
-           AuthState.handle_login_success(token)
-           # Redirect after successful login
-           rx.redirect("account/")
+           rx.redirect("protected/account/")
            return login_and_redirect
            def user_login() -> rx.Component:
                """Login page with simulated login buttons and proper redirects."""
 
                # Helper functions
-
-
            def logout_and_redirect():
                    # AuthState._auth_token()
-               return rx.redirect("/")  # Redirect to home after logout
+               return rx.redirect("/Home/")  # Redirect to home after logout
            def login(login_and_redirect) -> rx.Component:
                    """Alias for compatibility with modules that expect a `login` function"""
            return user_login()
-
-
         token = f"{username}:{password}"
         self._auth_token = token
         self.authenticated_user = self._user_from_token(token)
         print(f"[AuthState] Login success for {self.authenticated_user['name']}")
-        # Redirect to protected page after successful login
-        # return rx.redirect(token)
-        # rx.redirect(token)
-        # rx.redirect("/protected/account/" + self.authenticated_user["email"])
-
+        rx.redirect("/protected/account/" + self.authenticated_user["email"])
+        return token
     @rx.event
     def set_user_email(self, email: str):
         """Update authenticated user's email"""
@@ -79,15 +67,6 @@ class AuthState(rx.State):
             self.authenticated_user["email"] = email
         else:
             print("[AuthState] No authenticated user to update")
-
-    # @rx.event
-    # def clear_auth_token(self):
-    #     """Clear authentication state and log out"""
-    #     print("[AuthState] Clearing auth token and authenticated user")
-    #     self._auth_token = None
-    #     self.authenticated_user = None
-    #     return rx.redirect("/")
-    #     auth_logic()
 
     @rx.event
     def do_logout(self):

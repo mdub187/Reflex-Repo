@@ -1,9 +1,7 @@
 # lmrex/components/check_tables.py
-
 import os
 import sys
 from pathlib import Path
-
 from sqlmodel import create_engine, inspect
 
 # Get the absolute path to the project root

@@ -1,25 +1,19 @@
 # lmrex/ui/index.py
 
-import reflex as rx
-
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
 from lmrex.components.heading import header
 from lmrex.components.input import input
 from lmrex.components.navbar import navbar
 from lmrex.state.state import State
+from ..imports import rx
 
-# from lmrex.components.media_carousel import media_carousel
-# from lmrex.template import template
-
-# index = "/index"
-
+index = "/Home/"
 
 def index() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-            # Welcome section with nice styling
             rx.text(
                 rx.code({"Hello"}),
                 size="5",
@@ -28,23 +22,13 @@ def index() -> rx.Component:
                     "color": "#6b7280",
                 },
             ),
-            rx.heading(
-                State.label,
-                size="9",
-                style={
-                    "background": "linear-gradient(45deg, #667eea, #764ba2)",
-                    "background_clip": "text",
-                    "color": "transparent",
-                    "margin_bottom": "1rem",
-                },
-            ),
-            # Interactive elements in a nice container
+            header(),
             rx.box(
                 rx.vstack(
                     input(rx.input),
                     rx.button(
                         "Lizzard",
-                        on_click=State.change_label(),
+                        on_click=State.change_label,
                         size="3",
                         style={
                             "background_color": "#667eea",
@@ -74,6 +58,5 @@ def index() -> rx.Component:
         rx.container(
             footer(),
             color_mode(),
-            # icon_dir(),
         ),
     )

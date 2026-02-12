@@ -1,11 +1,9 @@
 # lmrex/middleware/migrations.py
-
 import os
 from sqlalchemy import create_engine
 from alembic.config import Config
 from alembic import command
 from lmrex.models import Base
-
 
 class MigrationManager:
     """Handles database initialization and Alembic migrations"""
@@ -74,22 +72,17 @@ class MigrationManager:
     def initialize(self):
         """Complete database initialization process"""
         print("🚀 Initializing database...")
-
         # Create tables first
         self.init_database()
-
         # Then run migrations
         self.run_migrations()
-
         # Show current status
         current_rev = self.get_current_revision()
         if current_rev:
             print(f"📊 Current database revision: {current_rev}")
         else:
             print("📊 No migrations applied yet")
-
         print("✅ Database initialization complete!")
-
 
 def init_database_on_startup():
     """Convenience function to initialize database on app startup"""
@@ -97,16 +90,12 @@ def init_database_on_startup():
     migration_manager.initialize()
     return migration_manager
 
-
 if __name__ == "__main__":
     # Allow running migrations directly
     import sys
-
     manager = MigrationManager()
-
     if len(sys.argv) > 1:
         command = sys.argv[1]
-
         if command == "init":
             manager.initialize()
         elif command == "upgrade":

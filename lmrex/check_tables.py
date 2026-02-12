@@ -1,9 +1,7 @@
 # lmrex/components/check_tables.py
-
 import os
 import sys
 from pathlib import Path
-
 from sqlmodel import create_engine, inspect
 
 # Get the absolute path to the project root
@@ -15,8 +13,6 @@ if str(project_root) not in sys.path:
 
 # Now import your models
 from lmrex.models.user_model import LocalAuthSession, LocalUser
-
-
 def check_tables():
     """Check if required tables exist in the database."""
     try:
@@ -24,22 +20,17 @@ def check_tables():
         DATABASE_URL = (
             "sqlite:///database.db"  # Update this with your actual database URL
         )
-
         engine = create_engine(DATABASE_URL)
         inspector = inspect(engine)
-
         print("Tables in the database:")
         print(inspector.get_table_names())
-
         required_tables = ["localuser", "localauthsession"]
         missing_tables = []
-
         for table in required_tables:
             exists = table in inspector.get_table_names()
             print(f"Table '{table}' exists: {exists}")
             if not exists:
                 missing_tables.append(table)
-
         if missing_tables:
             print(f"Missing tables detected: {', '.join(missing_tables)}")
             print("Attempting to create missing tables...")
@@ -51,11 +42,9 @@ def check_tables():
             print(
                 "Tables created successfully. Please try running your application again."
             )
-
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         print("Please check your database configuration and try again.")
-
 
 if __name__ == "__main__":
     check_tables()

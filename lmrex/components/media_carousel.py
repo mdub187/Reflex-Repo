@@ -1,11 +1,9 @@
 import reflex as rx
-
 from ..state.state import State
-
+from ..ui.responsive_utils import apply_responsive_styles
 
 def media_carousel(current_media_item):
-    return (
-        rx.vstack(
+    return rx.vstack(
             # Title and type indicator
             rx.vstack(
                 rx.heading(
@@ -157,9 +155,9 @@ def media_carousel(current_media_item):
             margin="0 auto",
             padding="20px",
             style={
+                **apply_responsive_styles(),
                 "background_color": "white",
                 "border_radius": "16px",
                 "box_shadow": "0 1px 3px rgba(0, 0, 0, 0.1)",
             },
-        ),
-    )
+        )

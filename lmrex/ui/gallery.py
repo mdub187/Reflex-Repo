@@ -1,61 +1,47 @@
 # lmrex/ui/gallery.py
-
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
 from lmrex.components.media_carousel import media_carousel
 from lmrex.components.media_modal import media_modal
 from lmrex.components.menu import menu
+from lmrex.components.heading import header
 from lmrex.components.navbar import navbar
-from lmrex.models.media_model import MediaService
 from lmrex.state.state import State
-
+from ..ui.responsive_utils import apply_responsive_styles
 from ..imports import rx
-
-# gallery_url = "pages/gallery"
-
 
 def gallery() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-            rx.heading(
-                State.label,
-                size="9",
+            rx.text(
+                rx.code({"Creative"}),
+                size="5",
                 style={
-                    "background": "linear-gradient(45deg, #667eea, #764ba2)",
-                    "background_clip": "text",
-                    "color": "transparent",
-                    "margin_bottom": "1rem",
+                		"margin": "1rem 0 2rem 0",
+                 		"color": "#6b7280",
                 },
             ),
-            rx.text(
-                rx.code("creative"),
-                url_redirect=gallery_url,
-                size="5",
-            ),
-            rx.container(
-                rx.menu.root(
-                    rx.menu.trigger(
-                        rx.button(
-                            id="Add_Media",
-                            label="Add Media",
-                            on_click=State.toggle_modal,
-                        )
-                    ),
-                    rx.menu.content(menu()),
+            header(),
+            rx.box(
+            rx.menu.root(
+                rx.menu.trigger(
+                    rx.button(
+                        id="Add_Media",
+                        label="Add Media",
+                        on_click=State.toggle_modal,
+                    )
                 ),
+                rx.menu.content(menu()),
             ),
+            ),
+            media_modal(),
             media_carousel(current_media_item=State.current_media_item),
             rx.button("Add Media", on_click=State.toggle_modal),
-            url_redirect=gallery_url,
-            size="5",
-            key="gallery",
-            justify="center",
-            align="center",
+            rx.container(
+                footer(),
+                color_mode(),
+            ),
         ),
-        rx.container(
-            footer(),
-            color_mode(),
-        ),
-        # media_modal(),
+        style=apply_responsive_styles(),
     )

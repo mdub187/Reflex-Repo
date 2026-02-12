@@ -1,7 +1,5 @@
 # ./lmrex/components/color_mode.py
-
 import reflex as rx
-
 
 def color_mode() -> rx.Component:
     return rx.container(

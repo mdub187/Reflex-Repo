@@ -1,4 +1,4 @@
-
+# lmrex/components/debug/debug_modal.py
 from reflex import Component, alert_dialog, button, text, vstack
 
 

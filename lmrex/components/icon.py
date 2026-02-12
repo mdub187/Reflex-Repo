@@ -1,7 +1,5 @@
 # lmrex/components/icon.py
-
 import reflex as rx
-
 
 class State(rx.State):
     def icon(self) -> rx.Component:

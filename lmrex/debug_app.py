@@ -1,8 +1,6 @@
 # lmrex/components/debug_app.py
-#
 import reflex as rx
 from reflex import App, Component, alert_dialog, button, text, vstack
-
 
 def debug_modal() -> Component:
     """A standalone debug modal component for testing purposes."""
@@ -20,13 +18,11 @@ def debug_modal() -> Component:
         )
     )
 
-
 class DebugApp(App):
     """A minimal Reflex app for testing the debug modal."""
 
     def render(self) -> Component:
         return debug_modal()
-
 
 if __name__ == "__main__":
     app = DebugApp()

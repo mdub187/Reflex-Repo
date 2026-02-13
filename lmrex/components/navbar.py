@@ -1,15 +1,16 @@
 # ./lmrex/components/navbar.py
 import reflex as rx
+from lmrex.state.auth_state import AuthState
+from .login_modal import user_menu, login_modal, LoginModalState
 
-from .user_login import user_login
-
-def navbar_link(text, url) -> rx.Component:
+def navbar_link(text, url=None, on_click=None) -> rx.Component:
     return rx.link(
         rx.text(text, size="4", weight="medium", display="contents"),
-        href=url,
+        href=url if url else "#",
+        on_click=on_click,
         padding="10px",
         min_width="48px",
-        min_height="48px",
+        # min_height="48px"
     )
 
 def navbar() -> rx.Component:
@@ -25,23 +26,37 @@ def navbar() -> rx.Component:
                         border_radius="55%",
                     ),
                     rx.heading("We Gon", size="7", weight="bold"),
-                    width="100%",
+                    # width="100%",
                 ),
                 rx.hstack(
                     rx.button(navbar_link("Home", "/Home")),
                     rx.button(navbar_link("About", "/About")),
                     rx.button(navbar_link("Gallery", "/Gallery")),
                     rx.button(navbar_link("Contact", "/Contact")),
-                    rx.button(navbar_link("Login", "/Login")),
+                    # Login modal + user menu
+                    # # rx.button(
+
+                    #     navbar_link(
+                    #     text="Login Modal",
+                    #     on_click=user_menu,
+                    #     # padding="10px",
+                    #     # min_width="48px",
+
+
+                    # ),
+
+                    # Optional: Keep link to login page
+                    login_modal(),
+                    # rx.button(navbar_link("login")),
                 ),
-                min_width="100%",
+                # min_width="100%",
                 justify="between",
                 align_items="center",
                 background="linear-gradient(45deg, #667eea, #764ba2)",
             ),
         ),
         top="2px",
-        max_width="100%",
+        # max_width="100%",
         padding="0px",
     ),
         rx.mobile_and_tablet(
@@ -63,15 +78,34 @@ def navbar() -> rx.Component:
                         navbar_link("About", "/About"),
                         navbar_link("Gallery", "/Gallery"),
                         navbar_link("Contact", "/Contact"),
+                        # Mobile login - use login modal trigger
+                        rx.cond(
+                            AuthState.is_logged_in,
+                            rx.vstack(
+                                rx.text(f"Logged in: {AuthState.user_email}", size="2"),
+                                navbar_link("Account", "/Account"),
+                                rx.menu.separator(),
+                                rx.button(
+                                    "Logout",
+                                    on_click=AuthState.logout_and_redirect,
+                                    variant="soft",
+                                    color_scheme="red",
+                                    size="2",
+                                ),
+                                spacing="1",
+                            ),
+                            # Login modal in menu
+                            # login_modal(),
+                        ),
                     ),
                 ),
-                width="100%",
+                # width="100%",
                 justify="between",
                 align_items="center",
             ),
         top="2px",
         z_index="5",
-        width="100%",
+        # width="100%",
         padding="10px",
     ),
 )

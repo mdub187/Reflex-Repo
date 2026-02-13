@@ -1,67 +1,185 @@
-# user
-
 .states
 .web
-__pycache__/
-assets/external/
+# ============================================
+# REFLEX SPECIFIC
+# ============================================
+.web/
+.states/
 *.db
-**__pycache__/*
-assets/external/*
-*.py[cod]
-.web/*
-**.states/
-**.DS_Store*
-**.venv/*
-**.zed/*
-**.web/*
-*.m4v
-*.mov
-alembic.ini
-**alembic/*
-**.github/*
-**/.env
-**/.stakpak/*
-**/.stakpak/**
+reflex.db
 
-# ruff populated .gitignore
+# ============================================
+# PYTHON
+# ============================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
 .venv/
 venv/
 env/
+ENV/
+env.bak/
+venv.bak/
 __pypackages__/
 
-# Python bytecode and cache files
-__pycache__/
-*.pyc
-*.pyd
-*.pyo
-
-# Ruff cache directory
-.ruff_cache/
-
-# Build artifacts
+# Distribution / packaging
 dist/
 build/
 *.egg-info/
+*.egg
+MANIFEST
 
-# IDE-specific files (common examples)
-.idea/
-.vscode/
-*.swp
-*~
-.DS_Store
-
-# Environment files and secrets
-.env
-.flaskenv
-
-# Testing and coverage
-.pytest_cache/*
+# Unit test / coverage reports
+.pytest_cache/
 .coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
 
-# OS generated files
+# ============================================
+# DATABASE & MIGRATIONS
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+alembic.ini
+alembic/versions/*.py
+!alembic/versions/.gitkeep
+
+# Keep alembic_migrations (your actual migrations)
+# But ignore cache
+alembic_migrations/__pycache__/
+
+# ============================================
+# IDE & EDITORS
+# ============================================
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# Emacs
+\#*\#
+.\#*
+
+# Zed
+.zed/
+
+# ============================================
+# OS GENERATED FILES
+# ============================================
+# macOS
 .DS_Store
-.Trash
-Thumbs.db
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
 
-# Stakpak local files
-.stakpak/*
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+.Trash-*/
+
+# ============================================
+# ENVIRONMENT & SECRETS
+# ============================================
+.env
+.env.*
+!.env.example
+.flaskenv
+*.pem
+*.key
+*.secret
+
+# ============================================
+# LOGS
+# ============================================
+*.log
+logs/
+*.log.*
+
+# ============================================
+# CACHE & TEMP FILES
+# ============================================
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+pyrightconfig.json
+
+# ============================================
+# PROJECT SPECIFIC
+# ============================================
+# Stakpak
+.stakpak/
+
+# External assets (if dynamically downloaded)
+assets/external/
+
+# Media files (adjust based on your needs)
+# Uncomment if you don't want to track large media
+# *.mp4
+# *.mov
+# *.m4v
+# *.avi
+# *.mkv
+
+# ============================================
+# BUILD & DEPLOYMENT
+# ============================================
+.vercel/
+.netlify/
+.dockerignore
+docker-compose.override.yml
+
+
+# ============================================
+# Blueprint Docs
+# ============================================
+IMPROVEMENT_SUMMARY.md
+POJECT_STRUCTURE.md
+
+
+# ============================================
+# DOCUMENTATION
+# ============================================
+# Ignore generated docs
+docs/_build/
+site/
+
+# Keep important docs
+!README.md
+!TROUBLESHOOTING.md
+!LICENSE
+!CONTRIBUTING.md

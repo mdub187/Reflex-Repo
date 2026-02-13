@@ -1,23 +1,27 @@
-# # ./lmrex/components/user_login.py
+# lmrex/components/user_login.py
+"""
+User Login Component - Simple wrapper for the login modal
+Import and use login_modal for authentication functionality
+"""
 
 import reflex as rx
+from .login_modal import login_modal, login_button_trigger, register_button_trigger, user_menu
+
 
 def user_login() -> rx.Component:
-    return rx.dialog.root(
-        rx.dialog.trigger(
-        rx.container(
-        rx.dialog.title("Login"),
-        rx.dialog.content(
-            rx.text("Enter your credentials below."),
-            rx.form(
-                rx.input(placeholder="Username"),
-                rx.input(placeholder="Password", type="password"),
-                rx.button("Login", on_click=rx.redirect("/Account")),
-            ),
-         rx.dialog.trigger(rx.button("Create Account"),
-        ),
-        ),
-        rx.spacer(column=1),
-        ),
-    ),
-)
+    """
+    User login component.
+    Returns the login modal with trigger button.
+    This is the main component to use in your navbar or pages.
+    """
+    return login_modal()
+
+
+# Export commonly used components for convenience
+__all__ = [
+    "user_login",
+    "login_modal",
+    "login_button_trigger",
+    "register_button_trigger", 
+    "user_menu",
+]

@@ -1,0 +1,183 @@
+# lmrex/ui/login.py
+"""
+Login and Registration UI using reflex-local-auth
+Provides secure authentication forms with token management
+"""
+
+import reflex as rx
+import reflex_local_auth
+from lmrex.state.auth_state import AuthState
+from ..compon
+
+def login() -> rx.Component:
+    """
+    Login page with authentication forms
+    Uses reflex-local-auth for secure login and registration
+    """
+    
+    return rx.box(
+        rx.vstack(
+            # Header
+            rx.heading(
+                "Login / Register",
+                size="8",
+                weight="bold",
+                margin_bottom="2rem",
+            ),
+            
+            # Login/Register Forms Card
+            rx.card(
+                rx.vstack(
+                    # Tab navigation between login and register
+                    rx.tabs.root(
+                        rx.tabs.list(
+                            rx.tabs.trigger("Login", value="login"),
+                            rx.tabs.trigger("Register", value="register"),
+                        ),
+                        
+                        # Login Tab Content
+                        rx.tabs.content(
+                            rx.vstack(
+                                rx.heading("Sign In", size="6", margin_bottom="1rem"),
+                                
+                                # Use reflex-local-auth's built-in login form
+                                login_modal(
+                                    on_submit=AuthState.on_submit_login,
+                                ),
+                                
+                                rx.text(
+                                    "Don't have an account? Switch to Register tab.",
+                                    size="2",
+                                    color="gray",
+                                    margin_top="1rem",
+                                ),
+                                
+                                spacing="4",
+                                width="100%",
+                            ),
+                            value="login",
+                        ),
+                        
+                        # Register Tab Content
+                        rx.tabs.content(
+                            rx.vstack(
+                                rx.heading("Create Account", size="6", margin_bottom="1rem"),
+                                
+                                # Use reflex-local-auth's built-in registration form
+                                reflex_local_auth.register_form(
+                                    on_submit=AuthState.on_submit_register,
+                                ),
+                                
+                                rx.text(
+                                    "Already have an account? Switch to Login tab.",
+                                    size="2",
+                                    color="gray",
+                                    margin_top="1rem",
+                                ),
+                                
+                                spacing="4",
+                                width="100%",
+                            ),
+                            value="register",
+                        ),
+                        
+                        default_value="login",
+                        width="100%",
+                    ),
+                    
+                    spacing="4",
+                    width="100%",
+                    padding="2rem",
+                ),
+                max_width="500px",
+                width="100%",
+            ),
+            
+            # Demo Section (for development/testing)
+            rx.card(
+                rx.vstack(
+                    rx.heading("Quick Demo Access", size="5", margin_bottom="1rem"),
+                    rx.text(
+                        "For testing, you can create a demo account or use existing credentials.",
+                        size="2",
+                        color="gray",
+                        margin_bottom="1rem",
+                    ),
+                    
+                    rx.hstack(
+                        rx.button(
+                            "Go to Account (if logged in)",
+                            on_click=AuthState.check_login_redirect,
+                            variant="soft",
+                            color_scheme="blue",
+                        ),
+                        rx.button(
+                            "Logout",
+                            on_click=AuthState.logout_and_redirect,
+                            variant="soft",
+                            color_scheme="red",
+                        ),
+                        spacing="3",
+                        wrap="wrap",
+                        justify="center",
+                    ),
+                    
+                    # Show login status
+                    rx.cond(
+                        AuthState.is_logged_in,
+                        rx.badge(
+                            rx.icon("check-circle", size=16),
+                            f"Logged in as: {AuthState.user_email}",
+                            color_scheme="green",
+                            size="2",
+                        ),
+                        rx.badge(
+                            rx.icon("x-circle", size=16),
+                            "Not logged in",
+                            color_scheme="gray",
+                            size="2",
+                        ),
+                    ),
+                    
+                    spacing="4",
+                    align="center",
+                    padding="1.5rem",
+                ),
+                max_width="500px",
+                width="100%",
+                margin_top="2rem",
+            ),
+            
+            # Info Section
+            rx.card(
+                rx.vstack(
+                    rx.heading("How it works", size="4", margin_bottom="0.5rem"),
+                    rx.unordered_list(
+                        rx.list_item("Create an account with username and password"),
+                        rx.list_item("Login to receive a secure session token"),
+                        rx.list_item("Token is stored and managed automatically"),
+                        rx.list_item("Access protected pages like Account"),
+                        rx.list_item("Logout to clear your session"),
+                    ),
+                    rx.text(
+                        "🔒 Passwords are securely hashed and stored in the database.",
+                        size="2",
+                        color="green",
+                        margin_top="1rem",
+                    ),
+                    spacing="2",
+                    padding="1.5rem",
+                ),
+                max_width="500px",
+                width="100%",
+                margin_top="1rem",
+            ),
+            
+            spacing="6",
+            align="center",
+            justify="center",
+            min_height="80vh",
+            padding="2rem",
+        ),
+        width="100%",
+    )

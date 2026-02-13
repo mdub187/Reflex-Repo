@@ -14,15 +14,15 @@ def gallery() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-            rx.text(
-                rx.code({"Creative"}),
-                size="5",
-                style={
-                		"margin": "1rem 0 2rem 0",
-                 		"color": "#6b7280",
-                },
-            ),
             header(),
+            rx.text(
+                rx.code("Creative"),
+                size="5",
+                # style={
+                # 		"margin": "1rem 0 2rem 0",
+                #  		"color": "#6b7280",
+                # },
+            ),
             rx.box(
             rx.menu.root(
                 rx.menu.trigger(
@@ -42,6 +42,11 @@ def gallery() -> rx.Component:
                 footer(),
                 color_mode(),
             ),
+            spacing="5",
+            justify="center",
+            align="center",
+            min_height="80vh",
+            text_align="center",
         ),
         style=apply_responsive_styles(),
     )

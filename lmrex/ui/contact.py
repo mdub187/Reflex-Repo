@@ -9,11 +9,11 @@ def contact() -> rx.Component:
     return rx.box(
         navbar(),
         rx.vstack(
-            header(),
             rx.text(
                 rx.code("Resources"),
                 size="5",
             ),
+            header(),
             rx.vstack(
                 rx.text("Get in touch with me:"),
                 rx.text(

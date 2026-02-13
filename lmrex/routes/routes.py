@@ -17,8 +17,7 @@ from lmrex.ui.login import login
 # Import your UI pages
 
 app = rx.App()
-
-
+# index = "/Home"
 def add_routes():
     # Register your pages with their components
     app.add_page(index, route="/Home")
@@ -27,9 +26,6 @@ def add_routes():
     app.add_page(contact, route="/Contact")
     app.add_page(login, route="/Login")
     app.add_page(account_page, route="/Account")
-    # app.add_page(login, route="/login/")
-    # app.add_page(protected, route="/login/protected/account")
-    # app.add_page(account, route="/login/protected/account")
     # app.add_page(pictures, route="/gallery/pictures")
     # app.add_page(videos, route="/gallery/videos")
     # app.add_page(music, route="/gallery/music")

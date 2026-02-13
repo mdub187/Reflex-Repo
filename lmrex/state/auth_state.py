@@ -1,74 +1,84 @@
 # lmrex/state/auth_state.py
+"""
+Authentication State Management using reflex-local-auth
+Provides secure token-based authentication with session management
+"""
+
 import reflex as rx
-import typing as t
-from lmrex.middleware import auth_logic
-from lmrex.routes import routes
-from lmrex.ui.account import account_page
+import reflex_local_auth
+from typing import Optional, List
 
 
-class AuthState(rx.State):
-    """Authentication state management"""
+class AuthState(reflex_local_auth.LocalAuthState):
+    """
+    Main authentication state extending reflex-local-auth.LocalAuthState
+    Provides token-based authentication with secure session management
+    """
 
-    _auth_token: t.Optional[str] = None
-    authenticated_user: t.Optional[dict] = None
+    # Override to customize behavior
+    def on_load(self):
+        """Called when any page loads - checks authentication status"""
+        # This allows access to authenticated_user and session info
+        pass
 
     @rx.var
-    def is_authenticated(self) -> bool:
-        """Check if user is authenticated"""
-        return self.authenticated_user is not None
+    def user_email(self) -> str:
+        """Get the authenticated user's email/username"""
+        if self.authenticated_user and self.authenticated_user.username:
+            return str(self.authenticated_user.username)
+        return ""
 
     @rx.var
-    def get_roles(self) -> t.List[str]:
-        """Get user roles"""
-        return (
-            list(self.authenticated_user.get("roles", []))
-            if self.authenticated_user
-            else []
-        )
+    def is_logged_in(self) -> bool:
+        """Check if user is currently logged in"""
+        return self.is_authenticated
 
-    @staticmethod
-    def _user_from_token(token: str) -> dict:
-        """Mock user lookup from token - replace with real auth logic"""
-        if "admin" in (token or "").lower():
-            return {
-                "email": "admin@example.local",
-                "name": "Admin",
-                "roles": ["admin"],
-            }
-        return {"email": "demo@example.local", "name": "Demo User", "roles": ["user"]}
-
-    @rx.event
-    def handle_login_success(self, username: str, password: str):
-        """Handle successful login with username and password"""
-        def login_and_redirect(token: str):
-           rx.redirect("protected/account/")
-           return login_and_redirect
-           def user_login() -> rx.Component:
-               """Login page with simulated login buttons and proper redirects."""
-
-               # Helper functions
-           def logout_and_redirect():
-                   # AuthState._auth_token()
-               return rx.redirect("/Home/")  # Redirect to home after logout
-           def login(login_and_redirect) -> rx.Component:
-                   """Alias for compatibility with modules that expect a `login` function"""
-           return user_login()
-        token = f"{username}:{password}"
-        self._auth_token = token
-        self.authenticated_user = self._user_from_token(token)
-        print(f"[AuthState] Login success for {self.authenticated_user['name']}")
-        rx.redirect("/protected/account/" + self.authenticated_user["email"])
-        return token
-    @rx.event
-    def set_user_email(self, email: str):
-        """Update authenticated user's email"""
+    @rx.var
+    def user_info(self) -> dict:
+        """Get user information as a dictionary"""
         if self.authenticated_user:
-            print(f"[AuthState] Updating authenticated user email to: {email}")
-            self.authenticated_user["email"] = email
-        else:
-            print("[AuthState] No authenticated user to update")
+            return {
+                "username": self.authenticated_user.username,
+                "id": self.authenticated_user.id,
+                "enabled": self.authenticated_user.enabled,
+            }
+        return {}
 
     @rx.event
-    def do_logout(self):
-        """Logout handler"""
-        return self.clear_auth_token()
+    def logout_and_redirect(self):
+        """Logout and redirect to home page"""
+        self.do_logout()
+        return rx.redirect("/Home")
+
+    @rx.event
+    def check_login_redirect(self):
+        """Check if logged in and redirect to account page"""
+        if self.is_authenticated:
+            return rx.redirect("/Account")
+        return rx.window_alert("Please log in first")
+
+
+class ProtectedState(AuthState):
+    """
+    State for protected pages that require authentication
+    Automatically redirects to login if not authenticated
+    """
+
+    protected_data: str = ""
+
+    def on_load(self):
+        """Check authentication on protected page load"""
+        if not self.is_authenticated:
+            # Redirect to login page if not authenticated
+            return reflex_local_auth.LoginState.redir
+        
+        # Load protected data for authenticated users
+        self.protected_data = f"Welcome {self.authenticated_user.username}! This is your protected content."
+
+    @rx.event
+    def load_user_data(self):
+        """Load user-specific data"""
+        if self.is_authenticated:
+            self.protected_data = f"User data for {self.authenticated_user.username}"
+        else:
+            self.protected_data = ""

@@ -1,5 +1,4 @@
 # lmrex/ui/index.py
-
 from lmrex.components.color_mode import color_mode
 from lmrex.components.footer import footer
 from lmrex.components.heading import header
@@ -8,7 +7,6 @@ from lmrex.components.navbar import navbar
 from lmrex.state.state import State
 from ..imports import rx
 
-index = "/Home/"
 
 def index() -> rx.Component:
     return rx.box(

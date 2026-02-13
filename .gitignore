@@ -142,7 +142,7 @@ pyrightconfig.json
 # PROJECT SPECIFIC
 # ============================================
 # Stakpak
-.stakpak/
+.stakpak/*
 
 # External assets (if dynamically downloaded)
 assets/external/

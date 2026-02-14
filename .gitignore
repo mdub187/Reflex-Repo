@@ -162,7 +162,7 @@ assets/external/
 .netlify/
 .dockerignore
 docker-compose.override.yml
-
+*.zip
 
 # ============================================
 # Blueprint Docs

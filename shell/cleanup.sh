@@ -5,7 +5,7 @@
 
 set -e
 
-echo "🧹 Starting Project Cleanup..."
+echo "Starting Project Cleanup..."
 echo "================================"
 
 # Get the directory where the script is located
@@ -27,10 +27,10 @@ echo -e "${BLUE}1. Removing Python cache files (.pyc, .pyo)...${NC}"
 PYCS=$(find . -path ./.venv -prune -o -type f \( -name "*.pyc" -o -name "*.pyo" \) -print | wc -l | xargs)
 if [ "$PYCS" -gt 0 ]; then
     find . -path ./.venv -prune -o -type f \( -name "*.pyc" -o -name "*.pyo" \) -delete
-    echo -e "${GREEN}✓ Removed $PYCS .pyc/.pyo files${NC}"
+    echo -e "${GREEN} Removed $PYCS .pyc/.pyo files${NC}"
     CLEANED_COUNT=$((CLEANED_COUNT + PYCS))
 else
-    echo -e "${GREEN}✓ No .pyc/.pyo files found${NC}"
+    echo -e "${GREEN} No .pyc/.pyo files found${NC}"
 fi
 
 echo ""
@@ -38,49 +38,49 @@ echo -e "${BLUE}2. Removing __pycache__ directories...${NC}"
 PYCACHE_DIRS=$(find . -path ./.venv -prune -o -type d -name "__pycache__" -print | wc -l | xargs)
 if [ "$PYCACHE_DIRS" -gt 0 ]; then
     find . -path ./.venv -prune -o -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
-    echo -e "${GREEN}✓ Removed $PYCACHE_DIRS __pycache__ directories${NC}"
+    echo -e "${GREEN} Removed $PYCACHE_DIRS __pycache__ directories${NC}"
     CLEANED_COUNT=$((CLEANED_COUNT + PYCACHE_DIRS))
 else
-    echo -e "${GREEN}✓ No __pycache__ directories found${NC}"
+    echo -e "${GREEN}No __pycache__ directories found${NC}"
 fi
 
 echo ""
 echo -e "${BLUE}3. Checking for duplicate alembic directory...${NC}"
 if [ -d "alembic" ] && [ -d "alembic_migrations" ]; then
-    echo -e "${YELLOW}⚠️  Found duplicate alembic directories${NC}"
-    echo -e "${YELLOW}   Keep: alembic_migrations/ (has 2 migrations)${NC}"
-    echo -e "${YELLOW}   Remove: alembic/ (has 1 migration)${NC}"
+    echo -e "${YELLOW} Found duplicate alembic directories${NC}"
+    echo -e "${YELLOW} Keep: alembic_migrations/ (has 2 migrations)${NC}"
+    echo -e "${YELLOW} Remove: alembic/ (has 1 migration)${NC}"
     read -p "Do you want to remove the duplicate 'alembic/' directory? (y/N) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         rm -rf alembic/
-        echo -e "${GREEN}✓ Removed duplicate alembic/ directory${NC}"
+        echo -e "${GREEN} Removed duplicate alembic/ directory${NC}"
         CLEANED_COUNT=$((CLEANED_COUNT + 1))
     else
-        echo -e "${YELLOW}⊘ Skipped - keeping alembic/ directory${NC}"
+        echo -e "${YELLOW} Skipped - keeping alembic/ directory${NC}"
     fi
 else
-    echo -e "${GREEN}✓ No duplicate alembic directory found${NC}"
+    echo -e "${GREEN} No duplicate alembic directory found${NC}"
 fi
 
 echo ""
 echo -e "${BLUE}4. Removing .pytest_cache...${NC}"
 if [ -d ".pytest_cache" ]; then
     rm -rf .pytest_cache
-    echo -e "${GREEN}✓ Removed .pytest_cache${NC}"
+    echo -e "${GREEN} Removed .pytest_cache${NC}"
     CLEANED_COUNT=$((CLEANED_COUNT + 1))
 else
-    echo -e "${GREEN}✓ No .pytest_cache found${NC}"
+    echo -e "${GREEN} No .pytest_cache found${NC}"
 fi
 
 echo ""
 echo -e "${BLUE}5. Removing .ruff_cache...${NC}"
 if [ -d ".ruff_cache" ]; then
     rm -rf .ruff_cache
-    echo -e "${GREEN}✓ Removed .ruff_cache${NC}"
+    echo -e "${GREEN} Removed .ruff_cache${NC}"
     CLEANED_COUNT=$((CLEANED_COUNT + 1))
 else
-    echo -e "${GREEN}✓ No .ruff_cache found${NC}"
+    echo -e "${GREEN} No .ruff_cache found${NC}"
 fi
 
 echo ""
@@ -88,10 +88,10 @@ echo -e "${BLUE}6. Checking .DS_Store files (macOS)...${NC}"
 DSSTORE=$(find . -path ./.venv -prune -o -name ".DS_Store" -print | wc -l | xargs)
 if [ "$DSSTORE" -gt 0 ]; then
     find . -path ./.venv -prune -o -name ".DS_Store" -delete
-    echo -e "${GREEN}✓ Removed $DSSTORE .DS_Store files${NC}"
+    echo -e "${GREEN} Removed $DSSTORE .DS_Store files${NC}"
     CLEANED_COUNT=$((CLEANED_COUNT + DSSTORE))
 else
-    echo -e "${GREEN}✓ No .DS_Store files found${NC}"
+    echo -e "${GREEN} No .DS_Store files found${NC}"
 fi
 
 echo ""
@@ -99,18 +99,18 @@ echo -e "${BLUE}7. Checking for .pyc files in git tracking...${NC}"
 if git rev-parse --git-dir > /dev/null 2>&1; then
     TRACKED_PYC=$(git ls-files | grep -c "\.pyc$" || true)
     if [ "$TRACKED_PYC" -gt 0 ]; then
-        echo -e "${YELLOW}⚠️  Found $TRACKED_PYC .pyc files tracked by git${NC}"
+        echo -e "${YELLOW} Found $TRACKED_PYC .pyc files tracked by git${NC}"
         read -p "Remove them from git tracking? (y/N) " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             git ls-files | grep "\.pyc$" | xargs git rm --cached 2>/dev/null || true
-            echo -e "${GREEN}✓ Removed .pyc files from git tracking${NC}"
+            echo -e "${GREEN} Removed .pyc files from git tracking${NC}"
         fi
     else
-        echo -e "${GREEN}✓ No .pyc files in git tracking${NC}"
+        echo -e "${GREEN} No .pyc files in git tracking${NC}"
     fi
 else
-    echo -e "${YELLOW}⊘ Not a git repository, skipping git checks${NC}"
+    echo -e "${YELLOW} Not a git repository, skipping git checks${NC}"
 fi
 
 echo ""
@@ -134,7 +134,7 @@ fi
 
 echo ""
 echo "================================"
-echo -e "${GREEN}✓ Cleanup Complete!${NC}"
+echo -e "${GREEN} Cleanup Complete!${NC}"
 echo -e "   Total items cleaned: ${YELLOW}${CLEANED_COUNT}${NC}"
 echo ""
 echo -e "${BLUE}Optional: Deep Clean${NC}"
@@ -146,4 +146,4 @@ echo "If you made changes to tracked files, commit them:"
 echo -e "  ${YELLOW}git add .gitignore${NC}"
 echo -e "  ${YELLOW}git commit -m \"chore: cleanup build artifacts and update .gitignore\"${NC}"
 echo ""
-echo -e "${GREEN}🎉 Your project is now clean and optimized!${NC}"
+echo -e "${GREEN} Your project is now clean and optimized!${NC}"

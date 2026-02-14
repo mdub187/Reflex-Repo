@@ -59,7 +59,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-echo -e "${BLUE}🚀 Starting Reflex Application...${NC}"
+echo -e "${BLUE} Starting Reflex Application...${NC}"
 echo "=================================="
 
 # Get the directory where the script is located
@@ -80,14 +80,14 @@ check_port() {
 find_available_port() {
     local start_port=$1
     local max_attempts=${2:-10}
-    
+
     for ((port=start_port; port<start_port+max_attempts; port++)); do
         if check_port $port; then
             echo $port
             return 0
         fi
     done
-    
+
     return 1
 }
 
@@ -95,31 +95,31 @@ find_available_port() {
 echo -e "${YELLOW}Checking for processes on ports $BACKEND_PORT and $FRONTEND_PORT...${NC}"
 
 if lsof -Pi :$BACKEND_PORT -sTCP:LISTEN -t >/dev/null 2>&1; then
-    echo -e "${YELLOW}⚠️  Port $BACKEND_PORT is in use. Finding alternative...${NC}"
+    echo -e "${YELLOW} Port $BACKEND_PORT is in use. Finding alternative...${NC}"
     NEW_BACKEND_PORT=$(find_available_port $BACKEND_PORT)
     if [ $? -eq 0 ]; then
         BACKEND_PORT=$NEW_BACKEND_PORT
-        echo -e "${GREEN}✓ Using backend port: $BACKEND_PORT${NC}"
+        echo -e "${GREEN} Using backend port: $BACKEND_PORT${NC}"
     else
-        echo -e "${RED}❌ Could not find available backend port${NC}"
+        echo -e "${RED} Could not find available backend port${NC}"
         exit 1
     fi
 else
-    echo -e "${GREEN}✓ Backend port $BACKEND_PORT is available${NC}"
+    echo -e "${GREEN} Backend port $BACKEND_PORT is available${NC}"
 fi
 
 if lsof -Pi :$FRONTEND_PORT -sTCP:LISTEN -t >/dev/null 2>&1; then
-    echo -e "${YELLOW}⚠️  Port $FRONTEND_PORT is in use. Finding alternative...${NC}"
+    echo -e "${YELLOW} Port $FRONTEND_PORT is in use. Finding alternative...${NC}"
     NEW_FRONTEND_PORT=$(find_available_port $FRONTEND_PORT)
     if [ $? -eq 0 ]; then
         FRONTEND_PORT=$NEW_FRONTEND_PORT
-        echo -e "${GREEN}✓ Using frontend port: $FRONTEND_PORT${NC}"
+        echo -e "${GREEN} Using frontend port: $FRONTEND_PORT${NC}"
     else
-        echo -e "${RED}❌ Could not find available frontend port${NC}"
+        echo -e "${RED} Could not find available frontend port${NC}"
         exit 1
     fi
 else
-    echo -e "${GREEN}✓ Frontend port $FRONTEND_PORT is available${NC}"
+    echo -e "${GREEN} Frontend port $FRONTEND_PORT is available${NC}"
 fi
 
 # Export ports for rxconfig.py to use (if needed)
@@ -138,47 +138,47 @@ if [[ -z "$VIRTUAL_ENV" ]]; then
     echo -e "${YELLOW}Activating virtual environment...${NC}"
     if [ -d ".venv" ]; then
         source .venv/bin/activate
-        echo -e "${GREEN}✓ Virtual environment activated${NC}"
+        echo -e "${GREEN} Virtual environment activated${NC}"
     else
-        echo -e "${RED}❌ No .venv found. Please create a virtual environment first.${NC}"
+        echo -e "${RED} No .venv found. Please create a virtual environment first.${NC}"
         exit 1
     fi
 fi
 
 # Verify Reflex is installed
 if ! command -v reflex &> /dev/null; then
-    echo -e "${RED}❌ Reflex is not installed. Run: pip install reflex${NC}"
+    echo -e "${RED} Reflex is not installed. Run: pip install reflex${NC}"
     exit 1
 fi
 
-echo -e "${GREEN}✓ All prerequisites met${NC}"
+echo -e "${GREEN} All prerequisites met${NC}"
 echo ""
 
 # Clean rebuild if requested
 if [ "$CLEAN_BUILD" = true ]; then
     echo -e "${YELLOW}Performing clean rebuild...${NC}"
     rm -rf .web .states
-    echo -e "${GREEN}✓ Cleaned .web and .states directories${NC}"
+    echo -e "${GREEN} Cleaned .web and .states directories${NC}"
 fi
 
 # Check if .web directory exists and has node_modules
 if [ ! -d ".web/node_modules" ]; then
     echo -e "${BLUE}Initializing .web directory...${NC}"
     reflex init
-    
+
     echo -e "${BLUE}Installing frontend packages with npm...${NC}"
     cd .web
     npm install --legacy-peer-deps --prefer-offline
     if [ $? -eq 0 ]; then
-        echo -e "${GREEN}✓ All packages installed${NC}"
+        echo -e "${GREEN} All packages installed${NC}"
     else
-        echo -e "${RED}❌ Package installation failed${NC}"
+        echo -e "${RED} Package installation failed${NC}"
         cd ..
         exit 1
     fi
     cd ..
 else
-    echo -e "${GREEN}✓ Frontend packages already installed${NC}"
+    echo -e "${GREEN} Frontend packages already installed${NC}"
 fi
 
 echo ""

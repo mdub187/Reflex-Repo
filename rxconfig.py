@@ -1,6 +1,7 @@
 # rxconfig.py
 import reflex as rx
 import socket
+import os
 
 
 def find_available_port(start_port: int, max_attempts: int = 10) -> int:
@@ -32,54 +33,114 @@ def find_available_port(start_port: int, max_attempts: int = 10) -> int:
     )
 
 
-# Dynamically find available ports
-try:
-    backend_port = find_available_port(8000)
-    frontend_port = find_available_port(3000)
-    
-    print(f"✅ Using backend port: {backend_port}")
-    print(f"✅ Using frontend port: {frontend_port}")
-except RuntimeError as e:
-    print(f"⚠️  Warning: {e}")
-    print("Falling back to default ports...")
-    backend_port = 8000
-    frontend_port = 3000
+# Detect environment
+IS_PRODUCTION = os.getenv("PRODUCTION", "false").lower() == "true" or os.getenv("FLY_APP_NAME") is not None
+IS_FLY = os.getenv("FLY_APP_NAME") is not None
+IS_RAILWAY = os.getenv("RAILWAY_ENVIRONMENT") is not None
+IS_RENDER = os.getenv("RENDER") is not None
 
+# Get deployment URL from environment or use default
+DEPLOY_URL = os.getenv("DEPLOY_URL", "")
+FLY_APP_NAME = os.getenv("FLY_APP_NAME", "")
+RAILWAY_PUBLIC_DOMAIN = os.getenv("RAILWAY_PUBLIC_DOMAIN", "")
+RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL", "")
+
+# Port configuration
+if IS_PRODUCTION:
+    # In production, use fixed ports that match your proxy configuration
+    backend_port = int(os.getenv("BACKEND_PORT", "8000"))
+    frontend_port = int(os.getenv("FRONTEND_PORT", "3000"))
+    print(f"🚀 Production mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
+else:
+    # In development, dynamically find available ports
+    try:
+        backend_port = find_available_port(8000)
+        frontend_port = find_available_port(3000)
+        print(f"✅ Development mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
+    except RuntimeError as e:
+        print(f"⚠️  Warning: {e}")
+        print("Falling back to default ports...")
+        backend_port = 8000
+        frontend_port = 3000
+
+# URL configuration based on environment
+if IS_FLY and FLY_APP_NAME:
+    # Fly.io deployment
+    deploy_url = f"https://{FLY_APP_NAME}.fly.dev"
+    api_url = f"https://{FLY_APP_NAME}.fly.dev"
+    print(f"🪰 Fly.io deployment detected: {deploy_url}")
+elif IS_RAILWAY and RAILWAY_PUBLIC_DOMAIN:
+    # Railway deployment
+    deploy_url = f"https://{RAILWAY_PUBLIC_DOMAIN}"
+    api_url = f"https://{RAILWAY_PUBLIC_DOMAIN}"
+    print(f"🚂 Railway deployment detected: {deploy_url}")
+elif IS_RENDER and RENDER_EXTERNAL_URL:
+    # Render deployment
+    deploy_url = RENDER_EXTERNAL_URL
+    api_url = RENDER_EXTERNAL_URL
+    print(f"🎨 Render deployment detected: {deploy_url}")
+elif DEPLOY_URL:
+    # Custom deployment URL provided
+    deploy_url = DEPLOY_URL
+    api_url = DEPLOY_URL
+    print(f"🌐 Custom deployment URL: {deploy_url}")
+elif IS_PRODUCTION:
+    # Generic production - bind to all interfaces
+    deploy_url = f"http://0.0.0.0:{frontend_port}"
+    api_url = f"http://0.0.0.0:{backend_port}"
+    print("🔧 Production mode with 0.0.0.0 binding")
+else:
+    # Local development
+    deploy_url = f"http://localhost:{frontend_port}"
+    api_url = f"http://localhost:{backend_port}"
+    print("💻 Local development mode")
+
+# CORS configuration
+cors_origins = [
+    f"http://localhost:{frontend_port}",
+    f"http://127.0.0.1:{frontend_port}",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+# Add production URLs to CORS if in production
+if IS_FLY and FLY_APP_NAME:
+    cors_origins.extend([
+        f"https://{FLY_APP_NAME}.fly.dev",
+        f"http://{FLY_APP_NAME}.fly.dev",
+    ])
+elif IS_RAILWAY and RAILWAY_PUBLIC_DOMAIN:
+    cors_origins.extend([
+        f"https://{RAILWAY_PUBLIC_DOMAIN}",
+        f"http://{RAILWAY_PUBLIC_DOMAIN}",
+    ])
+elif IS_RENDER and RENDER_EXTERNAL_URL:
+    cors_origins.append(RENDER_EXTERNAL_URL)
+elif DEPLOY_URL:
+    cors_origins.append(DEPLOY_URL)
 
 config = rx.Config(
     app_name="lmrex",
     
-    # Dynamic port configuration
+    # Port configuration
     backend_port=backend_port,
     frontend_port=frontend_port,
-    api_url=f"http://localhost:{backend_port}",
-    deploy_url=f"http://localhost:{frontend_port}",
+    
+    # URL configuration (environment-aware)
+    api_url=api_url,
+    deploy_url=deploy_url,
+    
+    # Host binding - 0.0.0.0 allows external connections
     backend_host="0.0.0.0",
     
-    # CORS - include dynamic frontend port
-    cors_allowed_origins=[
-        f"http://localhost:{frontend_port}",
-        f"http://127.0.0.1:{frontend_port}",
-        # Also allow default ports for compatibility
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
-    
-    # Stylesheets
-    stylesheets=[
-        "assets/styles.css",
-        "assets/styles/styles.css",
-        ".web/styles/tailwind.css",
-    ],
-    
-    # Plugins - temporarily disabled to avoid bun installation timeouts
-    # Uncomment when you want to enable Tailwind V4
-    # plugins=[
-    #     rx.plugins.TailwindV4Plugin(),
-    # ],
-    
-    # Disabled plugins
-    disable_plugins=[
-        "reflex.plugins.sitemap.SitemapPlugin",
-    ],
+    # CORS configuration
+    cors_allowed_origins=cors_origins,
 )
+
+# Print configuration summary
+print("=" * 60)
+print(f"Environment: {'PRODUCTION' if IS_PRODUCTION else 'DEVELOPMENT'}")
+print(f"Backend: {api_url}")
+print(f"Frontend: {deploy_url}")
+print(f"CORS Origins: {len(cors_origins)} configured")
+print("=" * 60)

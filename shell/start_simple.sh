@@ -1,7 +1,7 @@
 #!/bin/bash
 # Simple startup without extras
 
-echo "🚀 Starting Reflex (Simple Mode - skipping Tailwind plugins)..."
+echo "Starting Reflex (Simple Mode - skipping Tailwind plugins)..."
 
 # Kill existing
 lsof -ti:3000,8000 | xargs kill -9 2>/dev/null
@@ -19,8 +19,8 @@ echo "Installing base packages (PID: $NPM_PID)..."
 wait $NPM_PID
 
 cd ..
-echo "✅ Packages installed"
-echo "🚀 Starting Reflex..."
+echo "Packages installed"
+echo "Starting Reflex..."
 
 # Start reflex
 reflex run

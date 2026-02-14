@@ -1,0 +1,36 @@
+{
+  "name": "reflex-repo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdub187/Reflex-Repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mdub187/Reflex-Repo/issues"
+  },
+  "homepage": "https://github.com/mdub187/Reflex-Repo#readme",
+  "devDependencies": {
+    "@aws-amplify/backend": "^1.21.0",
+    "@aws-amplify/backend-cli": "^1.8.2",
+    "aws-cdk-lib": "^2.234.1",
+    "constructs": "^10.4.5",
+    "esbuild": "^0.27.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "aws-amplify": "^6.16.2"
+  }
+}

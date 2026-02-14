@@ -183,3 +183,9 @@ site/
 !TROUBLESHOOTING.md
 !LICENSE
 !CONTRIBUTING.md
+
+# amplify
+node_modules
+.amplify
+amplify_outputs*
+amplifyconfiguration*

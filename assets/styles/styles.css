@@ -38,3 +38,23 @@ bakground {
 		padding: 0;
 	}
 }
+
+
+
+
+.rt-Flex {
+	justify-content: left
+}
+
+
+#radix-_r_3_ {
+	align-content: right;
+	float: right;
+}
+
+.lucide,
+.lucide-menu,
+.css-fc66ai {
+	align-content: right;
+	float: right;
+}

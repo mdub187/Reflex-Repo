@@ -23,27 +23,30 @@ def gallery() -> rx.Component:
                 #  		"color": "#6b7280",
                 # },
             ),
-            rx.box(
+            rx.container(
             rx.menu.root(
                 rx.menu.trigger(
-                    rx.button(
+                    rx.button("Browse",
                         id="Add_Media",
                         label="Add Media",
                         on_click=State.toggle_modal,
+                        justify_content="left",
                     )
                 ),
+                media_modal(
+                ),
                 rx.menu.content(menu()),
+                justify_content="right"
             ),
-            ),
-            media_modal(),
             media_carousel(current_media_item=State.current_media_item),
-            rx.button("Add Media", on_click=State.toggle_modal),
+            # rx.button("Add Media", on_click=State.toggle_modal),
+            ),
             rx.container(
                 footer(),
                 color_mode(),
             ),
             spacing="5",
-            justify="center",
+            justify="start",
             align="center",
             min_height="80vh",
             text_align="center",

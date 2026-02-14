@@ -28,6 +28,15 @@ html, body {
     flex-direction: column;
 }
 
+:where(.rt-Container.rt-r-size-3),
+.rt-ContainerInner,
+.rt-Container,
+.rt-r-size-3,
+.css-19midj6 {
+	width: 100%;
+	max-width: 100%;
+}
+
 /* Center content in vstack containers */
 .rx-vstack {
     align-items: center;
@@ -50,4 +59,22 @@ html, body {
 /* Prevent horizontal scroll on mobile */
 body {
     overflow-x: hidden;
+}
+
+
+/*.rt-Flex {
+	justify-content: left
+}*/
+
+
+#radix-_r_3_ {
+	align-content: right;
+	float: right;
+}
+
+.lucide,
+.lucide-menu,
+.css-fc66ai {
+	align-content: right;
+	float: right;
 }

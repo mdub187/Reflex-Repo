@@ -46,18 +46,23 @@ def navbar() -> rx.Component:
                     # ),
 
                     # Optional: Keep link to login page
-                    login_modal(),
+                    rx.button(rx.link(login_modal())),
                     # rx.button(navbar_link("login")),
                 ),
                 # min_width="100%",
                 justify="between",
-                align_items="center",
-                background="linear-gradient(45deg, #667eea, #764ba2)",
+                # align_items="center",
+                # background=("linear-gradient(45deg, #667eea, #764ba2)"),
             ),
         ),
+        xxbg=rx.color("accent", 5),
         top="2px",
-        # max_width="100%",
-        padding="0px",
+        # z_index="5",
+        # width="100%",
+        bg=rx.color("accent", 7),
+        # padding="1px",
+        # border_radius="5%"
+        box_shadow="linear-gradient(90deg, #667eea, #764ba2) 50px 50px",
     ),
         rx.mobile_and_tablet(
             rx.hstack(
@@ -78,6 +83,8 @@ def navbar() -> rx.Component:
                         navbar_link("About", "/About"),
                         navbar_link("Gallery", "/Gallery"),
                         navbar_link("Contact", "/Contact"),
+                        rx.button(rx.link(login_modal())),
+
                         # Mobile login - use login modal trigger
                         rx.cond(
                             AuthState.is_logged_in,
@@ -99,13 +106,15 @@ def navbar() -> rx.Component:
                         ),
                     ),
                 ),
-                # width="100%",
+                width="100%",
                 justify="between",
                 align_items="center",
             ),
+        xxbg=rx.color("accent", 1),
+        bg=rx.color("accent", 5),
         top="2px",
-        z_index="5",
-        # width="100%",
+        z_index="10",
+        width="100%",
         padding="10px",
     ),
 )

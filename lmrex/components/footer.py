@@ -12,15 +12,15 @@ def footer() -> rx.Component:
                 rx.text("© 2025 Marc Weeks", size="2", color="gray.600"),
                 # Social icons
                 social_icons_footer(
-                    # ="center"
                 ),
                 rx.box(),
+                align_content="center",
                 # Color mode toggle
                 justify="center",
                 align="center",
                 width="100%",
             ),
-            max_width="1200px",
+            # max_width="1200px",
         ),
         width="100%",
         padding="4",

@@ -136,7 +136,7 @@ except Exception as e:
 
 config = rx.Config(
     app_name="lmrex",
-    
+    allowedHosts = True
     # Database configuration
     db_url=DATABASE_URL,
     # Port configuration

@@ -2,9 +2,10 @@ version: 1
 frontend:
   phases:
     preBuild:
-      commands:
-        - python3 -m pip install --upgrade pip
-        - pip install -r requirements.txt
+  commands:
+    - python3 -m pip install --upgrade pip
+    - pip install -r requirements.txt
+    - reflex db migrate
     build:
       commands:
         - reflex export --frontend-only

@@ -144,7 +144,7 @@ config = rx.Config(
     frontend_port=frontend_port,
 
     # URL configuration (environment-aware)
-    api_url="http://reflex-repo.onrender.com:8000"
+    api_url="http://reflex-repo.onrender.com:8000",
     deploy_url=deploy_url,
 
     # Host binding - 0.0.0.0 allows external connections

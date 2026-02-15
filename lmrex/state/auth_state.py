@@ -91,9 +91,6 @@ class ProtectedState(AuthState):
         except OperationalError:
             # Database tables don't exist yet (during initialization)
             return reflex_local_auth.LoginState.redir
-        
-        # Load protected data for authenticated users
-        self.protected_data = f"Welcome {self.authenticated_user.username}! This is your protected content."
 
     @rx.event
     def load_user_data(self):

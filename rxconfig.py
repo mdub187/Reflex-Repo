@@ -34,11 +34,6 @@ def find_available_port(start_port: int, max_attempts: int = 10) -> int:
 
 
 # Detect environment
-# from lmrex.check_tables import check_tables
-DB = psycopg2.connect(database="pandaflex", user="pandaflex_user", password="c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth")
-DATABASE_URL =  "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a/pandaflex"
-# check_tables()
-# print(DATABASE_URL)
 IS_PRODUCTION = os.getenv("PRODUCTION", "false").lower() == "true" or os.getenv("FLY_APP_NAME") is not None
 IS_FLY = os.getenv("FLY_APP_NAME") is not None
 IS_RAILWAY = os.getenv("RAILWAY_ENVIRONMENT") is not None
@@ -124,23 +119,43 @@ elif IS_RENDER and RENDER_EXTERNAL_URL:
 elif DEPLOY_URL:
     cors_origins.append(DEPLOY_URL)
 
+# Database configuration - use environment variable or default to SQLite
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a.oregon-postgres.render.com/pandaflex"
+)
+
+# For local development, fall back to SQLite if PostgreSQL connection fails
+if not IS_PRODUCTION:
+    try:
+        # Test if we can connect to PostgreSQL
+        test_conn = psycopg2.connect(DATABASE_URL)
+        test_conn.close()
+        print(f"✅ PostgreSQL connection successful")
+    except Exception as e:
+        print(f"⚠️  PostgreSQL not available locally ({e}), using SQLite")
+        DATABASE_URL = "sqlite:///reflex.db"
+
 config = rx.Config(
     app_name="lmrex",
-    
+
+    # Database configuration
+    db_url=DATABASE_URL,
     # Port configuration
     backend_port=backend_port,
     frontend_port=frontend_port,
-    
+
     # URL configuration (environment-aware)
     api_url=api_url,
     deploy_url=deploy_url,
-    
+
     # Host binding - 0.0.0.0 allows external connections
     backend_host="0.0.0.0",
-    
+
     # CORS configuration
     cors_allowed_origins=cors_origins,
 )
+print(f"📊 Database: {config.db_url[:50]}...")
 
 # Print configuration summary
 print("=" * 60)

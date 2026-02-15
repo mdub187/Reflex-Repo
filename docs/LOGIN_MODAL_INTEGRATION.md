@@ -605,8 +605,7 @@ Your login modal is now fully integrated with authentication!
 **Authentication Flow:**
 - Modal → Form submit → reflex-local-auth → Database → Session token → Logged in
 
-**Everything is working and ready to use!** 🚀
-
+**Everything is working and ready to use!** 
 ---
 
 **Created**: 2025-02-12  

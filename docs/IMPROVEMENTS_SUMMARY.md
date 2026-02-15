@@ -143,13 +143,11 @@ config = rx.Config(
    - `reflex.db` should not be committed
    - **Status**: Fixed in `.gitignore`
 
-5. **Missing .env.example** 📝
-   - No template for environment variables
+5. **Missing .env.example**    - No template for environment variables
    - **Action**: Create `.env.example`
 
 ### Low Priority
-6. **No CI/CD Setup** 📝
-   - Consider adding GitHub Actions
+6. **No CI/CD Setup**    - Consider adding GitHub Actions
    - Consider pre-commit hooks
 
 ---

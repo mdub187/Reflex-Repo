@@ -154,6 +154,18 @@ fi
 echo -e "${GREEN} All prerequisites met${NC}"
 echo ""
 
+# Initialize database
+echo -e "${BLUE}Initializing database...${NC}"
+cd "$SCRIPT_DIR/.."
+python init_db.py
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN} Database initialized successfully${NC}"
+else
+    echo -e "${YELLOW} Database initialization had warnings (this may be normal)${NC}"
+fi
+cd "$SCRIPT_DIR"
+echo ""
+
 # Clean rebuild if requested
 if [ "$CLEAN_BUILD" = true ]; then
     echo -e "${YELLOW}Performing clean rebuild...${NC}"

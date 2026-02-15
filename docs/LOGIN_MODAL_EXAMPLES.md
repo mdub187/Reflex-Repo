@@ -394,6 +394,5 @@ on_click=AuthState.logout_and_redirect
 
 ---
 
-**All examples are copy-paste ready!** 🚀
-
+**All examples are copy-paste ready!** 
 **See LOGIN_MODAL_INTEGRATION.md for complete documentation.**

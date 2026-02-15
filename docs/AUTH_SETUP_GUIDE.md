@@ -317,8 +317,7 @@ reflex db migrate
 
 ## 🔒 Security Best Practices
 
-### DO ✅
-
+### DO 
 1. **Use HTTPS in production** - Never send passwords over HTTP
 2. **Set strong session expiration** - Default 1 hour is good
 3. **Validate user input** - Check username/password requirements
@@ -328,8 +327,7 @@ reflex db migrate
 7. **Implement rate limiting** - Prevent brute force attacks
 8. **Regular security updates** - Keep reflex and dependencies updated
 
-### DON'T ❌
-
+### DON'T 
 1. **Don't store passwords in plain text** - Always hash (done automatically)
 2. **Don't expose session tokens** - They're managed securely
 3. **Don't share database files** - Add `*.db` to .gitignore (already done)

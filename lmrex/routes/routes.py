@@ -32,7 +32,7 @@ def add_routes():
     # Health check endpoints
     app.add_page(ping, route="/ping")
     app.add_page(health, route="/_health")
-    
+
     # Register your pages with their components
     app.add_page(index, route="/Home")
     app.add_page(about, route="/About")

@@ -125,13 +125,13 @@ password_hash   TEXT NOT NULL
 enabled         BOOLEAN DEFAULT TRUE
 ```
 
-**`localauthsession` table**:
+<!--**`localauthsession` table**:
 ```sql
 id              INTEGER PRIMARY KEY
 user_id         INTEGER FOREIGN KEY → localuser.id
 session_id      TEXT UNIQUE NOT NULL
 expiration      DATETIME NOT NULL
-```
+```-->
 
 ---
 
@@ -241,7 +241,7 @@ def my_protected_page() -> rx.Component:
 
 Check users in database:
 
-```bash
+<!--```bash
 # Using sqlite3
 sqlite3 reflex.db
 
@@ -253,7 +253,7 @@ SELECT * FROM localauthsession;
 
 # Exit
 .exit
-```
+```-->
 
 ### Programmatic Testing
 
@@ -394,7 +394,7 @@ conn.close()
 
 ### Clear All Sessions (Force Logout All Users)
 
-```bash
+<!--```bash
 sqlite3 reflex.db "DELETE FROM localauthsession;"
 ```
 
@@ -402,7 +402,7 @@ sqlite3 reflex.db "DELETE FROM localauthsession;"
 
 ```bash
 sqlite3 reflex.db "DELETE FROM localuser WHERE username = 'testuser';"
-```
+```-->
 
 ---
 
@@ -520,4 +520,4 @@ Before deploying to production:
 **Created**: 2025-02-12  
 **Last Updated**: 2025-02-12  
 **Reflex Version**: 0.8.26  
-**reflex-local-auth Version**: 0.4.0  
+**reflex-local-auth Version**: 0.4.0

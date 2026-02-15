@@ -97,12 +97,12 @@ sqlite3 reflex.db "SELECT id, username, enabled FROM localuser;"
 
 ### Check Active Sessions
 ```bash
-sqlite3 reflex.db "SELECT user_id, session_id, expiration FROM localauthsession;"
+# sqlite3 reflex.db "SELECT user_id, session_id, expiration FROM localauthsession;"
 ```
 
 ### View All Tables
 ```bash
-sqlite3 reflex.db ".tables"
+# sqlite3 reflex.db ".tables"
 # Output: alembic_version  localauthsession  localuser
 ```
 
@@ -356,10 +356,10 @@ sqlite3 reflex.db ".tables"
 sqlite3 reflex.db "SELECT * FROM localuser;"
 
 # View sessions
-sqlite3 reflex.db "SELECT * FROM localauthsession;"
+# sqlite3 reflex.db "SELECT * FROM localauthsession;"
 
 # Clear all sessions (force logout everyone)
-sqlite3 reflex.db "DELETE FROM localauthsession;"
+# sqlite3 reflex.db "DELETE FROM localauthsession;"
 
 # Run migrations
 reflex db migrate

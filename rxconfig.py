@@ -2,19 +2,19 @@
 import reflex as rx
 import socket
 import os
-
+import psycopg2
 
 def find_available_port(start_port: int, max_attempts: int = 10) -> int:
     """
     Find an available port starting from start_port.
-    
+
     Args:
         start_port: The port to start checking from
         max_attempts: Maximum number of ports to try
-        
+
     Returns:
         First available port found
-        
+
     Raises:
         RuntimeError: If no available port found within max_attempts
     """
@@ -27,13 +27,18 @@ def find_available_port(start_port: int, max_attempts: int = 10) -> int:
         except OSError:
             # Port is in use, try next one
             continue
-    
+
     raise RuntimeError(
         f"Could not find available port in range {start_port}-{start_port + max_attempts - 1}"
     )
 
 
 # Detect environment
+# from lmrex.check_tables import check_tables
+DB = psycopg2.connect(database="pandaflex", user="pandaflex_user", password="c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth")
+DATABASE_URL =  "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a/pandaflex"
+# check_tables()
+# print(DATABASE_URL)
 IS_PRODUCTION = os.getenv("PRODUCTION", "false").lower() == "true" or os.getenv("FLY_APP_NAME") is not None
 IS_FLY = os.getenv("FLY_APP_NAME") is not None
 IS_RAILWAY = os.getenv("RAILWAY_ENVIRONMENT") is not None

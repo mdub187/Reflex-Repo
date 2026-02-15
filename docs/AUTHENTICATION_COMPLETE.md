@@ -142,7 +142,7 @@ expiration      DATETIME NOT NULL
 sqlite3 reflex.db "SELECT id, username, enabled FROM localuser;"
 
 # View active sessions  
-sqlite3 reflex.db "SELECT user_id, expiration FROM localauthsession;"
+# sqlite3 reflex.db "SELECT user_id, expiration FROM localauthsession;"
 
 # Count users
 sqlite3 reflex.db "SELECT COUNT(*) FROM localuser;"

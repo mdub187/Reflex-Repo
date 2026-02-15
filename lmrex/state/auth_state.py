@@ -7,7 +7,7 @@ Provides secure token-based authentication with session management
 import reflex as rx
 import reflex_local_auth
 from typing import Optional, List
-from sqlalchemy.exc import OperationalError
+from sqlalchemy.exc import OperationalError, ProgrammingError
 
 
 class AuthState(reflex_local_auth.LocalAuthState):
@@ -28,7 +28,7 @@ class AuthState(reflex_local_auth.LocalAuthState):
         try:
             if self.authenticated_user and self.authenticated_user.username:
                 return str(self.authenticated_user.username)
-        except OperationalError:
+        except (OperationalError, ProgrammingError):
             # Database tables don't exist yet (during initialization)
             pass
         return ""
@@ -38,7 +38,7 @@ class AuthState(reflex_local_auth.LocalAuthState):
         """Check if user is currently logged in"""
         try:
             return self.is_authenticated
-        except OperationalError:
+        except (OperationalError, ProgrammingError):
             # Database tables don't exist yet (during initialization)
             return False
 
@@ -52,7 +52,7 @@ class AuthState(reflex_local_auth.LocalAuthState):
                     "id": self.authenticated_user.id,
                     "enabled": self.authenticated_user.enabled,
                 }
-        except OperationalError:
+        except (OperationalError, ProgrammingError):
             # Database tables don't exist yet (during initialization)
             pass
         return {}
@@ -88,7 +88,7 @@ class ProtectedState(AuthState):
 
             # Load protected data for authenticated users
             self.protected_data = f"Welcome {self.authenticated_user.username}! This is your protected content."
-        except OperationalError:
+        except (OperationalError, ProgrammingError):
             # Database tables don't exist yet (during initialization)
             return reflex_local_auth.LoginState.redir
 
@@ -100,6 +100,6 @@ class ProtectedState(AuthState):
                 self.protected_data = f"User data for {self.authenticated_user.username}"
             else:
                 self.protected_data = ""
-        except OperationalError:
+        except (OperationalError, ProgrammingError):
             # Database tables don't exist yet (during initialization)
             self.protected_data = ""

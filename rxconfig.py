@@ -119,22 +119,20 @@ elif IS_RENDER and RENDER_EXTERNAL_URL:
 elif DEPLOY_URL:
     cors_origins.append(DEPLOY_URL)
 
-# Database configuration - use environment variable or default to SQLite
+# Database configuration - use environment variable or default PostgreSQL
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
     "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a.oregon-postgres.render.com/pandaflex"
 )
 
-# For local development, fall back to SQLite if PostgreSQL connection fails
-if not IS_PRODUCTION:
-    try:
-        # Test if we can connect to PostgreSQL
-        test_conn = psycopg2.connect(DATABASE_URL)
-        test_conn.close()
-        print(f"✅ PostgreSQL connection successful")
-    except Exception as e:
-        print(f"⚠️  PostgreSQL not available locally ({e}), using SQLite")
-        DATABASE_URL = "sqlite:///reflex.db"
+# Verify PostgreSQL connection
+try:
+    test_conn = psycopg2.connect(DATABASE_URL)
+    test_conn.close()
+    print(f"✅ PostgreSQL connection successful")
+except Exception as e:
+    print(f"⚠️  PostgreSQL connection issue: {e}")
+    print(f"   Using DATABASE_URL: {DATABASE_URL[:50]}...")
 
 config = rx.Config(
     app_name="lmrex",

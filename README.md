@@ -1,6 +1,8 @@
  Reflex Application
 
-A modern web application built with [Reflex](https://reflex.dev) featuring authentication, responsive design, and PostgreSQL/SQLite database support.
+A modern web application built with [Reflex](https://reflex.dev) featuring authentication, responsive design, and PostgreSQL database support.
+
+**IMPORTANT: This application requires PostgreSQL (not SQLite).**
 
   Database Error Fix
 
@@ -19,28 +21,32 @@ reflex run
 That's it! See [QUICK_START.md](QUICK_START.md) for more details.
 
   Documentation
+## Documentation
 
-- [QUICK_START.md](QUICK_START.md) - Fix database errors and get running fast
-- [DEPLOYMENT.md](DEPLOYMENT.md) - Complete deployment guide for production
-- [docs/](docs/) - Additional documentation
+- **[QUICK_START.md](QUICK_START.md)** - Fix database errors and get running fast
+- **[POSTGRES_SETUP.md](POSTGRES_SETUP.md)** - PostgreSQL setup guide
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Complete deployment guide for production
+- **[docs/](docs/)** - Additional documentation
 
   Features
+## Features
 
--  Authentication - Secure login/logout with `reflex-local-auth`
--  Responsive Design - Mobile-first, works on all devices
--  Database Support - PostgreSQL (production) and SQLite (development)
--  Auto-Configuration - Detects Render, Railway, Fly.io environments
--  Dynamic Ports - Automatically finds available ports
--  CORS Protection - Configurable CORS for security
--  Modern UI - Clean, professional interface
+- **Authentication** - Secure login/logout with `reflex-local-auth`
+- **Responsive Design** - Mobile-first, works on all devices
+- **Database** - PostgreSQL required for production and development
+- **Auto-Configuration** - Detects Render, Railway, Fly.io environments
+- **Dynamic Ports** - Automatically finds available ports
+- **CORS Protection** - Configurable CORS for security
+- **Modern UI** - Clean, professional interface
 
   Quick Start
 
  Prerequisites
+### Prerequisites
 
-- Python . or higher
-- Node.js + (for frontend)
-- PostgreSQL (for production) or SQLite (auto-configured for dev)
+- Python 3.11 or higher
+- Node.js 16+ (for frontend)
+- **PostgreSQL** (required - see [POSTGRES_SETUP.md](POSTGRES_SETUP.md))
 
  Installation
 

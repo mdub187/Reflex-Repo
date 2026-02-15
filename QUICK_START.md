@@ -1,8 +1,10 @@
 # Quick Start Guide - Fix Database Error
 
-## 🚨 Seeing "no such table: localuser" Error?
+## Seeing "no such table: localuser" Error?
 
 This quick guide will get you up and running in 2 minutes.
+
+**IMPORTANT: This application requires PostgreSQL, not SQLite.**
 
 ## Step 1: Initialize the Database
 
@@ -26,16 +28,25 @@ Or use the enhanced startup script:
 ./shell/start_reflex.sh
 ```
 
-## ✅ What Was Fixed?
+## What Was Fixed?
 
 We've implemented multiple fixes for the database initialization issue:
 
-1. **`init_db.py`** - Automated database setup script
-2. **`auth_state.py`** - Added error handling for missing tables
+1. **`init_db.py`** - Automated database setup script for PostgreSQL
+2. **`auth_state.py`** - Added error handling for missing tables (catches both SQLite and PostgreSQL errors)
 3. **`deploy_start.sh`** - Production deployment script with built-in initialization
-4. **`rxconfig.py`** - Smart database fallback (PostgreSQL → SQLite for local dev)
+4. **`rxconfig.py`** - PostgreSQL configuration with proper connection handling
 
-## 🚀 Deployment (Render/Railway/Fly.io)
+## PostgreSQL Setup
+
+**This app requires PostgreSQL.** Set up your database:
+
+1. **For Render:** Add a PostgreSQL database service
+2. **For Railway:** Add PostgreSQL plugin
+3. **For Fly.io:** Run `fly postgres create`
+4. **For Local:** Install PostgreSQL locally or use a cloud instance
+
+## Deployment (Render/Railway/Fly.io)
 
 ### Build Command:
 ```bash
@@ -59,7 +70,10 @@ chmod +x init_db.py deploy_start.sh
 ```
 
 ### Issue: PostgreSQL connection fails locally
-No problem! The app automatically falls back to SQLite for local development.
+You need PostgreSQL running. Install it locally or use your production database URL:
+```bash
+export DATABASE_URL="postgresql://user:pass@host:port/dbname"
+```
 
 ### Issue: Tables exist but still getting errors
 ```bash
@@ -81,7 +95,7 @@ See `DEPLOYMENT.md` for:
 - Troubleshooting steps
 - Database schema details
 
-## 💡 How It Works
+## How It Works
 
 The database initialization happens in this order:
 
@@ -90,9 +104,9 @@ The database initialization happens in this order:
 3. **Verify** tables were created successfully
 4. **Start** the application
 
-The `auth_state.py` file now has try-catch blocks that gracefully handle cases where tables don't exist during app initialization, preventing crashes.
+The `auth_state.py` file now has try-catch blocks that gracefully handle cases where tables don't exist during app initialization, preventing crashes. It catches both `OperationalError` (SQLite) and `ProgrammingError` (PostgreSQL).
 
-## 🎯 For Developers
+## For Developers
 
 If you're modifying the database schema:
 
@@ -107,7 +121,7 @@ reflex db migrate
 python init_db.py
 ```
 
-## ✨ Why This Happened
+## Why This Happened
 
 The `reflex-local-auth` library requires database tables (`localuser` and `localauthsession`) for authentication. During app initialization, computed properties in `AuthState` try to query these tables. If they don't exist, the app crashes.
 

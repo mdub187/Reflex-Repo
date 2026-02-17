@@ -163,6 +163,8 @@ assets/external/
 .dockerignore
 docker-compose.override.yml
 *.zip
+node_modules/
+
 
 # ============================================
 # Blueprint Docs

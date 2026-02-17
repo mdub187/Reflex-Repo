@@ -7,12 +7,12 @@ Complete guide for setting up token-based authentication in your Reflex app usin
 ## 📋 Overview
 
 Your app now has a complete authentication system with:
-- ✅ User registration with secure password hashing
-- ✅ Login/logout with session token management
-- ✅ Protected routes (Account page)
-- ✅ Database-backed user storage
-- ✅ Automatic token validation
-- ✅ Navbar shows login status
+-User registration with secure password hashing
+-Login/logout with session token management
+-Protected routes (Account page)
+-Database-backed user storage
+-Automatic token validation
+-Navbar shows login status
 
 ---
 
@@ -492,7 +492,7 @@ ProtectedState.on_load()          # Page load check
 
 ---
 
-## ✅ Checklist
+##Checklist
 
 Before deploying to production:
 

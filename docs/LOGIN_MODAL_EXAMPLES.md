@@ -1,10 +1,10 @@
-# 🎨 Login Modal - Usage Examples
+# Login Modal - Usage Examples
 
 Quick copy-paste examples for using the login modal in your app.
 
 ---
 
-## 🚀 Basic Usage
+## Basic Usage
 
 ### In Navbar (Already Done!)
 
@@ -199,7 +199,7 @@ def pricing_page():
 
 ---
 
-## 🎨 Styling Examples
+## Styling Examples
 
 ### Custom Modal Button
 
@@ -338,7 +338,7 @@ rx.desktop_only(
 
 ---
 
-## 🎯 Quick Reference
+## Quick Reference
 
 ### Import Statements
 
@@ -383,7 +383,7 @@ on_click=AuthState.logout_and_redirect
 
 ---
 
-## ✅ Testing Your Integration
+## Testing Your Integration
 
 1. **Click login button** - Modal opens
 2. **Try registration** - Create account, auto-login

@@ -10,15 +10,15 @@ Your Reflex app now supports **automatic dynamic port selection**. If a port is 
 
 ### Features
 
-- ✅ Automatic port detection in `rxconfig.py`
-- ✅ Manual port specification via command line
-- ✅ Environment variable support
-- ✅ Fallback to next available port
-- ✅ CORS automatically configured for dynamic ports
+- Automatic port detection in `rxconfig.py`
+- Manual port specification via command line
+- Environment variable support
+- Fallback to next available port
+- CORS automatically configured for dynamic ports
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Method 1: Automatic Port Selection (Default)
 
@@ -36,14 +36,14 @@ Simply start the app - it will find available ports automatically:
 
 **Example output:**
 ```
-✅ Using backend port: 8000
-✅ Using frontend port: 3000
+Using backend port: 8000
+Using frontend port: 3000
 ```
 
 Or if ports are in use:
 ```
 ⚠️  Port 3000 is in use. Finding alternative...
-✅ Using frontend port: 3001
+Using frontend port: 3001
 ```
 
 ---
@@ -462,16 +462,16 @@ echo 'export BACKEND_PORT=9000' >> ~/.bashrc
 
 ### Development
 
-- ✅ Dynamic ports are fine for local development
-- ✅ Automatic detection prevents conflicts
-- ✅ CORS is configured for detected ports
+-  Dynamic ports are fine for local development
+-  Automatic detection prevents conflicts
+-  CORS is configured for detected ports
 
 ### Production
 
-- ⚠️ Use fixed ports in production
-- ⚠️ Configure firewall rules for specific ports
-- ⚠️ Set explicit CORS origins (no wildcards)
-- ⚠️ Use environment variables, not auto-detection
+-  Use fixed ports in production
+-  Configure firewall rules for specific ports
+-  Set explicit CORS origins (no wildcards)
+-  Use environment variables, not auto-detection
 
 **Production `rxconfig.py`:**
 
@@ -562,7 +562,7 @@ python3 -c "import socket; s=socket.socket(); s.bind(('', 0)); print(s.getsockna
 
 ---
 
-## ✅ Summary
+## Summary
 
 Your Reflex app now has intelligent port management:
 

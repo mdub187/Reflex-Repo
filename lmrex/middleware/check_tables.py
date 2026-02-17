@@ -20,7 +20,7 @@ def check_tables():
     try:
         # Use the same database URL as your application
         DATABASE_URL = (
-            "sqlite:///database.db"  # Update this with your actual database URL
+           "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a.oregon-postgres.render.com/pandaflex"  # Update this with your actual database URL
         )
 
         engine = create_engine(DATABASE_URL)

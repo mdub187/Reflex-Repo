@@ -1,8 +1,8 @@
-# 🔐 Authentication System - Quick Start Guide
+# Authentication System - Quick Start Guide
 
-**Status**: ✅ **READY TO USE**  
+**Status**: **READY TO USE**  
 **Last Updated**: 2025-02-12  
-**Database**: ✅ Migrated and ready
+**Database**: Migrated and ready
 
 ---
 
@@ -10,17 +10,17 @@
 
 Your Reflex app now has **complete token-based authentication**:
 
-- ✅ User registration with secure password hashing (bcrypt)
-- ✅ Login/logout with session token management
-- ✅ Protected routes (Account page requires login)
-- ✅ Database tables created (`localuser`, `localauthsession`)
-- ✅ Navbar shows login status dynamically
-- ✅ Automatic redirect to login for protected pages
-- ✅ Session persistence across page refreshes
+- User registration with secure password hashing (bcrypt)
+- Login/logout with session token management
+- Protected routes (Account page requires login)
+- Database tables created (`localuser`, `localauthsession`)
+- Navbar shows login status dynamically
+- Automatic redirect to login for protected pages
+- Session persistence across page refreshes
 
 ---
 
-## 🚀 How to Use (3 Steps)
+## How to Use (3 Steps)
 
 ### 1. **Start the App**
 
@@ -52,38 +52,38 @@ cd /Users/mdub/Documents/Git\ Repos/Reflex/Reflex-Repo
 ### Test 1: Registration Flow
 ```
 Navigate to /Login → Register tab → Create account
-✅ Should auto-login and show "You're Logged In!" badge
-✅ Navbar should show your username
-✅ "Account" button appears in navbar
+Should auto-login and show "You're Logged In!" badge
+Navbar should show your username
+"Account" button appears in navbar
 ```
 
 ### Test 2: Login Flow
 ```
 Logout → Login tab → Enter credentials
-✅ Should redirect to Account page
-✅ User info displayed correctly
+Should redirect to Account page
+User info displayed correctly
 ```
 
 ### Test 3: Protected Page Access
 ```
 Logout → Try to visit /Account directly
-✅ Should redirect to /Login
-✅ After login, access granted
+Should redirect to /Login
+After login, access granted
 ```
 
 ### Test 4: Session Persistence
 ```
 Login → Refresh the page
-✅ Should stay logged in
-✅ Token persists in browser
+Should stay logged in
+Token persists in browser
 ```
 
 ### Test 5: Logout
 ```
 Click logout button (navbar or Account page)
-✅ Redirects to /Home
-✅ Navbar shows "Login" button again
-✅ Cannot access /Account anymore
+Redirects to /Home
+Navbar shows "Login" button again
+Cannot access /Account anymore
 ```
 
 ---
@@ -437,7 +437,7 @@ rx.cond(
 
 ---
 
-## ✅ Success Checklist
+## Success Checklist
 
 Your authentication is working if:
 

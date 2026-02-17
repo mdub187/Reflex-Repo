@@ -13,26 +13,26 @@ def init_database():
     try:
         # Import config to get db_url
         from rxconfig import config
-        
+
         # Import models to ensure they're registered
         import reflex_local_auth
-        
+
         # Get the database engine from the config
         from sqlalchemy import create_engine
         engine = create_engine(config.db_url)
-        
+
         # Check if tables exist
         inspector = inspect(engine)
         existing_tables = inspector.get_table_names()
-        
+
         # Check for required auth tables
         required_tables = {'localuser', 'localauthsession'}
         missing_tables = required_tables - set(existing_tables)
-        
+
         if missing_tables:
-            print(f"⚠️  Missing database tables: {missing_tables}")
-            print("🔧 Initializing database tables...")
-            
+            print(f"Missing database tables: {missing_tables}")
+            print("Initializing database tables...")
+
             # Run reflex db init to create tables
             import subprocess
             result = subprocess.run(
@@ -40,21 +40,21 @@ def init_database():
                 capture_output=True,
                 text=True
             )
-            
+
             if result.returncode == 0:
-                print("✅ Database tables created successfully")
+                print("Database tables created successfully")
             else:
-                print(f"⚠️  Database init warning: {result.stderr}")
+                print(f"Database init warning: {result.stderr}")
                 # Continue anyway - tables might be created by other means
         else:
-            print("✅ Database tables exist")
-            
+            print("Database tables exist")
+
     except Exception as e:
-        print(f"⚠️  Database initialization warning: {e}")
-        print("   Continuing - tables will be created on first use")
+        print(f"Database initialization warning: {e}")
+        print("Continuing - tables will be created on first use")
 
 # Initialize database before importing routes
-print("🚀 Initializing application...")
+print("Initializing application...")
 init_database()
 
 # Now import and setup routes

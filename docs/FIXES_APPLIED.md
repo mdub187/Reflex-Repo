@@ -89,7 +89,7 @@ if not IS_PRODUCTION:
     try:
         test_conn = psycopg2.connect(DATABASE_URL)
         test_conn.close()
-        print(f"✅ PostgreSQL connection successful")
+        print(f"PostgreSQL connection successful")
     except Exception as e:
         print(f"⚠️  PostgreSQL not available locally, using SQLite")
         DATABASE_URL = "sqlite:///reflex.db"
@@ -167,15 +167,15 @@ python init_db.py
 **Output:**
 ```
 ============================================================
-🚀 Database Initialization Script
+Database Initialization Script
 ============================================================
 📋 Loading configuration...
 🔌 Connecting to database...
-✅ Database connection successful
+Database connection successful
 🔍 Checking existing tables...
-✅ All required tables exist
+All required tables exist
 ============================================================
-✅ Database initialization complete!
+Database initialization complete!
 ============================================================
 ```
 
@@ -329,17 +329,17 @@ Auth works! ```
 ### Compatibility
 
 **Environments Tested:**
-- ✅ Local development (macOS, Linux)
-- ✅ Render deployment
-- ✅ Railway deployment
-- ✅ Fly.io deployment
-- ✅ Docker containers
-- ✅ Generic VPS/cloud
+- Local development (macOS, Linux)
+- Render deployment
+- Railway deployment
+- Fly.io deployment
+- Docker containers
+- Generic VPS/cloud
 
 **Database Support:**
-- ✅ PostgreSQL (production)
-- ✅ SQLite (development fallback)
-- ✅ Both with automatic detection
+- PostgreSQL (production)
+- SQLite (development fallback)
+- Both with automatic detection
 
 ## Before vs After
 
@@ -351,8 +351,8 @@ Auth works! ```
 4. App compiles state (including AuthState)
 5. AuthState.user_email computed property executes
 6. Property tries to query localuser table
-7. ❌ ERROR: no such table: localuser
-8. ❌ App crashes
+7.  ERROR: no such table: localuser
+8.  App crashes
 ```
 
 ### After (Fixed)
@@ -361,12 +361,12 @@ Auth works! ```
 2. App loads lmrex/lmrex.py
 3. init_database() checks for tables
 4. If missing, creates tables
-5. ✅ Tables confirmed to exist
+5. Tables confirmed to exist
 6. App loads routes/routes.py
 7. App compiles state (including AuthState)
 8. AuthState.user_email executes with try-catch
 9. Even if DB issue, returns safe default
-10. ✅ App starts successfully
+10. App starts successfully
 ```
 
 ## Deployment Changes
@@ -379,7 +379,7 @@ pip install -r requirements.txt
 # Start
 reflex run --env prod
 
-# Result: ❌ Crashes with database error
+# Result:  Crashes with database error
 ```
 
 ### New Deployment
@@ -390,29 +390,29 @@ pip install -r requirements.txt && python init_db.py
 # Start
 reflex run --env prod
 
-# Result: ✅ Works perfectly
+# Result: Works perfectly
 ```
 
 Or simply:
 ```bash
 ./deploy_start.sh
-# Result: ✅ Everything handled automatically
+# Result: Everything handled automatically
 ```
 
 ## Testing Performed
 
 ### Local Testing
-- ✅ Fresh installation with no database
-- ✅ PostgreSQL unavailable (SQLite fallback)
-- ✅ Existing database with tables
-- ✅ Database with missing tables
-- ✅ Multiple app restarts
+- Fresh installation with no database
+- PostgreSQL unavailable (SQLite fallback)
+- Existing database with tables
+- Database with missing tables
+- Multiple app restarts
 
 ### Production Scenarios
-- ✅ First-time deployment
-- ✅ Redeployment with existing database
-- ✅ Database migrations
-- ✅ Different platforms (Render, Railway, etc.)
+- First-time deployment
+- Redeployment with existing database
+- Database migrations
+- Different platforms (Render, Railway, etc.)
 
 ## Benefits
 

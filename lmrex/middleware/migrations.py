@@ -8,7 +8,7 @@ from lmrex.models import Base
 class MigrationManager:
     """Handles database initialization and Alembic migrations"""
 
-    def __init__(self, db_url: str = "sqlite:///database.db"):
+    def __init__(self, db_url: str = ""):
         self.db_url = db_url or os.getenv("DATABASE_URL", "sqlite:///database.db")
         self.engine = create_engine(self.db_url)
 
@@ -16,9 +16,9 @@ class MigrationManager:
         """Initialize database and create tables"""
         try:
             Base.metadata.create_all(bind=self.engine)
-            print("✓ Database tables created successfully")
+            print("Database tables created successfully")
         except Exception as e:
-            print(f"✗ Error creating database tables: {e}")
+            print(f"Error creating database tables: {e}")
             raise
 
     def run_migrations(self):
@@ -71,7 +71,7 @@ class MigrationManager:
 
     def initialize(self):
         """Complete database initialization process"""
-        print("🚀 Initializing database...")
+        print("Initializing database...")
         # Create tables first
         self.init_database()
         # Then run migrations
@@ -79,10 +79,10 @@ class MigrationManager:
         # Show current status
         current_rev = self.get_current_revision()
         if current_rev:
-            print(f"📊 Current database revision: {current_rev}")
+            print(f"Current database revision: {current_rev}")
         else:
-            print("📊 No migrations applied yet")
-        print("✅ Database initialization complete!")
+            print("No migrations applied yet")
+        print("Database initialization complete!")
 
 def init_database_on_startup():
     """Convenience function to initialize database on app startup"""

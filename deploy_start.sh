@@ -13,13 +13,13 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 echo "================================================================"
-echo -e "${BLUE}🚀 Starting Reflex Application Deployment${NC}"
+echo -e "${BLUE}Starting Reflex Application Deployment${NC}"
 echo "================================================================"
 echo ""
 
 # Detect environment
 if [ -n "$RENDER" ]; then
-    echo -e "${GREEN}🎨 Render deployment detected${NC}"
+    echo -e "${GREEN}Render deployment detected${NC}"
     PLATFORM="Render"
 elif [ -n "$RAILWAY_ENVIRONMENT" ]; then
     echo -e "${GREEN}🚂 Railway deployment detected${NC}"
@@ -57,7 +57,7 @@ if command -v reflex &> /dev/null; then
     REFLEX_VERSION=$(reflex --version 2>&1 || echo "unknown")
     echo -e "${GREEN}✓ Reflex installed: $REFLEX_VERSION${NC}"
 else
-    echo -e "${RED}❌ Reflex is not installed${NC}"
+    echo -e "${RED} Reflex is not installed${NC}"
     echo "Installing Reflex..."
     pip install reflex reflex-local-auth
 fi
@@ -72,11 +72,11 @@ echo -e "${YELLOW}Running database initialization script...${NC}"
 python init_db.py
 
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✅ Database initialization completed successfully${NC}"
+    echo -e "${GREEN}Database initialization completed successfully${NC}"
 else
     echo -e "${YELLOW}⚠️  Database initialization had warnings${NC}"
     echo "   Attempting to continue anyway..."
-    
+
     # Try running reflex db init as fallback
     echo -e "${YELLOW}Trying 'reflex db init' as fallback...${NC}"
     reflex db init || echo -e "${YELLOW}⚠️  'reflex db init' also had issues, continuing anyway${NC}"
@@ -91,11 +91,11 @@ echo "================================================================"
 if [ ! -d ".web" ]; then
     echo -e "${YELLOW}Initializing Reflex frontend...${NC}"
     reflex init
-    
+
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✓ Frontend initialized${NC}"
     else
-        echo -e "${RED}❌ Frontend initialization failed${NC}"
+        echo -e "${RED} Frontend initialization failed${NC}"
         exit 1
     fi
 else
@@ -106,7 +106,7 @@ fi
 if [ ! -d ".web/node_modules" ]; then
     echo -e "${YELLOW}Installing frontend dependencies...${NC}"
     cd .web
-    
+
     # Try npm first, then fallback to bun if available
     if command -v npm &> /dev/null; then
         npm install --legacy-peer-deps --prefer-offline
@@ -118,7 +118,7 @@ if [ ! -d ".web/node_modules" ]; then
                 bun install
                 echo -e "${GREEN}✓ Frontend dependencies installed with bun${NC}"
             else
-                echo -e "${RED}❌ Frontend dependency installation failed${NC}"
+                echo -e "${RED} Frontend dependency installation failed${NC}"
                 cd ..
                 exit 1
             fi
@@ -127,11 +127,11 @@ if [ ! -d ".web/node_modules" ]; then
         bun install
         echo -e "${GREEN}✓ Frontend dependencies installed with bun${NC}"
     else
-        echo -e "${RED}❌ Neither npm nor bun found${NC}"
+        echo -e "${RED} Neither npm nor bun found${NC}"
         cd ..
         exit 1
     fi
-    
+
     cd ..
 else
     echo -e "${GREEN}✓ Frontend dependencies already installed${NC}"
@@ -151,7 +151,7 @@ echo "Deploy URL: ${RENDER_EXTERNAL_URL:-${RAILWAY_PUBLIC_DOMAIN:-${FLY_APP_NAME
 
 echo ""
 echo "================================================================"
-echo -e "${GREEN}✅ Deployment preparation complete!${NC}"
+echo -e "${GREEN}Deployment preparation complete!${NC}"
 echo "================================================================"
 echo ""
 echo -e "${BLUE}Starting Reflex server...${NC}"

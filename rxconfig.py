@@ -3,7 +3,10 @@ import reflex as rx
 import socket
 import os
 import psycopg2
+from dotenv import load_dotenv
 
+db_creds = load_dotenv(dotenv_path=".env/Reflex-Repo.env")
+print(db_creds)
 def find_available_port(start_port: int, max_attempts: int = 10) -> int:
     """
     Find an available port starting from start_port.
@@ -40,7 +43,7 @@ IS_RAILWAY = os.getenv("RAILWAY_ENVIRONMENT") is not None
 IS_RENDER = os.getenv("RENDER") is not None
 
 # Get deployment URL from environment or use default
-DEPLOY_URL = os.getenv("DEPLOY_URL", "")
+DEPLOY_URL = os.getenv("DEPLOY_URL", "http://dubpanda.io:")
 FLY_APP_NAME = os.getenv("FLY_APP_NAME", "")
 RAILWAY_PUBLIC_DOMAIN = os.getenv("RAILWAY_PUBLIC_DOMAIN", "")
 RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL", "")
@@ -48,59 +51,59 @@ RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL", "")
 # Port configuration
 if IS_PRODUCTION:
     # In production, use fixed ports that match your proxy configuration
-    backend_port = int(os.getenv("BACKEND_PORT", "8000"))
-    frontend_port = int(os.getenv("FRONTEND_PORT", "3000"))
-    print(f"🚀 Production mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
+    backend_port = int(os.getenv("BACKEND_PORT", "8001"))
+    frontend_port = int(os.getenv("FRONTEND_PORT", "3001"))
+    print(f"Production mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
 else:
     # In development, dynamically find available ports
     try:
-        backend_port = find_available_port(8000)
-        frontend_port = find_available_port(3000)
-        print(f"✅ Development mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
+        backend_port = find_available_port(8001)
+        frontend_port = find_available_port(3001)
+        print(f"Development mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
     except RuntimeError as e:
-        print(f"⚠️  Warning: {e}")
+        print(f"Warning: {e}")
         print("Falling back to default ports...")
-        backend_port = 8000
-        frontend_port = 3000
+        backend_port = 8001
+        frontend_port = 3001
 
 # URL configuration based on environment
 if IS_FLY and FLY_APP_NAME:
     # Fly.io deployment
     deploy_url = f"https://{FLY_APP_NAME}.fly.dev"
     api_url = f"https://{FLY_APP_NAME}.fly.dev"
-    print(f"🪰 Fly.io deployment detected: {deploy_url}")
+    print(f"Fly.io deployment detected: {deploy_url}")
 elif IS_RAILWAY and RAILWAY_PUBLIC_DOMAIN:
     # Railway deployment
     deploy_url = f"https://{RAILWAY_PUBLIC_DOMAIN}"
     api_url = f"https://{RAILWAY_PUBLIC_DOMAIN}"
-    print(f"🚂 Railway deployment detected: {deploy_url}")
+    print(f"Railway deployment detected: {deploy_url}")
 elif IS_RENDER and RENDER_EXTERNAL_URL:
     # Render deployment
     deploy_url = RENDER_EXTERNAL_URL
     api_url = RENDER_EXTERNAL_URL
-    print(f"🎨 Render deployment detected: {deploy_url}")
+    print(f"Render deployment detected: {deploy_url}")
 elif DEPLOY_URL:
     # Custom deployment URL provided
     deploy_url = DEPLOY_URL
     api_url = DEPLOY_URL
-    print(f"🌐 Custom deployment URL: {deploy_url}")
+    print(f"Custom deployment URL: {deploy_url}")
 elif IS_PRODUCTION:
     # Generic production - bind to all interfaces
-    deploy_url = f"http://0.0.0.0:{frontend_port}"
+    deploy_url = f"http://dubpanda.io:{frontend_port}"
     api_url = f"http://0.0.0.0:{backend_port}"
-    print("🔧 Production mode with 0.0.0.0 binding")
+    print("Production mode with 0.0.0.0 binding")
 else:
     # Local development
-    deploy_url = f"http://localhost:{frontend_port}"
+    deploy_url = f"http://dubpanda.io:{frontend_port}"
     api_url = f"http://localhost:{backend_port}"
-    print("💻 Local development mode")
+    print("Local development mode")
 
 # CORS configuration
 cors_origins = [
     f"http://localhost:{frontend_port}",
     f"http://127.0.0.1:{frontend_port}",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
 ]
 
 # Add production URLs to CORS if in production
@@ -120,19 +123,22 @@ elif DEPLOY_URL:
     cors_origins.append(DEPLOY_URL)
 
 # Database configuration - use environment variable or default PostgreSQL
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a.oregon-postgres.render.com/pandaflex"
-)
+# DATABASE_URL = os.getenv(db_creds)
+# os.getenv(
+#     "DATABASE_URL",
+#     "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a.oregon-postgres.render.com/pandaflex"
+# )
+from setup_postgres import setup_database
 
+DATABASE_URL = setup_database()
 # Verify PostgreSQL connection
 try:
-    test_conn = psycopg2.connect(DATABASE_URL)
+    test_conn = psycopg2.connect(setup_database())
     test_conn.close()
-    print(f"✅ PostgreSQL connection successful")
+    print("PostgreSQL connection successful")
 except Exception as e:
-    print(f"⚠️  PostgreSQL connection issue: {e}")
-    print(f"   Using DATABASE_URL: {DATABASE_URL[:50]}...")
+    print(f"PostgreSQL connection issue: {e}")
+    print(f"Using DATABASE_URL: {DATABASE_URL[:50]}...")
 
 config = rx.Config(
     app_name="lmrex",
@@ -153,7 +159,7 @@ config = rx.Config(
     # CORS configuration
     cors_allowed_origins=cors_origins,
 )
-print(f"📊 Database: {config.db_url[:50]}...")
+print(f"Database: {DATABASE_URL[:50]}...")
 
 # Print configuration summary
 print("=" * 60)

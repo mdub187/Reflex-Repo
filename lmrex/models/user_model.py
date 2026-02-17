@@ -28,17 +28,6 @@ class UserGallery(rx.Model, extend_existing=True):
     creator: str = ""
 
 
-class LocalUser(SQLModel, table=True, extend_existing=True):
-    """Model for local users."""
-    id: Optional[int] = Field(default=None, primary_key=True)
-    username: str
-    password_hash: str
-    enabled: bool = True
-
-
-class LocalAuthSession(SQLModel, table=True, extend_existing=True):
-    """Model for local authentication sessions."""
-    id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: int = Field(foreign_key="localuser.id")
-    session_id: str
-    expiration: datetime
+# LocalUser and LocalAuthSession are provided by reflex_local_auth
+# Do not redefine them here to avoid conflicts
+# Import them with: from reflex_local_auth.local_auth import LocalUser, LocalAuthSession

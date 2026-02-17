@@ -32,7 +32,7 @@ def add_routes():
     # Health check endpoints
     app.add_page(ping, route="/ping")
     app.add_page(health, route="/_health")
-    
+
     # Register your pages with their components
     app.add_page(index, route="/Home")
     app.add_page(about, route="/About")
@@ -43,5 +43,5 @@ def add_routes():
     # app.add_page(pictures, route="/gallery/pictures")
     # app.add_page(videos, route="/gallery/videos")
     # app.add_page(music, route="/gallery/music")
-    app._compile()
+    # app._compile()
     return app

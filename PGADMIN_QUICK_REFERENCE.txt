@@ -1,0 +1,133 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   pgAdmin Connection - Quick Reference Card                  ║
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║  DATABASE CONNECTION INFORMATION                                             ║
+║  ════════════════════════════════                                            ║
+║                                                                              ║
+║  Host:         localhost                                                     ║
+║  Port:         5432                                                          ║
+║  Database:     reflex_dev                                                    ║
+║  Username:     mdub                                                          ║
+║  Password:     (leave blank)                                                 ║
+║                                                                              ║
+║  Connection String:                                                          ║
+║  postgresql://mdub@localhost:5432/reflex_dev                                 ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  PGADMIN SETUP (Step-by-Step)                                                ║
+║  ═════════════════════════════                                               ║
+║                                                                              ║
+║  1. Open pgAdmin 4                                                           ║
+║                                                                              ║
+║  2. Right-click "Servers" → "Register" → "Server..."                         ║
+║                                                                              ║
+║  3. GENERAL TAB:                                                             ║
+║     ▸ Name: Reflex Local Dev                                                 ║
+║                                                                              ║
+║  4. CONNECTION TAB:                                                          ║
+║     ▸ Host name/address:  localhost                                          ║
+║     ▸ Port:               5432                                               ║
+║     ▸ Maintenance database: reflex_dev                                       ║
+║     ▸ Username:           mdub                                               ║
+║     ▸ Password:           (leave empty)                                      ║
+║     ▸ Save password?      ☑ (check this)                                     ║
+║                                                                              ║
+║  5. SSL TAB:                                                                 ║
+║     ▸ SSL mode: Prefer (or Disable)                                          ║
+║                                                                              ║
+║  6. Click "Save"                                                             ║
+║                                                                              ║
+║  7. You should see "Reflex Local Dev" in left sidebar with green icon       ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  TROUBLESHOOTING                                                             ║
+║  ═══════════════                                                             ║
+║                                                                              ║
+║  ✗ "Could not connect to server"                                            ║
+║    → Check PostgreSQL is running:                                            ║
+║      pg_isready -h localhost -p 5432                                         ║
+║    → Start PostgreSQL:                                                       ║
+║      brew services start postgresql@14                                       ║
+║                                                                              ║
+║  ✗ "Database does not exist"                                                 ║
+║    → Create database:                                                        ║
+║      psql -h localhost -U mdub -d postgres -c "CREATE DATABASE reflex_dev;"  ║
+║                                                                              ║
+║  ✗ "Password authentication failed"                                          ║
+║    → Make sure password field is BLANK in pgAdmin                            ║
+║    → Ensure "Host name/address" is "localhost" not empty                     ║
+║                                                                              ║
+║  ✗ Server icon is grayed out                                                 ║
+║    → Right-click server → "Connect Server"                                   ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  COMMAND LINE QUICK TESTS                                                    ║
+║  ═════════════════════════                                                   ║
+║                                                                              ║
+║  # Test PostgreSQL is running                                                ║
+║  pg_isready -h localhost -p 5432                                             ║
+║                                                                              ║
+║  # Test database connection                                                  ║
+║  psql -h localhost -U mdub -d reflex_dev                                     ║
+║                                                                              ║
+║  # List all tables                                                           ║
+║  psql -h localhost -U mdub -d reflex_dev -c "\dt"                            ║
+║                                                                              ║
+║  # View table data                                                           ║
+║  psql -h localhost -U mdub -d reflex_dev -c "SELECT * FROM localuser;"       ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  INITIALIZE DATABASE TABLES                                                  ║
+║  ═══════════════════════════                                                 ║
+║                                                                              ║
+║  # Set environment variable                                                  ║
+║  export DATABASE_URL="postgresql://mdub@localhost:5432/reflex_dev"           ║
+║                                                                              ║
+║  # Initialize tables                                                         ║
+║  reflex db init                                                              ║
+║                                                                              ║
+║  # Or use the setup script                                                   ║
+║  ./db_setup.sh postgres                                                      ║
+║  ./db_setup.sh init                                                          ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  ALTERNATIVE GUI TOOLS                                                       ║
+║  ══════════════════════                                                      ║
+║                                                                              ║
+║  If pgAdmin doesn't work, try:                                               ║
+║                                                                              ║
+║  • DBeaver       (Free)         → https://dbeaver.io/                        ║
+║  • TablePlus     (Paid/Trial)   → https://tableplus.com/                     ║
+║  • Postico       (macOS, Paid)  → https://eggerapps.at/postico/             ║
+║  • DataGrip      (JetBrains)    → https://www.jetbrains.com/datagrip/       ║
+║                                                                              ║
+║  All use same connection settings above                                      ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  FILES FOR REFERENCE                                                         ║
+║  ════════════════════                                                        ║
+║                                                                              ║
+║  📄 PGADMIN_SETUP.md              - Detailed setup guide with screenshots    ║
+║  📄 .env/DATABASE_CONNECTION.md   - Full connection documentation            ║
+║  📄 .env.local                    - Environment variable file                ║
+║  🔧 db_setup.sh                   - Interactive database setup script        ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  NEED MORE HELP?                                                             ║
+║  ════════════════                                                            ║
+║                                                                              ║
+║  1. Run: ./db_setup.sh test                                                  ║
+║  2. Check: cat PGADMIN_SETUP.md                                              ║
+║  3. View: cat .env/DATABASE_CONNECTION.md                                    ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+                         Print this and keep it handy! 📌

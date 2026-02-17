@@ -1,18 +1,18 @@
-# 🔌 Dynamic Ports - Quick Reference
+# Dynamic Ports - Quick Reference
 
-## ✅ What's Working
+## What's Working
 
 Your Reflex app now automatically finds available ports!
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ### Default (Automatic)
 ```bash
 ./start_reflex.sh
 ```
-✅ Automatically finds next available port if 8000/3000 are in use
+Automatically finds next available port if 8000/3000 are in use
 
 ### Custom Ports
 ```bash
@@ -26,7 +26,7 @@ BACKEND_PORT=9000 FRONTEND_PORT=4000 ./start_reflex.sh
 
 ---
 
-## 🔍 How It Works
+## How It Works
 
 **In `rxconfig.py`:**
 - Tries to bind to port 8000
@@ -36,13 +36,13 @@ BACKEND_PORT=9000 FRONTEND_PORT=4000 ./start_reflex.sh
 
 **Example output:**
 ```
-✅ Using backend port: 8001
-✅ Using frontend port: 3001
+Using backend port: 8001
+Using frontend port: 3001
 ```
 
 ---
 
-## 💡 Quick Examples
+## Quick Examples
 
 ### Run Multiple Apps Simultaneously
 ```bash
@@ -69,7 +69,7 @@ cd project2
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Change Starting Port
 
@@ -87,7 +87,7 @@ backend_port = find_available_port(8000, max_attempts=50)
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Port still in use?
 ```bash
@@ -105,11 +105,11 @@ lsof -i :8000-8010
 
 ---
 
-## 📚 Full Documentation
+## Full Documentation
 
 See `DYNAMIC_PORTS_GUIDE.md` for complete documentation.
 
 ---
 
 **Created**: 2025-02-12  
-**Status**: ✅ Working!
+**Status**: Working!

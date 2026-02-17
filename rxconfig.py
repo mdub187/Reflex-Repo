@@ -7,14 +7,14 @@ import os
 def find_available_port(start_port: int, max_attempts: int = 10) -> int:
     """
     Find an available port starting from start_port.
-    
+
     Args:
         start_port: The port to start checking from
         max_attempts: Maximum number of ports to try
-        
+
     Returns:
         First available port found
-        
+
     Raises:
         RuntimeError: If no available port found within max_attempts
     """
@@ -27,7 +27,7 @@ def find_available_port(start_port: int, max_attempts: int = 10) -> int:
         except OSError:
             # Port is in use, try next one
             continue
-    
+
     raise RuntimeError(
         f"Could not find available port in range {start_port}-{start_port + max_attempts - 1}"
     )
@@ -58,7 +58,7 @@ else:
         frontend_port = find_available_port(3000)
         print(f"✅ Development mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
     except RuntimeError as e:
-        print(f"⚠️  Warning: {e}")
+        print(f" Warning: {e}")
         print("Falling back to default ports...")
         backend_port = 8000
         frontend_port = 3000
@@ -103,6 +103,19 @@ cors_origins = [
     "http://127.0.0.1:3000",
 ]
 
+# Database configuration
+# Use environment variable DATABASE_URL or default to SQLite for local development
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    # No DATABASE_URL set - use SQLite for local development
+    DATABASE_URL = "sqlite:///reflex.db"
+    print("📁 Using SQLite database: reflex.db")
+elif DATABASE_URL.startswith("postgresql://"):
+    print(f"🐘 Using PostgreSQL database")
+else:
+    print(f"🗄️  Using database: {DATABASE_URL[:20]}...")
+
 # Add production URLs to CORS if in production
 if IS_FLY and FLY_APP_NAME:
     cors_origins.extend([
@@ -121,20 +134,22 @@ elif DEPLOY_URL:
 
 config = rx.Config(
     app_name="lmrex",
-    
+
     # Port configuration
     backend_port=backend_port,
     frontend_port=frontend_port,
-    
+
     # URL configuration (environment-aware)
     api_url=api_url,
     deploy_url=deploy_url,
-    
+
     # Host binding - 0.0.0.0 allows external connections
     backend_host="0.0.0.0",
-    
+
     # CORS configuration
     cors_allowed_origins=cors_origins,
+
+    db_url=DATABASE_URL,
 )
 
 # Print configuration summary

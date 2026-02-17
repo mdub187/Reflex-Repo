@@ -36,6 +36,7 @@ fi
 echo ""
 echo -e "${BLUE}2. Removing __pycache__ directories...${NC}"
 PYCACHE_DIRS=$(find . -path ./.venv -prune -o -type d -name "__pycache__" -print | wc -l | xargs)
+PYCACHE_DIRS=$(find . -path ./__pycache__ -prune -o -type d -name "__pycache__" -print | wc -l | xargs)
 if [ "$PYCACHE_DIRS" -gt 0 ]; then
     find . -path ./.venv -prune -o -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
     echo -e "${GREEN} Removed $PYCACHE_DIRS __pycache__ directories${NC}"

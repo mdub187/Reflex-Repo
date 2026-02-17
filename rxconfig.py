@@ -142,7 +142,7 @@ except Exception as e:
 
 config = rx.Config(
     app_name="lmrex",
-
+    allowedHosts = True,
     # Database configuration
     db_url=DATABASE_URL,
     # Port configuration
@@ -150,7 +150,7 @@ config = rx.Config(
     frontend_port=frontend_port,
 
     # URL configuration (environment-aware)
-    api_url=api_url,
+    api_url="http://reflex-repo.onrender.com:8000",
     deploy_url=deploy_url,
 
     # Host binding - 0.0.0.0 allows external connections

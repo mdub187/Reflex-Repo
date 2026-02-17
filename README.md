@@ -1,35 +1,35 @@
- Reflex Application
-
+#  Boiler-ish Reflex Application
+##  Can be used as a template for any type of marketplace, blog, or media full stack website.
 A modern web application built with [Reflex](https://reflex.dev) featuring authentication, responsive design, and PostgreSQL database support.
 
 **IMPORTANT: This application requires PostgreSQL (not SQLite).**
 
-  Database Error Fix
+##  Database Error Fix
+###  this is the most prominent error so far
 
-Seeing `no such table: localuser` error? We've got you covered!
+`no such table: localuser` error
 
- Quick Fix ( minutes)
+#### Fix
 
 ```bash
- . Initialize the database
+ # Initialize the database
 python init_db.py
 
- . Start the app
+ # Start the app
 reflex run
 ```
+See [QUICK_START.md](QUICK_START.md) for more details.
 
-That's it! See [QUICK_START.md](QUICK_START.md) for more details.
 
-  Documentation
-## Documentation
+##  Documentation
 
 - **[QUICK_START.md](QUICK_START.md)** - Fix database errors and get running fast
 - **[POSTGRES_SETUP.md](POSTGRES_SETUP.md)** - PostgreSQL setup guide
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Complete deployment guide for production
 - **[docs/](docs/)** - Additional documentation
 
-  Features
-## Features
+
+##  Features
 
 - **Authentication** - Secure login/logout with `reflex-local-auth`
 - **Responsive Design** - Mobile-first, works on all devices
@@ -39,16 +39,16 @@ That's it! See [QUICK_START.md](QUICK_START.md) for more details.
 - **CORS Protection** - Configurable CORS for security
 - **Modern UI** - Clean, professional interface
 
-  Quick Start
+##  Quick Start
 
- Prerequisites
-### Prerequisites
 
-- Python 3.11 or higher
+###  Prerequisites
+
+- Python 3.11 or higher, (I would recommend keeping your python venv set to 3.11, as reflex is having regression issues with 3.14 see https://github.com/reflex-dev/reflex/issues/5964)#5964
 - Node.js 16+ (for frontend)
 - **PostgreSQL** (required - see [POSTGRES_SETUP.md](POSTGRES_SETUP.md))
 
- Installation
+###  Installation 
 
 . Clone the repository:
    ```bash
@@ -82,21 +82,21 @@ That's it! See [QUICK_START.md](QUICK_START.md) for more details.
    http://localhost:
    ```
 
-  Deployment
+###  Deployment
 
- Quick Deploy Commands
+-- Quick Deploy Commands --
 
-Build Command:
+. Build Command:
 ```bash
 pip install -r requirements.txt && python init_db.py
 ```
 
-Start Command:
+. Start Command:
 ```bash
 reflex run --env prod
 ```
 
- Environment Variables
+-- Environment Variables --
 
 Set these in your deployment platform:
 
@@ -105,7 +105,7 @@ Set these in your deployment platform:
 - `BACKEND_PORT=` - Backend port (optional)
 - `FRONTEND_PORT=` - Frontend port (optional)
 
- Platform Support
+. Platform Support
 
 -  Render - Auto-detected, zero config
 -  Railway - Auto-detected, zero config
@@ -115,7 +115,7 @@ Set these in your deployment platform:
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for platform-specific instructions.
 
-  Project Structure
+ -- Project Structure --
 
 ```
 Reflex-Repo/
@@ -143,9 +143,9 @@ Reflex-Repo/
 
  = New files that fix the database error
 
-  Development
+###  Development 
 
- Running with Custom Ports
+. Running with Custom Ports
 
 ```bash
  Method : Environment variables
@@ -158,56 +158,60 @@ BACKEND_PORT= FRONTEND_PORT= reflex run
 reflex run   Finds available ports automatically
 ```
 
- Database Management
+. Database Management
 
 ```bash
- Initialize database
+# Initialize database
 python init_db.py
 
- Create migration
+# Create migration
 reflex db makemigrations -m "description"
 
- Apply migrations
+# Apply migrations
 reflex db migrate
 
- Check migration status
+# Check migration status
 reflex db heads
 ```
 
- Clean Rebuild
+. Clean Rebuild
 
 ```bash
- Remove build artifacts
+# Remove build artifacts
 rm -rf .web .states
 
- Reinitialize
+# Reinitialize
 reflex init
 reflex run
 ```
 
-  Troubleshooting
+###  Troubleshooting
 
- Database Issues
+####  Database Issues
 
-Problem: `no such table: localuser`
+> [!IMPORTANT]
+. Problem: `no such table: localuser`
 ```bash
 python init_db.py
 ```
 
-Problem: PostgreSQL connection fails locally
+> [!IMPORTANT]
+. Problem: PostgreSQL connection fails locally
 - The app automatically falls back to SQLite for local development
 - No action needed!
 
-Problem: Authentication not working
+> [!IMPORTANT]
+. Problem: `Authentication not working`
 ```bash
 rm -rf .states
 python init_db.py
 reflex run
 ```
 
- Frontend Issues
+####  Frontend Issues
 
-Problem: Frontend won't load
+> [!IMPORTANT]
+. Problem: `Frontend won't load`
 ```bash
 rm -rf .web
 reflex init
@@ -215,14 +219,16 @@ cd .web && npm install --legacy-peer-deps
 cd .. && reflex run
 ```
 
-Problem: Icon warnings
+> [!IMPORTANT]
+. Problem: `Icon warnings`
 - The app uses Lucide icons
 - Warnings about invalid icons are non-critical
 - Replace `check_circle` with `check_check` or `circle_check` if desired
 
- Port Issues
+####  Port Issues
 
-Problem: Port already in use
+> [!IMPORTANT]
+. Problem: Port already in use
 ```bash
  Kill existing processes
 pkill -f "reflex run"
@@ -233,7 +239,7 @@ pkill -f "reflex run"
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for complete troubleshooting guide.
 
-  Authentication
+###  Authentication
 
 The app uses `reflex-local-auth` for secure authentication:
 
@@ -243,7 +249,7 @@ The app uses `reflex-local-auth` for secure authentication:
 - Protected routes
 - User account management
 
- Creating Users
+. Creating Users
 
 Users can register through the login page, or you can create them programmatically:
 
@@ -260,7 +266,7 @@ with Session(engine) as session:
     session.commit()
 ```
 
-  Dependencies
+###  Dependencies
 
 Key dependencies:
 

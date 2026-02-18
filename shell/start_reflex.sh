@@ -56,6 +56,12 @@ while [[ $# -gt 0 ]]; do
             echo "Use -h or --help for usage information"
             exit 1
             ;;
+            # Add this to the argument parsing section
+            --app-dir)
+                APP_DIR="$2"
+                shift 2
+                ;;
+
     esac
 done
 
@@ -194,5 +200,13 @@ echo ""
 echo "Press Ctrl+C to stop the server"
 echo ""
 
+APP_DIR="$SCRIPT_DIR/../"
+
 # Start Reflex
+if [ -d "$APP_DIR" ]; then
+    cd "$APP_DIR"
+else
+    echo -e "${RED}App directory not found: $APP_DIR${NC}"
+    exit 1
+fi
 exec reflex run

@@ -149,6 +149,7 @@ config = rx.Config(
     # CORS configuration
     cors_allowed_origins=cors_origins,
 
+    disable_plugins="reflex.plugins.sitemap.SitemapPlugin",
     db_url=DATABASE_URL,
 )
 

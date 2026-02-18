@@ -16,13 +16,15 @@ def gallery() -> rx.Component:
         rx.vstack(
             header(),
             rx.text(
-                rx.code("Creative"),
+                rx.text(rx.code({"Creative"}),
                 size="5",
+
                 # style={
                 # 		"margin": "1rem 0 2rem 0",
                 #  		"color": "#6b7280",
                 # },
-            ),
+                ),
+            	),
             rx.container(
             rx.menu.root(
                 rx.menu.trigger(
@@ -41,15 +43,16 @@ def gallery() -> rx.Component:
             media_carousel(current_media_item=State.current_media_item),
             # rx.button("Add Media", on_click=State.toggle_modal),
             ),
-            rx.container(
-                footer(),
-                color_mode(),
-            ),
             spacing="5",
             justify="start",
             align="center",
             min_height="80vh",
             text_align="center",
         ),
-        style=apply_responsive_styles(),
+        rx.container(
+            footer(),
+            color_mode(),
+         ),
+        # width="100%",
+        # style=apply_responsive_styles(),
     )

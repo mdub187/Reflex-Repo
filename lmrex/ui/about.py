@@ -12,7 +12,7 @@ def about() -> rx.Component:
         navbar(),
         rx.vstack(
             header(),
-            rx.text(rx.code({"about"}), url_redirect=(f"{about}"), size="5"),
+            rx.text(rx.code({"About"}), url_redirect=(f"{about}"), size="5"),
             spacing="5",
             justify="center",
             align="center",

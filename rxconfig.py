@@ -143,8 +143,8 @@ except Exception as e:
 
 # Build allowed hosts list based on environment
 allowed_hosts = [
-    # "localhost",
-    # "127.0.0.1",
+    "localhost",
+    "127.0.0.1",
     "dubpanda.io",
     "reflex-repo.onrender.com",
 ]
@@ -179,11 +179,11 @@ config = rx.Config(
     cors_allowed_origins=cors_origins,
 
     # Vite configuration - allow all hosts in production
-    vite_config={
-        "server": {
-            "allowedHosts": "all",
-        }
-    },
+    # vite_config={
+    #     "server": {
+    #         "allowedHosts": "all",
+    #     }
+    # },
 )
 print(f"Database: {DATABASE_URL[:50]}...")
 

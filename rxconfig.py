@@ -178,10 +178,10 @@ config = rx.Config(
     # CORS configuration
     cors_allowed_origins=cors_origins,
     
-    # Vite configuration for allowed hosts
+    # Vite configuration - allow all hosts in production
     vite_config={
         "server": {
-            "allowedHosts": allowed_hosts + [".onrender.com"],
+            "allowedHosts": "all",
         }
     },
 )

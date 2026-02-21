@@ -4,6 +4,7 @@ import socket
 import os
 import psycopg2
 from dotenv import load_dotenv
+from typing import List
 
 db_creds = load_dotenv(dotenv_path=".env/Reflex-Repo.env")
 print(db_creds)
@@ -176,6 +177,13 @@ config = rx.Config(
 
     # CORS configuration
     cors_allowed_origins=cors_origins,
+    
+    # Vite configuration for allowed hosts
+    vite_config={
+        "server": {
+            "allowedHosts": allowed_hosts + [".onrender.com"],
+        }
+    },
 )
 print(f"Database: {DATABASE_URL[:50]}...")
 

@@ -140,15 +140,33 @@ except Exception as e:
     print(f"PostgreSQL connection issue: {e}")
     print(f"Using DATABASE_URL: {DATABASE_URL[:50]}...")
 
+# Build allowed hosts list based on environment
+allowed_hosts = [
+    "localhost",
+    "127.0.0.1",
+    "dubpanda.io",
+    "reflex-repo.onrender.com",
+]
+
+if IS_FLY and FLY_APP_NAME:
+    allowed_hosts.append(f"{FLY_APP_NAME}.fly.dev")
+elif IS_RAILWAY and RAILWAY_PUBLIC_DOMAIN:
+    allowed_hosts.append(RAILWAY_PUBLIC_DOMAIN)
+elif IS_RENDER and RENDER_EXTERNAL_URL:
+    # Extract domain from RENDER_EXTERNAL_URL
+    from urllib.parse import urlparse
+    parsed_url = urlparse(RENDER_EXTERNAL_URL)
+    allowed_hosts.append(parsed_url.netloc)
+
 config = rx.Config(
     app_name="lmrex",
-    allowedHosts = True,
+    allowedHosts=allowed_hosts,
+    server_host="reflex-repo.onrender.com",
     # Database configuration
     db_url=DATABASE_URL,
     # Port configuration
     backend_port=backend_port,
     frontend_port=frontend_port,
-
     # URL configuration (environment-aware)
     api_url="http://reflex-repo.onrender.com:8000",
     deploy_url=deploy_url,

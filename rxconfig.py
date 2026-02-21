@@ -143,8 +143,8 @@ except Exception as e:
 
 # Build allowed hosts list based on environment
 allowed_hosts = [
-    "localhost",
-    "127.0.0.1",
+    # "localhost",
+    # "127.0.0.1",
     "dubpanda.io",
     "reflex-repo.onrender.com",
 ]
@@ -161,8 +161,8 @@ elif IS_RENDER and RENDER_EXTERNAL_URL:
 
 config = rx.Config(
     app_name="lmrex",
-    allowedHosts=allowed_hosts,
-    server_host="reflex-repo.onrender.com",
+    # allowedHosts=allowed_hosts,
+    # server_host="reflex-repo.onrender.com",
     # Database configuration
     db_url=DATABASE_URL,
     # Port configuration
@@ -177,7 +177,7 @@ config = rx.Config(
 
     # CORS configuration
     cors_allowed_origins=cors_origins,
-    
+
     # Vite configuration - allow all hosts in production
     vite_config={
         "server": {

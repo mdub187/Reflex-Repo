@@ -50,13 +50,13 @@ if IS_PRODUCTION:
     # In production, use fixed ports that match your proxy configuration
     backend_port = int(os.getenv("BACKEND_PORT", "8000"))
     frontend_port = int(os.getenv("FRONTEND_PORT", "3000"))
-    print(f"🚀 Production mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
+    print(f"Production mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
 else:
     # In development, dynamically find available ports
     try:
         backend_port = find_available_port(8000)
         frontend_port = find_available_port(3000)
-        print(f"✅ Development mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
+        print(f"Development mode - Using backend port: {backend_port}, frontend port: {frontend_port}")
     except RuntimeError as e:
         print(f" Warning: {e}")
         print("Falling back to default ports...")
@@ -68,32 +68,32 @@ if IS_FLY and FLY_APP_NAME:
     # Fly.io deployment
     deploy_url = f"https://{FLY_APP_NAME}.fly.dev"
     api_url = f"https://{FLY_APP_NAME}.fly.dev"
-    print(f"🪰 Fly.io deployment detected: {deploy_url}")
+    print(f"Fly.io deployment detected: {deploy_url}")
 elif IS_RAILWAY and RAILWAY_PUBLIC_DOMAIN:
     # Railway deployment
     deploy_url = f"https://{RAILWAY_PUBLIC_DOMAIN}"
     api_url = f"https://{RAILWAY_PUBLIC_DOMAIN}"
-    print(f"🚂 Railway deployment detected: {deploy_url}")
+    print(f"Railway deployment detected: {deploy_url}")
 elif IS_RENDER and RENDER_EXTERNAL_URL:
     # Render deployment
     deploy_url = RENDER_EXTERNAL_URL
     api_url = RENDER_EXTERNAL_URL
-    print(f"🎨 Render deployment detected: {deploy_url}")
+    print(f"Render deployment detected: {deploy_url}")
 elif DEPLOY_URL:
     # Custom deployment URL provided
     deploy_url = DEPLOY_URL
     api_url = DEPLOY_URL
-    print(f"🌐 Custom deployment URL: {deploy_url}")
+    print(f"Custom deployment URL: {deploy_url}")
 elif IS_PRODUCTION:
     # Generic production - bind to all interfaces
     deploy_url = f"http://0.0.0.0:{frontend_port}"
     api_url = f"http://0.0.0.0:{backend_port}"
-    print("🔧 Production mode with 0.0.0.0 binding")
+    print("Production mode with 0.0.0.0 binding")
 else:
     # Local development
     deploy_url = f"http://localhost:{frontend_port}"
     api_url = f"http://localhost:{backend_port}"
-    print("💻 Local development mode")
+    print("Local development mode")
 
 # CORS configuration
 cors_origins = [
@@ -110,11 +110,11 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     # No DATABASE_URL set - use SQLite for local development
     DATABASE_URL = "sqlite:///reflex.db"
-    print("📁 Using SQLite database: reflex.db")
+    print("Using SQLite database: reflex.db")
 elif DATABASE_URL.startswith("postgresql://"):
-    print(f"🐘 Using PostgreSQL database")
+    print(f"Using PostgreSQL database")
 else:
-    print(f"🗄️  Using database: {DATABASE_URL[:20]}...")
+    print(f"Using database: {DATABASE_URL[:20]}...")
 
 # Add production URLs to CORS if in production
 if IS_FLY and FLY_APP_NAME:
@@ -149,7 +149,7 @@ config = rx.Config(
     # CORS configuration
     cors_allowed_origins=cors_origins,
 
-    disable_plugins="reflex.plugins.sitemap.SitemapPlugin",
+    # disable_plugins="reflex.plugins.sitemap.SitemapPlugin",
     db_url=DATABASE_URL,
 )
 

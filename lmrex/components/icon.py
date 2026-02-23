@@ -1,16 +1,21 @@
 # lmrex/components/icon.py
+
 import reflex as rx
 
-class State(rx.State):
-    def icon(self) -> rx.Component:
-        rx.image(
-            src="'../music-notes-minus-thin.svg'",
-            width="2em",
-            height="auto",
-            border_radius="25%",
-        )
-        return icon
+
+def logo_icon(
+    width: str = "2.25em",
+    height: str = "auto",
+    border_radius: str = "55%",
+) -> rx.Component:
+    return rx.image(
+        src="/music-notes-minus-thin.svg",
+        width=width,
+        height=height,
+        border_radius=border_radius,
+        on_click=rx.redirect("/Home")
+    )
 
 
-if __name__ == "__main__":
-    print(rx.image)
+def small_logo_icon() -> rx.Component:
+    return logo_icon(width="1.5em", border_radius="25%")

@@ -93,9 +93,9 @@ def login() -> rx.Component:
             rx.card(
                 rx.vstack(
                     rx.heading("How It Works", size="4"),
-                    rx.text("🔐 Create an account or login to access protected pages", size="2"),
-                    rx.text("🔑 Your session is managed with secure tokens", size="2"),
-                    rx.text("🛡️ Passwords are hashed with bcrypt", size="2"),
+                    rx.text("Create an account or login to access protected pages", size="2"),
+                    rx.text("Your session is managed with secure tokens", size="2"),
+                    rx.text("Passwords are hashed with bcrypt", size="2"),
                     spacing="2",
                 ),
                 padding="1.5rem",

@@ -1,7 +1,8 @@
 # ./lmrex/components/navbar.py
 import reflex as rx
 from lmrex.state.auth_state import AuthState
-from .login_modal import user_menu, login_modal, LoginModalState
+from .login_modal import login_modal
+from .icon import logo_icon, small_logo_icon
 
 def navbar_link(text, url=None, on_click=None) -> rx.Component:
     return rx.link(
@@ -19,12 +20,7 @@ def navbar() -> rx.Component:
         rx.desktop_only(
             rx.hstack(
                 rx.hstack(
-                    rx.image(
-                        src="/music-notes-minus-thin.svg",
-                        width="2.25em",
-                        height="auto",
-                        border_radius="55%",
-                    ),
+                    logo_icon(),
                     rx.heading("We Gon", size="7", weight="bold"),
                     # width="100%",
                 ),
@@ -45,8 +41,12 @@ def navbar() -> rx.Component:
 
                     # ),
 
-                    # Optional: Keep link to login page
-                    rx.button(rx.link(login_modal())),
+                    # Conditional: Show Account button if logged in, Login modal if not
+                    rx.cond(
+                        AuthState.is_logged_in,
+                        rx.button(navbar_link("Account", "/Account")),
+                        login_modal(),
+                    ),
                     # rx.button(navbar_link("login")),
                 ),
                 # min_width="100%",
@@ -67,12 +67,7 @@ def navbar() -> rx.Component:
         rx.mobile_and_tablet(
             rx.hstack(
                 rx.hstack(
-                    rx.image(
-                        src="/music-notes-minus-thin.svg",
-                        width="1.5em",
-                        height="auto",
-                        border_radius="25%",
-                    ),
+                    small_logo_icon(),
                     rx.heading("B alright", size="7", weight="bold"),
                     align_items="center",
                 ),
@@ -83,9 +78,7 @@ def navbar() -> rx.Component:
                         navbar_link("About", "/About"),
                         navbar_link("Gallery", "/Gallery"),
                         navbar_link("Contact", "/Contact"),
-                        rx.button(rx.link(login_modal())),
-
-                        # Mobile login - use login modal trigger
+                        # Conditional: Show user info/account if logged in, login modal if not
                         rx.cond(
                             AuthState.is_logged_in,
                             rx.vstack(
@@ -101,8 +94,7 @@ def navbar() -> rx.Component:
                                 ),
                                 spacing="1",
                             ),
-                            # Login modal in menu
-                            # login_modal(),
+                            login_modal(),
                         ),
                     ),
                 ),

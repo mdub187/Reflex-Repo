@@ -120,6 +120,7 @@ $RECYCLE.BIN/
 *.pem
 *.key
 *.secret
+!.env_local
 
 # ============================================
 # LOGS
@@ -185,3 +186,10 @@ site/
 !TROUBLESHOOTING.md
 !LICENSE
 !CONTRIBUTING.md
+
+# ============================================
+# MISC
+# ============================================
+# AI gen files
+
+shell/*

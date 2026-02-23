@@ -120,7 +120,7 @@ $RECYCLE.BIN/
 *.pem
 *.key
 *.secret
-!.env_local
+.env_local
 
 # ============================================
 # LOGS

@@ -10,7 +10,7 @@ from lmrex.ui.login import login
 # from lmrex.ui.login import user_login
 from lmrex.ui.account import account_page
 from lmrex.ui.login import login
-
+from lmrex.ui.user_gallery import user_gallery
 # from lmrex.ui.gallery_music import music
 # from lmrex.ui.gallery_pictures import pictures
 # from lmrex.ui.gallery_video import videos
@@ -32,7 +32,6 @@ def add_routes():
     # Health check endpoints
     app.add_page(ping, route="/ping")
     app.add_page(health, route="/_health")
-
     # Register your pages with their components
     app.add_page(index, route="/Home")
     app.add_page(about, route="/About")
@@ -40,7 +39,7 @@ def add_routes():
     app.add_page(contact, route="/Contact")
     app.add_page(login, route="/Login")
     app.add_page(account_page, route="/Account")
-    # app.add_page(pictures, route="/gallery/pictures")
+    app.add_page(user_gallery, route="/Account/Gallery/")
     # app.add_page(videos, route="/gallery/videos")
     # app.add_page(music, route="/gallery/music")
     # app._compile()

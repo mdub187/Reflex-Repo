@@ -55,9 +55,10 @@ def login_modal() -> rx.Component:
                 rx.icon("log-in", size=16),
                 "Login",
                 variant="soft",
-                on_click=LoginModalState.open_modal("login"),
+                # on_click=LoginModalState.open_modal(),
             ),
         ),
+
 
         # Modal content
         rx.dialog.content(
@@ -215,7 +216,7 @@ def login_button_trigger() -> rx.Component:
     return rx.button(
         rx.icon("log-in", size=16),
         "Login",
-        on_click=LoginModalState.open_modal("login"),
+        on_click=LoginModalState.open_modal,
         variant="soft",
     )
 
@@ -228,7 +229,7 @@ def register_button_trigger() -> rx.Component:
     return rx.button(
         rx.icon("user-plus", size=16),
         "Sign Up",
-        on_click=LoginModalState.open_modal("register"),
+        on_click=LoginModalState.open_modal,
         variant="soft",
         color_scheme="blue",
     )

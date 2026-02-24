@@ -30,11 +30,11 @@ def login() -> rx.Component:
                     rx.card(
                         rx.dialog.trigger("Login",
                             rx.button("Login",
-                                rx.dialog.content(user_login.user_login(),
-                            user_login.user_login(),
+                            rx.dialog.content(user_login.user_login()),
+                            # user_login.user_login(),
                         padding="2rem",
                         max_width="400px",
-                    ),
+
                     value="login",
                 ),
                 ),

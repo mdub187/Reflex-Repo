@@ -132,6 +132,7 @@ elif IS_RENDER and RENDER_EXTERNAL_URL:
 elif DEPLOY_URL:
     cors_origins.append(DEPLOY_URL)
 
+enable_plugins="reflex.plugins.sitemap.SitemapPlugin",
 config = rx.Config(
     app_name="lmrex",
 
@@ -148,7 +149,6 @@ config = rx.Config(
 
     # CORS configuration
     cors_allowed_origins=cors_origins,
-
     # disable_plugins="reflex.plugins.sitemap.SitemapPlugin",
     db_url=DATABASE_URL,
 )

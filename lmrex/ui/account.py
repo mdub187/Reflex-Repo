@@ -135,7 +135,7 @@ def account_page() -> rx.Component:
                         rx.button(
                             rx.icon("image", size=16),
                             "View Gallery",
-                            on_click=rx.redirect("/Gallery"),
+                            on_click=rx.redirect("/Account/Gallery/"),
                             variant="soft",
                             color_scheme="purple",
                             width="100%",

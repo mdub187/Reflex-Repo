@@ -42,12 +42,12 @@ def navbar() -> rx.Component:
                     # ),
 
                     # Conditional: Show Account button if logged in, Login modal if not
+                    # Optional: Keep link to login page
                     rx.cond(
-                        AuthState.is_logged_in,
-                        rx.button(navbar_link("Account", "/Account")),
-                        login_modal(),
+                    	 AuthState.is_logged_in,
+                      rx.button(navbar_link("Account", "/Account")),
+                      rx.button(navbar_link(login_modal())),
                     ),
-                    # rx.button(navbar_link("login")),
                 ),
                 # min_width="100%",
                 justify="between",

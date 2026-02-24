@@ -49,7 +49,7 @@ class MediaFormState(rx.State):
 def media_modal() -> rx.Component:
     return rx.dialog.root(
         # Use a trigger that toggles the global state so external "Add Media" buttons can also control it
-        rx.dialog.trigger(rx.button("Add", id="Add_Media", on_click=State.toggle_modal)),
+        rx.dialog.trigger(rx.button("Add", id="Add_Media", on_click=State.toggle_modal, justify_self="center")),
         rx.dialog.content(
             rx.heading("Add Media", size="6"),
             rx.text("What media would you like to add?"),

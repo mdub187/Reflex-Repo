@@ -15,14 +15,15 @@ def setup_database():
 
     # Get DATABASE_URL from environment or use default
     DATABASE_URL = os.getenv(
-        "DATABASE_URL",
-        "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a.oregon-postgres.render.com/pandaflex"
+        # "DATABASE_URL",
+        "postgresql://mdub:ASDfret12!@127.0.0.1:5432/pandaflex_db"
+        # reflex_dev/mdub@mdub" DATABASE_URL="postgresql://user:password@host:port/database"
     )
     return DATABASE_URL
     return setup_database(DATABASE_URL)
     print("hej")
 
-    print(f"Database URL: {DATABASE_URL[2]}...")
+    print(f"Database URL: {DATABASE_URL[1]}...")
     # print()
 
     try:

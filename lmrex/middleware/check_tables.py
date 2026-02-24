@@ -12,7 +12,8 @@ if str(project_root) not in sys.path:
     sys.path.append(str(project_root))
 
 # Now import your models
-from lmrex.models.user_model import LocalAuthSession, LocalUser
+# from lmrex.state.auth_state import LocalAuthSession, LocalUser
+from lmrex.state.auth_state import AuthState, ProtectedState
 
 
 def check_tables():
@@ -20,7 +21,8 @@ def check_tables():
     try:
         # Use the same database URL as your application
         DATABASE_URL = (
-           "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a.oregon-postgres.render.com/pandaflex"  # Update this with your actual database URL
+        		"postgresql://mdub:ASDfret12!@127.0.0.1:5432/pandaflex_db"
+           # "postgresql://pandaflex_user:c8lHPEQ5jULajyLPnyytlQYTTo4d6Nth@dpg-d68gs406fj8s73c3rnsg-a.oregon-postgres.render.com/pandaflex"  # Update this with your actual database URL
         )
 
         engine = create_engine(DATABASE_URL)

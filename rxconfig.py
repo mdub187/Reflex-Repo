@@ -185,7 +185,7 @@ config = rx.Config(
     #     }
     # },
 )
-print(f"Database: {DATABASE_URL[:50]}...")
+print(f"Database: {DATABASE_URL}...")
 
 # Print configuration summary
 print("=" * 60)

@@ -10,7 +10,7 @@ Usage:
 import sys
 import os
 from pathlib import Path
-
+db_url = "postgresql://mdub@localhost:5432/reflex_dev"
 # Add project root to path
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
@@ -25,7 +25,7 @@ def init_database():
         # Import configuration
         print("Loading configuration...")
         from rxconfig import config
-        print(f"   Database URL: {config.db_url}...")
+        print(f"   Database URL: {db_url}...")
 
         # Import SQLAlchemy and SQLModel tools
         from sqlalchemy import create_engine, inspect
@@ -37,7 +37,7 @@ def init_database():
 
         # Create engine
         print("Connecting to database...")
-        engine = create_engine(config.db_url)
+        engine = create_engine(db_url)
 
         # Test connection
         try:

@@ -32,7 +32,7 @@ class MediaFormState(rx.State):
                 self.media_title, self.media_url, media_type
             )
             State.media = State.media + [new_item]
-            State.last_added_media = new_item;
+            State.add_media_item = new_item,
             print("Media added:", new_item)
         except ValueError as e:
             print(f"Failed to add media: {e}")

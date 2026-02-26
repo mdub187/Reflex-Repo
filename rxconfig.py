@@ -112,7 +112,7 @@ if not DATABASE_URL:
     DATABASE_URL = "sqlite:///reflex.db"
     print("Using SQLite database: reflex.db")
 elif DATABASE_URL.startswith("postgresql://"):
-    print(f"Using PostgreSQL database")
+    print(f'Using PostgreSQL database{DATABASE_URL}')
 else:
     print(f"Using database: {DATABASE_URL[:20]}...")
 

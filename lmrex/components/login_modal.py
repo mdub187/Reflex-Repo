@@ -19,27 +19,44 @@ class LoginModalState(rx.State):
     def toggle_modal(self):
         """Toggle modal visibility"""
         self.show_modal = not self.show_modal
+        print(f"[DEBUG] toggle_modal called. show_modal={self.show_modal}")
 
     @rx.event
-    def open_modal(self, tab: str = "login"):
+    def open_modal(self, tab: str):
         """Open modal with specific tab"""
         self.show_modal = True
         self.active_tab = tab
+        print(f"[DEBUG] open_modal called. tab={tab}, show_modal={self.show_modal}")
+
+    @rx.event
+    def open_login(self, _: rx.event.PointerEventInfo):
+        """Open modal to the login tab (wrapper for on_click)"""
+        self.open_modal("login")
+        print(f"[DEBUG] open_login called. active_tab='login'")
+
+    @rx.event
+    def open_register(self, _: rx.event.PointerEventInfo):
+        """Open modal to the register tab (wrapper for on_click)"""
+        self.open_modal("register")
+        print(f"[DEBUG] open_register called. active_tab='register'")
 
     @rx.event
     def close_modal(self):
         """Close the modal"""
         self.show_modal = False
+        print(f"[DEBUG] close_modal called. show_modal={self.show_modal}")
 
     @rx.event
     def switch_to_register(self):
         """Switch to registration tab"""
         self.active_tab = "register"
+        print(f"[DEBUG] switch_to_register called. active_tab={self.active_tab}")
 
     @rx.event
     def switch_to_login(self):
         """Switch to login tab"""
         self.active_tab = "login"
+        print(f"[DEBUG] switch_to_login called. active_tab={self.active_tab}")
 
 
 def login_modal() -> rx.Component:
@@ -49,15 +66,8 @@ def login_modal() -> rx.Component:
     """
 
     return rx.dialog.root(
-        # Trigger button
-        rx.dialog.trigger(
-            rx.button(
-                rx.icon("log-in", size=16),
-                "Login",
-                variant="soft",
-                # on_click=LoginModalState.open_modal(),
-            ),
-        ),
+        # Trigger removed - use the navbar's `login_button_trigger()` which calls
+        # `LoginModalState.open_login` to open this modal programmatically.
 
 
         # Modal content
@@ -216,7 +226,7 @@ def login_button_trigger() -> rx.Component:
     return rx.button(
         rx.icon("log-in", size=16),
         "Login",
-        on_click=LoginModalState.open_modal,
+        on_click=LoginModalState.open_login,
         variant="soft",
     )
 
@@ -229,7 +239,7 @@ def register_button_trigger() -> rx.Component:
     return rx.button(
         rx.icon("user-plus", size=16),
         "Sign Up",
-        on_click=LoginModalState.open_modal,
+        on_click=LoginModalState.open_register,
         variant="soft",
         color_scheme="blue",
     )
